@@ -57,7 +57,7 @@ public class StudentDTO implements Serializable {
 
     private String major;//专业
 
-    private String Class;//班级
+    private String classes;//班级
 
     private String job1;//职务1
 
