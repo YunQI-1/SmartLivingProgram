@@ -15,12 +15,13 @@ public class adminController {
     @Autowired
     adminService adminService;
     /**
-     * 获取所有学生信息
+     * 获取所有学生基本信息
      *
      * */
     @GetMapping("/getStudentInformation")
     public Result<PageResult> getStudentInformation(){
-        log.info("管理端查询所有学生信息");
+        log.info("管理端查询所有学生基本信息");
         return Result.success(adminService.getStudentInformation());
     }
+
 }

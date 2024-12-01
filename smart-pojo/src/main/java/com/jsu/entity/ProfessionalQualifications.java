@@ -10,17 +10,11 @@ public class ProfessionalQualifications implements Serializable {
     //学业情况-职业资格
     private String studentNumber;
 
-    private String studentName;
-
-    private String idCard;
-
-    private String major;//专业
-
     private String credentialsName;//证书名
 
     private String classification;//等级(院/校/市/省)
 
-    private String rank;//排名
+    private String ranks;//排名
 
     private LocalDateTime obtainingTime;//获得时间
 
