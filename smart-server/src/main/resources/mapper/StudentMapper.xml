@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jsu.mapper.StudentMapper">
+    <select id="getStudentInformation" resultType="com.jsu.vo.StudentVO">
+        select * from smart_living_program.student_information
+    </select>
+    <select id="getStudentInformationCount" resultType="Long">
+        select COUNT(*) from smart_living_program.student_information
+    </select>
+</mapper>
