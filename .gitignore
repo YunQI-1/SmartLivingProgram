@@ -4,3 +4,10 @@
 *.class
 *Test.java
 **/test/
+
+# 忽略配置文件
+config.json
+config.yaml
+application-dev.yml
+application.properties
+.env

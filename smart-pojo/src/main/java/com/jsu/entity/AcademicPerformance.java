@@ -11,6 +11,8 @@ public class AcademicPerformance {
 
     private String studentName;
 
+    private String classes;
+
     private String idCard;
 
     private String major;//专业
