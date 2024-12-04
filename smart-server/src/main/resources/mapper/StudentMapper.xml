@@ -5,6 +5,9 @@
     <select id="getStudentInformation" resultType="com.jsu.vo.StudentVO">
         select * from smart_living_program.student_information
     </select>
+
+
+
     <select id="getStudentInformationCount" resultType="Long">
         select COUNT(*) from smart_living_program.student_information
     </select>

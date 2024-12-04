@@ -1,9 +1,15 @@
-package com.jsu.entity;
+package com.jsu.vo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 @Data
-public class EnglishLevel {
+@NoArgsConstructor
+@AllArgsConstructor
+public class EnglishLevelVO implements Serializable {
     private String studentName;
 
     private String studentNumber;
@@ -11,7 +17,6 @@ public class EnglishLevel {
     private String cet4;//4级分数
 
     private String cet6;//6级分数
-
 
     private String toefl;            // TOEFL iBT 分数
     private String ielts;            // IELTS 分数
