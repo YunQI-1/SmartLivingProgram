@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProfessionnalQualificationVO implements Serializable {
+public class ProfessionalQualificationVO implements Serializable {
     //学业情况-职业资格
     private String studentNumber;
 

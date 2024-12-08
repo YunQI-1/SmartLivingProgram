@@ -28,6 +28,14 @@ public class adminServiceImpl implements adminService {
         return new PageResult(total, list);
     }
 
+    @Override
+    public PageResult getStudentInformationByPage(Integer page, Integer pageSize) {
+        Integer offset =(page-1)*pageSize;
+        List<StudentVO> list=studentMapper.getStudentInformationByPage(offset,pageSize);
+        Long total=studentMapper.getStudentInformationCount();
+        return new PageResult(total, list);
+    }
+
     /**
      * 获取所有课程数据
      * @return
@@ -63,8 +71,8 @@ public class adminServiceImpl implements adminService {
      * @return
      */
     @Override
-    public List<ProfessionnalQualificationVO> getProfessionalQualifications() {
-        List<ProfessionnalQualificationVO> list = studentMapper.getProfessionalQualifications();
+    public List<ProfessionalQualificationVO> getProfessionalQualifications() {
+        List<ProfessionalQualificationVO> list = studentMapper.getProfessionalQualifications();
         return list;
     }
 
@@ -120,6 +128,18 @@ public class adminServiceImpl implements adminService {
     public List<ParticipateProjectVO> getParticipateProject() {
         List<ParticipateProjectVO> list = studentMapper.getParticipateProject();
         return list;
+    }
+
+    /**
+     * 获取所有学生成绩信息，将来更改为分页查询
+     *
+     * @return
+     */
+    @Override
+    public PageResult getAllScore() {
+        List list=studentMapper.getAllScore();
+        Long total=studentMapper.getScoreCount();
+        return new PageResult(total, list);
     }
 
 

@@ -8,13 +8,15 @@ import java.util.List;
 public interface adminService {
     PageResult getStudentInformation();
 
+    PageResult getStudentInformationByPage(Integer page, Integer pageSize);
+
     List<CourseVO> getCourses();
 
     List<AcademicPerformanceVO> getAcademicPerformance();
 
     List<EnglishLevelVO> getEnglishLevel();
 
-    List<ProfessionnalQualificationVO> getProfessionalQualifications();
+    List<ProfessionalQualificationVO> getProfessionalQualifications();
 
     SoftwareDevelopmentCapabilityVO getSoftwareDevelopmentCapability();
 
@@ -25,4 +27,8 @@ public interface adminService {
     List<PaperVO> getPaperInformation();
 
     List<ParticipateProjectVO> getParticipateProject();
+
+    PageResult getAllScore();
+
+
 }

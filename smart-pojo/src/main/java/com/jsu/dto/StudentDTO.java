@@ -64,4 +64,6 @@ public class StudentDTO implements Serializable {
     private String job2;//职务2
 
     private String job3;//职务3
+
+    private String dormitoryNumber;//寝室号
 }
