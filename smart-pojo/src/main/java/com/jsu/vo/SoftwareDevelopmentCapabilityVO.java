@@ -1,8 +1,6 @@
 
 package com.jsu.vo;
 
-import com.jsu.entity.SoftwareCopyright;
-import com.jsu.entity.SoftwareSystem;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

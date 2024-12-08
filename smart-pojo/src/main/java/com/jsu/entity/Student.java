@@ -52,6 +52,8 @@ public class Student {
 
     private String major;//专业
 
+    private String grade;//年级
+
     private String classes;//班级
 
     private String job1;//职务1
@@ -59,4 +61,6 @@ public class Student {
     private String job2;//职务2
 
     private String job3;//职务3
+
+    private String dormitoryNumber;//寝室号
 }

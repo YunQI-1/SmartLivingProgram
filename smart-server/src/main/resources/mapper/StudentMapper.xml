@@ -6,9 +6,18 @@
         select * from smart_living_program.student_information
     </select>
 
-
-
     <select id="getStudentInformationCount" resultType="Long">
         select COUNT(*) from smart_living_program.student_information
+    </select>
+
+    <select id="getStudentInformationByPage" resultType="com.jsu.vo.StudentVO">
+        select * from smart_living_program.student_information limit #{offset},#{limit}
+    </select>
+
+    <select id="getAllScore" resultType="com.jsu.vo.ScoreVO">
+        select * from smart_living_program.score
+    </select>
+    <select id="getScoreCount" resultType="Long">
+        select COUNT(*) from smart_living_program.score
     </select>
 </mapper>

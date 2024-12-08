@@ -12,10 +12,12 @@ public interface StudentMapper {
 
     Long getStudentInformationCount();
 
+    List<StudentVO> getStudentInformationByPage(Integer offset,Integer limit);
+
     @Select("select * from course")
     List<CourseVO> getCourses();
 
-    @Select("select student_number,student_name,calsses from academic_performance")
+    @Select("select student_number,student_name,classes from academic_performance")
     List<AcademicPerformanceVO> getAcademicPerformance();
 
 
@@ -23,7 +25,7 @@ public interface StudentMapper {
     List<EnglishLevelVO> getEnglishLevel();
 
     @Select("select * from professional_qualifications")
-    List<ProfessionnalQualificationVO> getProfessionalQualifications();
+    List<ProfessionalQualificationVO> getProfessionalQualifications();
 
     @Select("select student_number,student_name,software_name,invention_patent from software_copyright")
     List<SoftwareCopyrightVO> getSoftwareCopyright();
@@ -47,4 +49,8 @@ public interface StudentMapper {
 
     @Select("select * from participate_project")
     List<ParticipateProjectVO> getParticipateProject();
+
+    List<ScoreVO> getAllScore();
+
+    Long getScoreCount();
 }

@@ -5,11 +5,11 @@ import com.jsu.result.Result;
 import com.jsu.service.adminService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 @Slf4j
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping
 public class adminController {
     @Autowired
@@ -25,6 +25,17 @@ public class adminController {
     }
 
     /**
+     * 分页查询所有学生基本信息
+     *
+     * @return
+     */
+    @GetMapping("/admin/getStudentInformationByPage")
+    public Result<PageResult> getStudentInformationByPage(@RequestParam Integer page, @RequestParam Integer pageSize){
+        log.info("管理端分页查询所有学生基本信息");
+        return Result.success(adminService.getStudentInformationByPage(page,pageSize));
+    }
+    /**
+     *
      * 获取所有课程信息
      */
     @GetMapping("admin/getCourses")
@@ -33,11 +44,15 @@ public class adminController {
         return Result.success(adminService.getCourses());
     }
 
-    //TODO:学习成绩分配后面写
+    /**
+     * 获取学生成绩，其中的课程信息，通过用获取课程信息的接口获取课程信息，然后根据成绩实体类里的课程编号映射
+     *
+     * @return
+     */
     @GetMapping("admin/getStudentsGrade")
-    public Result getStudentsGrade(){
+    public Result<PageResult> getStudentsGrade(){
         log.info("管理端查询所有学生成绩");
-        return Result.success(1);
+        return Result.success(adminService.getAllScore());
     }
 
 
@@ -125,4 +140,5 @@ public class adminController {
         log.info("管理端查询学生参加项目的情况");
         return Result.success(adminService.getParticipateProject());
     }
+
 }
