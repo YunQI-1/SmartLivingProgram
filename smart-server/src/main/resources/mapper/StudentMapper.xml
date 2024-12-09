@@ -14,10 +14,62 @@
         select * from smart_living_program.student_information limit #{offset},#{limit}
     </select>
 
+    <select id="getCourses" resultType="com.jsu.vo.CourseVO">
+        select * from smart_living_program.course limit #{offset},#{limit}
+    </select>
+    <select id="getCoursesCount" resultType="Long">
+        select COUNT(*) from smart_living_program.course
+    </select>
+
+
     <select id="getAllScore" resultType="com.jsu.vo.ScoreVO">
-        select * from smart_living_program.score
+        select * from smart_living_program.score limit #{offset},#{limit}
     </select>
     <select id="getScoreCount" resultType="Long">
         select COUNT(*) from smart_living_program.score
     </select>
+
+    <select id="getAcademicPerformance" resultType="com.jsu.vo.AcademicPerformanceVO">
+        select student_number,student_name,classes from academic_performance limit #{offset},#{limit}
+    </select>
+
+    <select id="getAcademicPerformanceCount" resultType="Long">
+        select COUNT(*) from academic_performance
+    </select>
+
+    <select id="getEnglishLevel" resultType="com.jsu.vo.EnglishLevelVO">
+        select * from english_level limit #{offset},#{limit}
+    </select>
+
+    <select id="getEnglishLevelCount" resultType="Long">
+        select COUNT(*) from english_level
+    </select>
+    
+    <select id="getProfessionalQualifications" resultType="com.jsu.vo.ProfessionalQualificationVO">
+        select * from professional_qualifications limit #{offset},#{limit}
+    </select>
+
+    <select id="getProfessionalQualificationsCount" resultType="Long">
+        select COUNT(*) from professional_qualifications
+    </select>
+
+    <select id="getProgrammingCapabilities" resultType="com.jsu.vo.ProgrammingCapabilitiesVO">
+        select * from programming_capabilities limit #{offset},#{limit}
+    </select>
+    <select id="getProgrammingCapabilitiesCount" resultType="java.lang.Long">
+        select count(*) from programming_capabilities
+    </select>
+
+    <select id="getSubjectCompetition" resultType="com.jsu.vo.SubjectCompetitionVO">
+        select * from subject_competition limit #{offset},#{limit}
+    </select>
+    <select id="getSubjectCompetitionCount" resultType="java.lang.Long">
+        select COUNT(*) from subject_competition
+    </select>
+    
+    <select id="getPaperInformation" resultType="com.jsu.vo.PaperVO">
+        select * from paper limit #{offset},#{limit}
+    </select>
+
+
 </mapper>

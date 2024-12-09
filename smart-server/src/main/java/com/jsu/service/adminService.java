@@ -10,25 +10,25 @@ public interface adminService {
 
     PageResult getStudentInformationByPage(Integer page, Integer pageSize);
 
-    List<CourseVO> getCourses();
+    PageResult getCourses(Integer page, Integer pageSize);
 
-    List<AcademicPerformanceVO> getAcademicPerformance();
+    PageResult getAcademicPerformance(Integer page, Integer pageSize);
 
-    List<EnglishLevelVO> getEnglishLevel();
+    PageResult getEnglishLevel(Integer page, Integer pageSize);
 
-    List<ProfessionalQualificationVO> getProfessionalQualifications();
+    PageResult getProfessionalQualifications(Integer page, Integer pageSize);
 
     SoftwareDevelopmentCapabilityVO getSoftwareDevelopmentCapability();
 
-    List<ProgrammingCapabilitiesVO> getProgrammingCapabilities();
+    PageResult getProgrammingCapabilities(Integer page, Integer pageSize);
 
-    List<SubjectCompetitionVO> getSubjectCompetition();
+    PageResult getSubjectCompetition(Integer page, Integer pageSize);
 
-    List<PaperVO> getPaperInformation();
+    PageResult getPaperInformation(Integer page, Integer pageSize);
 
-    List<ParticipateProjectVO> getParticipateProject();
+    PageResult getParticipateProject(Integer page, Integer pageSize);
 
-    PageResult getAllScore();
+    PageResult getAllScore(Integer page, Integer pageSize);
 
 
 }

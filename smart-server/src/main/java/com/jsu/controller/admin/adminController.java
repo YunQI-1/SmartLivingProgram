@@ -39,9 +39,9 @@ public class adminController {
      * 获取所有课程信息
      */
     @GetMapping("admin/getCourses")
-    public Result getCourses(){
+    public Result<PageResult> getCourses(@RequestParam Integer page, @RequestParam Integer pageSize){
         log.info("管理端查询所有课程信息");
-        return Result.success(adminService.getCourses());
+        return Result.success(adminService.getCourses(page,pageSize));
     }
 
     /**
@@ -50,9 +50,9 @@ public class adminController {
      * @return
      */
     @GetMapping("admin/getStudentsGrade")
-    public Result<PageResult> getStudentsGrade(){
-        log.info("管理端查询所有学生成绩");
-        return Result.success(adminService.getAllScore());
+    public Result<PageResult> getStudentsGrade(@RequestParam Integer page, @RequestParam Integer pageSize){
+        log.info("管理端分页查询所有学生成绩");
+        return Result.success(adminService.getAllScore(page,pageSize));
     }
 
 
@@ -61,9 +61,9 @@ public class adminController {
      * @return
      */
     @GetMapping("/admin/getAcademicPerformance")
-    public Result getAcademicPerformance(){
+    public Result<PageResult> getAcademicPerformance(@RequestParam Integer page, @RequestParam Integer pageSize){
         log.info("管理端查看所有学生的学业新情况");
-        return Result.success(adminService.getAcademicPerformance());
+        return Result.success(adminService.getAcademicPerformance(page,pageSize));
     }
 
 
@@ -73,9 +73,9 @@ public class adminController {
      * @return
      */
     @GetMapping("/admin/getAcademicPerformance/getEnglishLevel")
-    public Result getEnglishLevel(){
+    public Result getEnglishLevel(@RequestParam Integer page, @RequestParam Integer pageSize){
         log.info("管理端查询所有学生的英语水平");
-        return Result.success(adminService.getEnglishLevel());
+        return Result.success(adminService.getEnglishLevel(page,pageSize));
     }
 
     /**
@@ -84,9 +84,9 @@ public class adminController {
      * @return
      */
     @GetMapping("/admin/getAcademicPerformance/getProfessionalQualifications")
-    public Result getProfessionalQualifications(){
+    public Result getProfessionalQualifications(@RequestParam Integer page, @RequestParam Integer pageSize){
         log.info("管理端查看所有学生的职业资格");
-        return Result.success(adminService.getProfessionalQualifications());
+        return Result.success(adminService.getProfessionalQualifications(page,pageSize));
     }
 
 
@@ -94,7 +94,7 @@ public class adminController {
      * 查询所有学生的软件开发能力
      */
     @GetMapping("/admin/getAcademicPerformance/getSoftwareDevelopmentCapability")
-    public Result getSoftwareDevelopmentCapability(){
+    public Result getSoftwareDevelopmentCapability(@RequestParam Integer page, @RequestParam Integer pageSize){
         log.info("管理端查询所有学生的软件开发能力");
         return Result.success(adminService.getSoftwareDevelopmentCapability());
     }
@@ -104,9 +104,9 @@ public class adminController {
      *
      */
     @GetMapping("/admin/getAcademicPerformance/getProgrammingCapabilities")
-    public Result getProgrammingCapabilities(){
+    public Result getProgrammingCapabilities(@RequestParam Integer page, @RequestParam Integer pageSize){
         log.info("管理端查询所有学生的编程能力");
-        return Result.success(adminService.getProgrammingCapabilities());
+        return Result.success(adminService.getProgrammingCapabilities(page,pageSize));
 
     }
 
@@ -115,9 +115,9 @@ public class adminController {
      * @return
      */
     @GetMapping("/admin/getAcademicPerformance/getSubjectCompetition")
-    public Result getSubjectCompetition(){
+    public Result getSubjectCompetition(@RequestParam Integer page, @RequestParam Integer pageSize){
         log.info("管理端查询所有学生的学科竞赛");
-        return Result.success(adminService.getSubjectCompetition());
+        return Result.success(adminService.getSubjectCompetition(page,pageSize));
     }
 
 
@@ -126,9 +126,9 @@ public class adminController {
      * @return
      */
     @GetMapping("/admin/getAcademicPerformance/getPaperInformation")
-    public Result getPaperInformation(){
+    public Result getPaperInformation(@RequestParam Integer page, @RequestParam Integer pageSize){
         log.info("管理端查询学生论文情况");
-        return Result.success(adminService.getPaperInformation());
+        return Result.success(adminService.getPaperInformation(page,pageSize));
     }
 
     /**
@@ -136,9 +136,9 @@ public class adminController {
      * @return
      */
     @GetMapping("/admin/getAcademicPerformance/getParticipateProject")
-    public Result getParticipateProject(){
+    public Result getParticipateProject(@RequestParam Integer page, @RequestParam Integer pageSize){
         log.info("管理端查询学生参加项目的情况");
-        return Result.success(adminService.getParticipateProject());
+        return Result.success(adminService.getParticipateProject(page,pageSize));
     }
 
 }

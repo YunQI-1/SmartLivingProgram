@@ -14,18 +14,22 @@ public interface StudentMapper {
 
     List<StudentVO> getStudentInformationByPage(Integer offset,Integer limit);
 
-    @Select("select * from course")
-    List<CourseVO> getCourses();
+    List<CourseVO> getCourses(Integer offset,Integer limit);
 
-    @Select("select student_number,student_name,classes from academic_performance")
-    List<AcademicPerformanceVO> getAcademicPerformance();
+    Long getCoursesCount();
 
+    List<AcademicPerformanceVO> getAcademicPerformance(Integer offset,Integer limit);
 
-    @Select("select * from english_level")
-    List<EnglishLevelVO> getEnglishLevel();
+    Long getAcademicPerformanceCount();
 
-    @Select("select * from professional_qualifications")
-    List<ProfessionalQualificationVO> getProfessionalQualifications();
+    List<EnglishLevelVO> getEnglishLevel(Integer offset,Integer limit);
+
+    Long getEnglishLevelCount();
+
+    List<ProfessionalQualificationVO> getProfessionalQualifications(Integer offset,Integer limit);
+
+    Long getProfessionalQualificationsCount();
+
 
     @Select("select student_number,student_name,software_name,invention_patent from software_copyright")
     List<SoftwareCopyrightVO> getSoftwareCopyright();
@@ -38,19 +42,23 @@ public interface StudentMapper {
             "development_documents from software_system")
     List<SoftwareSystemVO> SoftwareSystem();
 
-    @Select("select * from programming_capabilities")
-    List<ProgrammingCapabilitiesVO> getProgrammingCapabilities();
+    List<ProgrammingCapabilitiesVO> getProgrammingCapabilities(Integer offset,Integer limit);
 
-    @Select("select * from subject_competition")
-    List<SubjectCompetitionVO> getSubjectCompetition();
+    Long getProgrammingCapabilitiesCount();
+
+
+    List<SubjectCompetitionVO> getSubjectCompetition(Integer offset,Integer limit);
+
+    Long getSubjectCompetitionCount();
+
 
     @Select("select * from paper")
-    List<PaperVO> getPaperInformation();
+    List<PaperVO> getPaperInformation(Integer offset,Integer limit);
 
     @Select("select * from participate_project")
-    List<ParticipateProjectVO> getParticipateProject();
+    List<ParticipateProjectVO> getParticipateProject(Integer offset,Integer limit);
 
-    List<ScoreVO> getAllScore();
+    List<ScoreVO> getAllScore(Integer offset,Integer limit);
 
     Long getScoreCount();
 }

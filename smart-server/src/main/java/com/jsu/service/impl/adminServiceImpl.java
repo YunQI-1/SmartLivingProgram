@@ -41,9 +41,11 @@ public class adminServiceImpl implements adminService {
      * @return
      */
     @Override
-    public List<CourseVO> getCourses() {
-        List<CourseVO> ListCourses = studentMapper.getCourses();
-        return ListCourses;
+    public PageResult getCourses(Integer page, Integer pageSize) {
+        Integer offset =(page-1)*pageSize;
+        List list = studentMapper.getCourses(offset,pageSize);
+        Long total=studentMapper.getCoursesCount();
+        return new PageResult(total, list);
     }
 
     /**
@@ -51,9 +53,11 @@ public class adminServiceImpl implements adminService {
      * @return
      */
     @Override
-    public List<AcademicPerformanceVO> getAcademicPerformance() {
-        List<AcademicPerformanceVO> List = studentMapper.getAcademicPerformance();
-        return List;
+    public PageResult getAcademicPerformance(Integer page, Integer pageSize) {
+        Integer offset =(page-1)*pageSize;
+        List<AcademicPerformanceVO> list = studentMapper.getAcademicPerformance(offset,pageSize);
+        Long total=studentMapper.getAcademicPerformanceCount();
+        return new PageResult(total, list);
     }
 
     /**
@@ -61,9 +65,11 @@ public class adminServiceImpl implements adminService {
      * @return
      */
     @Override
-    public List<EnglishLevelVO> getEnglishLevel() {
-        List<EnglishLevelVO> list = studentMapper.getEnglishLevel();
-        return list;
+    public PageResult getEnglishLevel(Integer page, Integer pageSize) {
+        Integer offset =(page-1)*pageSize;
+        List<EnglishLevelVO> list = studentMapper.getEnglishLevel(offset,pageSize);
+        Long total= 100L;
+        return new PageResult(total, list);
     }
 
     /**
@@ -71,11 +77,12 @@ public class adminServiceImpl implements adminService {
      * @return
      */
     @Override
-    public List<ProfessionalQualificationVO> getProfessionalQualifications() {
-        List<ProfessionalQualificationVO> list = studentMapper.getProfessionalQualifications();
-        return list;
+    public PageResult getProfessionalQualifications(Integer page, Integer pageSize) {
+        Integer offset = (page - 1) * pageSize;
+        List<ProfessionalQualificationVO> list = studentMapper.getProfessionalQualifications(offset,pageSize);
+        Long total=studentMapper.getProfessionalQualificationsCount();
+        return new PageResult(total, list);
     }
-
 
     /**
      * 获取学生软件开发能力
@@ -95,9 +102,11 @@ public class adminServiceImpl implements adminService {
      * @return
      */
     @Override
-    public List<ProgrammingCapabilitiesVO> getProgrammingCapabilities() {
+    public PageResult getProgrammingCapabilities(Integer page, Integer pageSize) {
+        Integer offset =(page-1)*pageSize;
         List<ProgrammingCapabilitiesVO> list = studentMapper.getProgrammingCapabilities();
-        return list;
+        Long total= 100L;
+        return new PageResult(total, list);
     }
 
     /**
@@ -105,9 +114,11 @@ public class adminServiceImpl implements adminService {
      * @return
      */
     @Override
-    public List<SubjectCompetitionVO> getSubjectCompetition() {
-        List<SubjectCompetitionVO> list = studentMapper.getSubjectCompetition();
-        return list;
+    public PageResult getSubjectCompetition(Integer page, Integer pageSize) {
+        Integer offset =(page-1)*pageSize;
+        List<SubjectCompetitionVO> list = studentMapper.getSubjectCompetition(offset,pageSize);
+        Long total= 100L;
+        return new PageResult(total, list);
     }
 
     /**
@@ -115,9 +126,11 @@ public class adminServiceImpl implements adminService {
      * @return
      */
     @Override
-    public List<PaperVO> getPaperInformation() {
-        List<PaperVO> list = studentMapper.getPaperInformation();
-        return list;
+    public PageResult getPaperInformation(Integer page, Integer pageSize) {
+        Integer offset =(page-1)*pageSize;
+        List<PaperVO> list = studentMapper.getPaperInformation(offset,pageSize);
+        Long total= 100L;
+        return new PageResult(total, list);
     }
 
     /**
@@ -125,9 +138,11 @@ public class adminServiceImpl implements adminService {
      * @return
      */
     @Override
-    public List<ParticipateProjectVO> getParticipateProject() {
-        List<ParticipateProjectVO> list = studentMapper.getParticipateProject();
-        return list;
+    public PageResult getParticipateProject(Integer page, Integer pageSize) {
+        Integer offset =(page-1)*pageSize;
+        List<ParticipateProjectVO> list = studentMapper.getParticipateProject(offset,pageSize);
+        Long total= 100L;
+        return new PageResult(total, list);
     }
 
     /**
@@ -136,8 +151,9 @@ public class adminServiceImpl implements adminService {
      * @return
      */
     @Override
-    public PageResult getAllScore() {
-        List list=studentMapper.getAllScore();
+    public PageResult getAllScore(Integer page, Integer pageSize) {
+        Integer offset =(page-1)*pageSize;
+        List list=studentMapper.getAllScore(offset,pageSize);
         Long total=studentMapper.getScoreCount();
         return new PageResult(total, list);
     }
