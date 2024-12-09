@@ -71,5 +71,7 @@
         select * from paper limit #{offset},#{limit}
     </select>
 
-
+    <select id="getParticipateProject" resultType="com.jsu.vo.ParticipateProjectVO">
+        select * from participate_project limit #{offset},#{limit}
+    </select>
 </mapper>
