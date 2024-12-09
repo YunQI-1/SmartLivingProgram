@@ -104,7 +104,7 @@ public class adminServiceImpl implements adminService {
     @Override
     public PageResult getProgrammingCapabilities(Integer page, Integer pageSize) {
         Integer offset =(page-1)*pageSize;
-        List<ProgrammingCapabilitiesVO> list = studentMapper.getProgrammingCapabilities();
+        List<ProgrammingCapabilitiesVO> list = studentMapper.getProgrammingCapabilities(offset,pageSize);
         Long total= 100L;
         return new PageResult(total, list);
     }
