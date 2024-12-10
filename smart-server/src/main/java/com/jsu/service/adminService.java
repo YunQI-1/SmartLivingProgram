@@ -31,4 +31,5 @@ public interface adminService {
     PageResult getAllScore(Integer page, Integer pageSize);
 
 
+    PageResult getAcademicCompetition(Integer page, Integer pageSize);
 }

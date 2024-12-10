@@ -1,5 +1,8 @@
 package com.jsu.mapper;
 
+import com.jsu.entity.AcademicCompetitionDetail;
+import com.jsu.entity.EnglishExamDetail;
+import com.jsu.entity.ProfessionalQualifications;
 import com.jsu.vo.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -22,11 +25,15 @@ public interface StudentMapper {
 
     Long getAcademicPerformanceCount();
 
-    List<EnglishLevelVO> getEnglishLevel(Integer offset,Integer limit);
 
     Long getEnglishLevelCount();
 
-    List<ProfessionalQualificationVO> getProfessionalQualifications(Integer offset,Integer limit);
+    /**
+     * 获取学生职业资格证的详细记录
+     * @param studentNumber
+     * @return
+     */
+    List<ProfessionalQualifications> getProfessionalQualifications(String studentNumber);
 
     Long getProfessionalQualificationsCount();
 
@@ -52,7 +59,6 @@ public interface StudentMapper {
     Long getSubjectCompetitionCount();
 
 
-    @Select("select * from paper")
     List<PaperVO> getPaperInformation(Integer offset,Integer limit);
 
     @Select("select * from participate_project")
@@ -61,4 +67,42 @@ public interface StudentMapper {
     List<ScoreVO> getAllScore(Integer offset,Integer limit);
 
     Long getScoreCount();
+
+    List<EnglishExamDetail> getEnglishExamDetail(String studentNumber);
+
+    List<String> getStudentNumbers(Integer offset,Integer limit);
+
+    @Select("select Count(student_number) from english_level where student_number = #{s} group by student_number")
+    int getStudentExamNumber(String s);
+
+
+    /**
+     *  获取英语等级考试中的有记录的学习列表
+     * @param offset
+     * @param pageSize
+     * @return
+     */
+    List<String> getStudentNumbersByACP(Integer offset, Integer pageSize);
+
+
+    List<AcademicCompetitionDetail> getAcademicCompetitionDetail(String studentNumber);
+
+    @Select("select Count(student_number) from academic_competition where student_number = #{studentNumber} group by student_number")
+    int getStudentExamNumberByACP(String studentNumber);
+
+    /**
+     *  获取符职业资格表中的有记录的学习列表
+     * @param offset
+     * @param pageSize
+     * @return
+     */
+    List<String> getStudentNumbersByPRQ(Integer offset, Integer pageSize);
+
+    /**
+     * 获取某个学生能有多少个职业资格证
+     * @param s
+     * @return
+     */
+    @Select("select Count(student_number) from professional_qualifications where student_number = #{studentNumber} group by student_number")
+    int getStudentExamNumberByPRQ(String s);
 }

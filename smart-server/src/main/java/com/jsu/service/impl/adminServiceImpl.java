@@ -1,5 +1,6 @@
 package com.jsu.service.impl;
 
+import com.jsu.entity.EnglishExamDetail;
 import com.jsu.mapper.StudentMapper;
 import com.jsu.result.PageResult;
 
@@ -9,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -61,13 +63,48 @@ public class adminServiceImpl implements adminService {
     }
 
     /**
+     * 获取所有学生的学科竞赛
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public PageResult getAcademicCompetition(Integer page, Integer pageSize) {
+        Integer offset =(page-1)*pageSize;
+        List<String> studentNumberList =studentMapper.getStudentNumbersByACP(offset,pageSize);
+        List<AcademicCompetitionVO> list = new ArrayList<>();
+        if(studentNumberList.size()>0 && studentNumberList != null){
+            studentNumberList.forEach(studentNumber -> {
+                //获得每个学生的考试详细信息并添加到list中
+                AcademicCompetitionVO academicCompetitionVO = new AcademicCompetitionVO();
+                academicCompetitionVO.setAcademicCompetitionDetails(studentMapper.getAcademicCompetitionDetail(studentNumber));
+                academicCompetitionVO.setAwards(studentMapper.getStudentExamNumberByACP(studentNumber));
+                list.add(academicCompetitionVO);
+            });
+        }
+        Long total = 100L;
+        return new PageResult(total, list);
+    }
+
+    /**
      * 获取所有学生的英语水平
      * @return
      */
     @Override
     public PageResult getEnglishLevel(Integer page, Integer pageSize) {
         Integer offset =(page-1)*pageSize;
-        List<EnglishLevelVO> list = studentMapper.getEnglishLevel(offset,pageSize);
+        List<String> studentNumberList=studentMapper.getStudentNumbers(offset,pageSize);
+        List<EnglishLevelVO> list = new ArrayList<>();
+        if (studentNumberList != null && studentNumberList.size() > 0) {
+            studentNumberList.forEach(s -> {
+                // 获取每个学生的考试详细信息并添加到 list 中
+                EnglishLevelVO englishLevelVO=new EnglishLevelVO();
+                englishLevelVO.setEnglishExamDetails(studentMapper.getEnglishExamDetail(s));
+                englishLevelVO.setExamNumber(studentMapper.getStudentExamNumber(s));
+                list.add(englishLevelVO);
+            });
+        }
+
         Long total= 100L;
         return new PageResult(total, list);
     }
@@ -79,8 +116,18 @@ public class adminServiceImpl implements adminService {
     @Override
     public PageResult getProfessionalQualifications(Integer page, Integer pageSize) {
         Integer offset = (page - 1) * pageSize;
-        List<ProfessionalQualificationVO> list = studentMapper.getProfessionalQualifications(offset,pageSize);
-        Long total=studentMapper.getProfessionalQualificationsCount();
+        List<String> studentNumberList =studentMapper.getStudentNumbersByPRQ(offset,pageSize);
+        List<ProfessionalQualificationsVO> list = new ArrayList<>();
+        if(studentNumberList != null && studentNumberList.size() > 0) {
+            studentNumberList.forEach(s -> {
+                //获取每个学生的详细信息并添加到list中
+                ProfessionalQualificationsVO professionalQualificationsVO=new ProfessionalQualificationsVO();
+                professionalQualificationsVO.setProfessionalQualificationsList(studentMapper.getProfessionalQualifications(s));
+                professionalQualificationsVO.setProfessionalNumbers(studentMapper.getStudentExamNumberByPRQ(s));
+                list.add(professionalQualificationsVO);
+            });
+        }
+        Long total= 100L;
         return new PageResult(total, list);
     }
 
@@ -157,6 +204,8 @@ public class adminServiceImpl implements adminService {
         Long total=studentMapper.getScoreCount();
         return new PageResult(total, list);
     }
+
+
 
 
 }

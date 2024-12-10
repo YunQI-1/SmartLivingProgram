@@ -38,7 +38,7 @@ public class adminController {
      *
      * 获取所有课程信息
      */
-    @GetMapping("admin/getCourses")
+    @GetMapping("/admin/getCourses")
     public Result<PageResult> getCourses(@RequestParam Integer page, @RequestParam Integer pageSize){
         log.info("管理端查询所有课程信息");
         return Result.success(adminService.getCourses(page,pageSize));
@@ -49,10 +49,19 @@ public class adminController {
      *
      * @return
      */
-    @GetMapping("admin/getStudentsGrade")
+    @GetMapping("/admin/getStudentsGrade")
     public Result<PageResult> getStudentsGrade(@RequestParam Integer page, @RequestParam Integer pageSize){
         log.info("管理端分页查询所有学生成绩");
         return Result.success(adminService.getAllScore(page,pageSize));
+    }
+
+    /**
+     * 管理端查询所有学生的学科竞赛
+     */
+    @GetMapping("/admin/getAcademicCompetition")
+    public Result<PageResult> getAcademicCompetition(@RequestParam Integer page, @RequestParam Integer pageSize){
+        log.info("管理端查询所有学生的学科竞赛");
+        return Result.success(adminService.getAcademicCompetition(page,pageSize));
     }
 
 
