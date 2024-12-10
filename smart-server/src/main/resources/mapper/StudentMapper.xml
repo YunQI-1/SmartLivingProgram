@@ -138,6 +138,27 @@
             limit #{offset},#{pageSize}
     </select>
 
+    <select id="getStudentNumbersByPaper" resultType="String">
+        SELECT student_number
+        FROM paper
+        GROUP BY student_number
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="getPaperList" resultType="com.jsu.entity.Paper">
+        SELECT
+            p.student_number,
+            p.student_name,
+            p.paper_number,
+            p.paper_name,
+            p.award_level,
+            p.get_time,
+            COUNT(*) OVER (PARTITION BY p.student_number) AS exam_number
+        FROM paper p
+        WHERE p.student_number = #{studentNumber}
+        ORDER BY p.student_number, p.get_time;
+    </select>
+
     <resultMap id="englishLevelResultMap" type="com.jsu.entity.EnglishExamDetail">
         <id property="studentNumber" column="student_number"/>
         <result property="studentName" column="student_name"/>
@@ -147,5 +168,6 @@
         <result property="getTime" column="get_time"/>
         <result property="photo" column="photo"/>
     </resultMap>
+
 
 </mapper>

@@ -11,6 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Paper {
     private String studentNumber;
+
     private String studentName;
     //论文编号
     private String paperNumber;

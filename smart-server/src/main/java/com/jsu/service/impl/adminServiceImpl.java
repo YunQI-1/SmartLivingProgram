@@ -175,7 +175,18 @@ public class adminServiceImpl implements adminService {
     @Override
     public PageResult getPaperInformation(Integer page, Integer pageSize) {
         Integer offset =(page-1)*pageSize;
-        List<PaperVO> list = studentMapper.getPaperInformation(offset,pageSize);
+        List<String> studentNumberList=studentMapper.getStudentNumbersByPaper(offset,pageSize);
+        List<PaperListVO> list = new ArrayList<>();
+        if (studentNumberList != null && !studentNumberList.isEmpty()) {
+            studentNumberList.forEach(s -> {
+                // 获取每个学生的考试详细信息并添加到 list 中
+                PaperListVO paperListVO=new PaperListVO();
+                paperListVO.setPaperList(studentMapper.getPaperList(s));
+                paperListVO.setPaperNumber(studentMapper.getStudentPaperCount(s));
+                list.add(paperListVO);
+            });
+        }
+        log.info("{}",list);
         Long total= 100L;
         return new PageResult(total, list);
     }

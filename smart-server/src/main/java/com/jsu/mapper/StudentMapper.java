@@ -2,6 +2,7 @@ package com.jsu.mapper;
 
 import com.jsu.entity.AcademicCompetitionDetail;
 import com.jsu.entity.EnglishExamDetail;
+import com.jsu.entity.Paper;
 import com.jsu.entity.ProfessionalQualifications;
 import com.jsu.vo.*;
 import org.apache.ibatis.annotations.Mapper;
@@ -104,4 +105,9 @@ public interface StudentMapper {
      */
     @Select("select Count(student_number) from professional_qualifications where student_number = #{studentNumber} group by student_number")
     int getStudentExamNumberByPRQ(String s);
+
+    List<String> getStudentNumbersByPaper(Integer offset, Integer limit);
+    List<Paper> getPaperList(String studentNumber);
+    @Select("select Count(student_number) from paper where student_number = #{studentNumber} group by student_number")
+    Integer getStudentPaperCount(String s);
 }
