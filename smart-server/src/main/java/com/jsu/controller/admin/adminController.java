@@ -103,7 +103,7 @@ public class adminController {
      * 查询所有学生的软件开发能力
      */
     @GetMapping("/admin/getAcademicPerformance/getSoftwareDevelopmentCapability")
-    public Result getSoftwareDevelopmentCapability(@RequestParam Integer page, @RequestParam Integer pageSize){
+    public Result getSoftwareDevelopmentCapability(){
         log.info("管理端查询所有学生的软件开发能力");
         return Result.success(adminService.getSoftwareDevelopmentCapability());
     }

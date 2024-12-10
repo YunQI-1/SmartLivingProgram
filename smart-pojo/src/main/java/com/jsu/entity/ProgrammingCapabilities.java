@@ -12,9 +12,9 @@ public class ProgrammingCapabilities implements Serializable {
 
     private String idCard;
 
-    private Long CLanguageCodeVolume;//C语言代码量
+    private Long cLanguageCodeVolume;//C语言代码量
 
-    private Long JavaCodeVolume;//java代码量
+    private Long javaCodeVolume;//java代码量
 
     private Long dataStructureCodeVolume;//数据结构代码量
 
@@ -22,15 +22,7 @@ public class ProgrammingCapabilities implements Serializable {
 
     private Long pythonCodeVolume;//python代码量
 
-    private Integer CLanguageProjectCount;//C语言项目数
+    private Integer ojPracticeNumber;//oj刷题数
 
-    private Integer JavaProjectCount;//java项目数
-
-    private Integer dataStructureProjectCount;//数据结构项目数
-
-    private Integer javaWebProjectCount;//javaWeb项目数
-
-    private Integer pythonProjectCount;//python项目数
-
-    private Integer OjPracticeNumber;//oj刷题数
+    private Integer otherPracticeNumber;//其他刷题数
 }
