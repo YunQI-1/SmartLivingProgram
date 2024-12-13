@@ -56,11 +56,11 @@ public class adminController {
     }
 
     /**
-     * 管理端查询所有学生的学科竞赛
+     * 管理端查询所有学生的学业竞赛
      */
-    @GetMapping("/admin/getAcademicCompetition")
+        @GetMapping("/admin/getAcademicPerformance/getAcademicCompetition")
     public Result<PageResult> getAcademicCompetition(@RequestParam Integer page, @RequestParam Integer pageSize){
-        log.info("管理端查询所有学生的学科竞赛");
+        log.info("管理端查询所有学生的荣誉情况");
         return Result.success(adminService.getAcademicCompetition(page,pageSize));
     }
 
@@ -99,13 +99,14 @@ public class adminController {
     }
 
 
+
     /**
-     * 查询所有学生的软件开发能力
+     * 查询所有学生的软著情况
      */
-    @GetMapping("/admin/getAcademicPerformance/getSoftwareDevelopmentCapability")
-    public Result getSoftwareDevelopmentCapability(){
-        log.info("管理端查询所有学生的软件开发能力");
-        return Result.success(adminService.getSoftwareDevelopmentCapability());
+    @GetMapping("/admin/getAcademicPerformance/getSoftwareCopyright")
+    public Result getSoftwareCopyright(@RequestParam Integer page, @RequestParam Integer pageSize){
+        log.info("管理端查询所有学生的软著情况");
+        return Result.success(adminService.getSoftwareCopyright(page,pageSize));
     }
 
     /**
@@ -139,6 +140,19 @@ public class adminController {
         log.info("管理端查询学生论文情况");
         return Result.success(adminService.getPaperInformation(page,pageSize));
     }
+
+    /**
+     * 获取发明专利情况
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    @GetMapping("/admin/getAcademicPerformance/getDevelopmentPatent")
+    public Result getDevelopmentPatent(@RequestParam Integer page, @RequestParam Integer pageSize){
+        log.info("管理端查询学生软著情况");
+        return Result.success(adminService.getDevelopmentPatent(page,pageSize));
+    }
+
 
     /**
      * 获取所有学生的参加项目的情况

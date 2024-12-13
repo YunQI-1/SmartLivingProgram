@@ -27,15 +27,9 @@ public class ProgrammingCapabilitiesVO implements Serializable {
 
     private Long pythonCodeVolume;//python代码量
 
-    private Integer CLanguageProjectCount;//C语言项目数
-
-    private Integer JavaProjectCount;//java项目数
-
-    private Integer dataStructureProjectCount;//数据结构项目数
-
-    private Integer javaWebProjectCount;//javaWeb项目数
-
-    private Integer pythonProjectCount;//python项目数
 
     private Integer OjPracticeNumber;//oj刷题数
+
+    private Integer OtherPracticeNumber;//其他刷题数
+
 }
