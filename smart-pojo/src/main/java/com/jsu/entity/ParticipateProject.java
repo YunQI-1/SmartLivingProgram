@@ -15,4 +15,5 @@ public class ParticipateProject {
     private String projectName;
     //类型
     private String type;
+
 }

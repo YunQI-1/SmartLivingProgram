@@ -31,6 +31,15 @@ public class EnglishExamDetail implements Serializable {
     //获取时间
     private Date getTime;
 
+    //学校
+    private String school;
+
+    //专业
+    private String major;
+
+    //准考证号
+    private String examinationCertificateNumber;
+
     //照片
     private  String photo;
 }

@@ -58,6 +58,7 @@
             pq.obtaining_time,
             pq.issuing_department,
             pq.photo,
+            pq.examination_certificate_number,
             (SELECT COUNT(*) FROM professional_qualifications WHERE student_number = pq.student_number) AS qualification_number
         FROM professional_qualifications pq
         WHERE pq.student_number = #{studentNumber}
@@ -111,19 +112,22 @@
     <!-- MyBatis 查询语句：根据学生编号查询英语水平 -->
     <select id="getEnglishExamDetail" resultMap="englishLevelResultMap">
         SELECT
-        el.student_number,
-        el.student_name,
-        el.id_card,
-        el.type_name,
-        el.certificate_number,
-        el.score,
-        el.issuing_department,
-        el.get_time,
-        el.photo,
-        COUNT(*) OVER (PARTITION BY el.student_number) AS exam_number
+            el.student_number,
+            el.student_name,
+            el.id_card,
+            el.type_name,
+            el.certificate_number,
+            el.score,
+            el.issuing_department,
+            el.get_time,
+            el.photo,
+            el.school,
+            el.major,
+            el.examination_certificate_number,
+            COUNT(*) OVER (PARTITION BY el.student_number) AS exam_number
         FROM english_level el
-        WHERE el.student_number = #{studentNumber}
-        ORDER BY el.student_number, el.get_time;
+        WHERE el.student_number = #{student_number}
+        ORDER BY el.student_number, el.get_time
     </select>
     <select id="getStudentNumbersByACP" resultType="java.lang.String">
         select student_number
