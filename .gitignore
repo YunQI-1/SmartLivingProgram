@@ -9,5 +9,5 @@
 config.json
 config.yaml
 application-dev.yml
-application.properties
+application.yml
 .env

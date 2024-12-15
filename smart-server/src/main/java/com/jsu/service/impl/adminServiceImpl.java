@@ -1,7 +1,5 @@
 package com.jsu.service.impl;
 
-import com.jsu.entity.EnglishExamDetail;
-import com.jsu.entity.SubjectCompetition;
 import com.jsu.mapper.StudentMapper;
 import com.jsu.result.PageResult;
 
@@ -75,17 +73,17 @@ public class adminServiceImpl implements adminService {
     public PageResult getAcademicCompetition(Integer page, Integer pageSize) {
         Integer offset =(page-1)*pageSize;
         List<String> studentNumberList =studentMapper.getStudentNumbersByACP(offset,pageSize);
-        List<AcademicCompetitionVO> list = new ArrayList<>();
+        List<StudentAwardVO> list = new ArrayList<>();
         if(studentNumberList.size()>0 && studentNumberList != null){
             studentNumberList.forEach(studentNumber -> {
                 //获得每个学生的考试详细信息并添加到list中
-                AcademicCompetitionVO academicCompetitionVO = new AcademicCompetitionVO();
-                academicCompetitionVO.setAcademicCompetitionDetails(studentMapper.getAcademicCompetitionDetail(studentNumber));
-                academicCompetitionVO.setAwards(studentMapper.getStudentExamNumberByACP(studentNumber));
-                list.add(academicCompetitionVO);
+                StudentAwardVO studentAwardVO = new StudentAwardVO();
+                studentAwardVO.setStudentAwardDetails(studentMapper.getAcademicCompetitionDetail(studentNumber));
+                studentAwardVO.setAwards(studentMapper.getStudentExamNumberByACP(studentNumber));
+                list.add(studentAwardVO);
             });
         }
-        Long total = 100L;
+        Long total= studentMapper.getStudentACPCount();
         return new PageResult(total, list);
     }
 
@@ -103,7 +101,7 @@ public class adminServiceImpl implements adminService {
                 list.add(developmentPatentVO);
             });
         }
-        Long total = 100L;
+        Long total= studentMapper.getDEPCount();
         return new PageResult(total, list);
     }
 
@@ -114,7 +112,7 @@ public class adminServiceImpl implements adminService {
     @Override
     public PageResult getEnglishLevel(Integer page, Integer pageSize) {
         Integer offset =(page-1)*pageSize;
-        List<String> studentNumberList=studentMapper.getStudentNumbers(offset,pageSize);
+        List<String> studentNumberList=studentMapper.getStudentNumbersByEnglish(offset,pageSize);
         List<EnglishLevelVO> list = new ArrayList<>();
         if (studentNumberList != null && studentNumberList.size() > 0) {
             studentNumberList.forEach(s -> {
@@ -125,8 +123,7 @@ public class adminServiceImpl implements adminService {
                 list.add(englishLevelVO);
             });
         }
-
-        Long total= 100L;
+        Long total= studentMapper.getEnglishLevelCount();
         return new PageResult(total, list);
     }
 
@@ -148,7 +145,7 @@ public class adminServiceImpl implements adminService {
                 list.add(professionalQualificationsVO);
             });
         }
-        Long total= 100L;
+        Long total= studentMapper.getProfessionalQualificationsCount();
         return new PageResult(total, list);
     }
 
@@ -171,7 +168,7 @@ public class adminServiceImpl implements adminService {
                 list.add(softwareCopyrightVO);
             });
         }
-        Long total= 100L;
+        Long total= studentMapper.getSOCCount();
         return new PageResult(total, list);
     }
 
@@ -183,7 +180,7 @@ public class adminServiceImpl implements adminService {
     public PageResult getProgrammingCapabilities(Integer page, Integer pageSize) {
         Integer offset =(page-1)*pageSize;
         List<ProgrammingCapabilitiesVO> list = studentMapper.getProgrammingCapabilities(offset,pageSize);
-        Long total= 100L;
+        Long total= studentMapper.getPCCount();
         return new PageResult(total, list);
     }
 
@@ -205,7 +202,7 @@ public class adminServiceImpl implements adminService {
                 list.add(subjectCompetitionVO);
             });
         }
-        Long total= 100L;
+        Long total= studentMapper.getSUCCount();
         return new PageResult(total, list);
     }
 
@@ -228,7 +225,7 @@ public class adminServiceImpl implements adminService {
             });
         }
         log.info("{}",list);
-        Long total= 100L;
+        Long total= studentMapper.getPaperCount();
         return new PageResult(total, list);
     }
 
@@ -239,8 +236,9 @@ public class adminServiceImpl implements adminService {
     @Override
     public PageResult getParticipateProject(Integer page, Integer pageSize) {
         Integer offset =(page-1)*pageSize;
-        Long total= 100L;
-        return null;
+        List list=studentMapper.getParticipateProject(offset,pageSize);
+        Long total= studentMapper.getPPCount();
+        return new PageResult(total,list);
     }
 
     /**

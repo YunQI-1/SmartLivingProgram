@@ -21,4 +21,11 @@ public class ScoreVO implements Serializable {
 
     private Double courseCredit;//获得的课程学分
 
+    //通过成绩表里的课程编码到课程表获取
+    private String courseModule;//课程模块
+
+    private String studyMethod;//修读方式
+
+    private String courseName;//课程名
+
 }
