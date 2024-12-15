@@ -14,6 +14,8 @@ public interface StudentMapper {
     Long getStudentInformationCount();
 
     List<StudentVO> getStudentInformationByPage(Integer offset,Integer limit);
+    @Select("select * from course")
+    List<CourseVO> getCourse();
 
     List<CourseVO> getCourses(Integer offset,Integer limit);
 
@@ -24,8 +26,6 @@ public interface StudentMapper {
     Long getAcademicPerformanceCount();
 
 
-    Long getEnglishLevelCount();
-
     /**
      * 获取学生职业资格证的详细记录
      * @param studentNumber
@@ -33,12 +33,14 @@ public interface StudentMapper {
      */
     List<ProfessionalQualifications> getProfessionalQualifications(String studentNumber);
 
+    @Select("select COUNT(DISTINCT student_number) from professional_qualifications")
     Long getProfessionalQualificationsCount();
 
 
 
     List<ProgrammingCapabilitiesVO> getProgrammingCapabilities(Integer offset,Integer limit);
-
+    @Select("select COUNT(DISTINCT student_number) from programming_capabilities")
+    Long getPCCount();
     Long getProgrammingCapabilitiesCount();
 
 
@@ -50,7 +52,6 @@ public interface StudentMapper {
 
     List<PaperVO> getPaperInformation(Integer offset,Integer limit);
 
-    List<ParticipateProjectVO> getParticipateProject(String studentNumber);
 
     List<ScoreVO> getAllScore(Integer offset,Integer limit);
 
@@ -58,11 +59,13 @@ public interface StudentMapper {
 
     List<EnglishExamDetail> getEnglishExamDetail(String studentNumber);
 
-    List<String> getStudentNumbers(Integer offset,Integer limit);
+    List<String> getStudentNumbersByEnglish(Integer offset, Integer limit);
 
     @Select("select Count(student_number) from english_level where student_number = #{s} group by student_number")
     int getStudentExamNumber(String s);
 
+    @Select("select COUNT(DISTINCT student_number) from english_level")
+    Long getEnglishLevelCount();
 
     /**
      *  获取英语等级考试中的有记录的学习列表
@@ -72,10 +75,12 @@ public interface StudentMapper {
      */
     List<String> getStudentNumbersByACP(Integer offset, Integer pageSize);
 
+    @Select("select COUNT(DISTINCT student_number) from academic_performance")
+    Long getStudentACPCount();
 
-    List<AcademicCompetitionDetail> getAcademicCompetitionDetail(String studentNumber);
+    List<StudentAwardDetail> getAcademicCompetitionDetail(String studentNumber);
 
-    @Select("select Count(student_number) from academic_competition where student_number = #{studentNumber} group by student_number")
+    @Select("select Count(student_number) from student_award where student_number = #{studentNumber} group by student_number")
     int getStudentExamNumberByACP(String studentNumber);
 
     /**
@@ -99,10 +104,17 @@ public interface StudentMapper {
     @Select("select Count(student_number) from paper where student_number = #{studentNumber} group by student_number")
     Integer getStudentPaperCount(String s);
 
+    @Select("select COUNT(DISTINCT student_number) from paper")
+    Long getPaperCount();
+
     List<String> getStudentNumbersBySUC(Integer offset, Integer limit);
+    @Select("select COUNT(DISTINCT student_number) from subject_competition")
+    Long getSUCCount();
 
 
     List<String> getStudentNumbersBySOC(Integer offset, Integer limit);
+    @Select("select COUNT(DISTINCT student_number) from software_copyright")
+    Long getSOCCount();
 
 
     List<SoftwareCopyright> getSoftwareCopyright(String s);
@@ -114,7 +126,15 @@ public interface StudentMapper {
 
     List<DevelopmentPatent> getDevelopmentPatents(String s);
 
+    @Select("select COUNT(DISTINCT student_number) from development_patent")
+    Long getDEPCount();
+
     @Select("select Count(student_number) from development_patent where student_number = #{studentNumber} group by student_number")
     int getDevelopmentPatentCount(String s);
+
+    List<ParticipateProjectVO> getParticipateProject(Integer offset, Integer limit);
+
+    @Select("select COUNT(*) from participate_project")
+    Long getPPCount();
 
 }

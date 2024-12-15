@@ -42,4 +42,10 @@ public class EnglishExamDetail implements Serializable {
 
     //照片
     private  String photo;
+
+    private String college;
+
+    private String major;
+
+    private String examinationCertificateNumber;
 }

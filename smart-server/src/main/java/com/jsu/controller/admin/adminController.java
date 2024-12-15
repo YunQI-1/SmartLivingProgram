@@ -38,10 +38,16 @@ public class adminController {
      *
      * 获取所有课程信息
      */
+//    @GetMapping("/admin/getCourses")
+//    public Result<PageResult> getCourses(@RequestParam Integer page, @RequestParam Integer pageSize){
+//        log.info("管理端查询所有课程信息");
+//        return Result.success(adminService.getCourses(page,pageSize));
+//    }
+
     @GetMapping("/admin/getCourses")
-    public Result<PageResult> getCourses(@RequestParam Integer page, @RequestParam Integer pageSize){
+    public Result<PageResult> getCourses(){
         log.info("管理端查询所有课程信息");
-        return Result.success(adminService.getCourses(page,pageSize));
+        return Result.success(adminService.getCourses(1,1));
     }
 
     /**
@@ -81,7 +87,7 @@ public class adminController {
      *
      * @return
      */
-    @GetMapping("/admin/getAcademicPerformance/getEnglishLevel")
+    @GetMapping("/admin/getEnglishLevel")
     public Result getEnglishLevel(@RequestParam Integer page, @RequestParam Integer pageSize){
         log.info("管理端查询所有学生的英语水平");
         return Result.success(adminService.getEnglishLevel(page,pageSize));

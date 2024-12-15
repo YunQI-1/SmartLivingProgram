@@ -23,7 +23,7 @@
 
 
     <select id="getAllScore" resultType="com.jsu.vo.ScoreVO">
-        select * from score limit #{offset},#{limit}
+        select score.* , course.course_name,course_module,course_start_date_time,study_method from score join course on course.course_number=score.course_number limit #{offset},#{limit}
     </select>
     <select id="getScoreCount" resultType="Long">
         select COUNT(*) from smart_living_program.score
@@ -35,15 +35,6 @@
 
     <select id="getAcademicPerformanceCount" resultType="Long">
         select COUNT(*) from academic_performance
-    </select>
-
-    <!-- 获取英语等级 -->
-    <select id="getEnglishLevel" resultType="com.jsu.entity.EnglishExamDetail">
-        select * from english_level group by student_number limit #{offset},#{limit}
-    </select>
-
-    <select id="getEnglishLevelCount" resultType="Long">
-        select COUNT(*) from english_level
     </select>
 
     <!-- 获取学生职业资格证的详细内容 -->
@@ -65,10 +56,6 @@
         ORDER BY pq.student_number, pq.obtaining_time;
     </select>
 
-
-    <select id="getProfessionalQualificationsCount" resultType="Long">
-        select COUNT(*) from professional_qualifications
-    </select>
 
     <select id="getProgrammingCapabilities" resultType="com.jsu.vo.ProgrammingCapabilitiesVO">
         select * from programming_capabilities limit #{offset},#{limit}
@@ -102,7 +89,7 @@
     </select>
 
     <!-- MyBatis 查询语句：获取符合条件的学生编号 -->
-    <select id="getStudentNumbers" resultType="String">
+    <select id="getStudentNumbersByEnglish" resultType="String">
         SELECT student_number
         FROM english_level
         GROUP BY student_number
@@ -131,11 +118,11 @@
     </select>
     <select id="getStudentNumbersByACP" resultType="java.lang.String">
         select student_number
-        from academic_competition
+        from student_award
         group by student_number
         limit #{offset},#{pageSize}
     </select>
-    <select id="getAcademicCompetitionDetail" resultType="com.jsu.entity.AcademicCompetitionDetail">
+    <select id="getAcademicCompetitionDetail" resultType="com.jsu.entity.StudentAwardDetail">
         select
             ac.student_number,
             ac.student_name,
@@ -148,7 +135,7 @@
             ac.ranks,
             ac.photo,
             count(*) over (partition by ac.student_number) as exam_number
-        from academic_competition  ac
+        from student_award  ac
         where ac.student_number = #{studentNumber}
         order by ac.student_number,ac.get_time;
     </select>
@@ -194,7 +181,7 @@
 
     <!--  获取参加的项目情况  -->
     <select id="getParticipateProject" resultType="com.jsu.vo.ParticipateProjectVO">
-
+        select * from participate_project limit #{offset}, #{limit}
     </select>
     <select id="getStudentNumbersBySOC" resultType="java.lang.String">
         SELECT student_number

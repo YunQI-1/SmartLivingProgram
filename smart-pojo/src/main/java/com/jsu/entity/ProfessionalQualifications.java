@@ -16,6 +16,8 @@ public class ProfessionalQualifications implements Serializable {
     //身份证号
     private String idCard;
 
+    private String examinationCertificateNumber;
+
     private String credentialsName;//证书名
 
     //证书编号

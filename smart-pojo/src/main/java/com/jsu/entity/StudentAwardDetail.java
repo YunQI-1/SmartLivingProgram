@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AcademicCompetitionDetail {
+public class StudentAwardDetail {
 
     private String studentNumber;
 
@@ -17,6 +17,10 @@ public class AcademicCompetitionDetail {
 
     //奖项名
     private String awardName;
+
+    private String college;
+
+    private String major;
 
     //证书编号
     private String certificateNumber;
