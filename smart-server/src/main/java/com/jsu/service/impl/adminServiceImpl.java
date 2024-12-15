@@ -45,7 +45,9 @@ public class adminServiceImpl implements adminService {
     @Override
     public PageResult getCourses(Integer page, Integer pageSize) {
         Integer offset =(page-1)*pageSize;
-        List list = studentMapper.getCourses(offset,pageSize);
+//        List list = studentMapper.getCourses(offset,pageSize);
+        List list=studentMapper.getCourse();
+        log.info(list.toString());
         Long total=studentMapper.getCoursesCount();
         return new PageResult(total, list);
     }

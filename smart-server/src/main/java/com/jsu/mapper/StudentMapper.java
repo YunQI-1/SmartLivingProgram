@@ -17,6 +17,8 @@ public interface StudentMapper {
     Long getStudentInformationCount();
 
     List<StudentVO> getStudentInformationByPage(Integer offset,Integer limit);
+    @Select("select * from course")
+    List<CourseVO> getCourse();
 
     List<CourseVO> getCourses(Integer offset,Integer limit);
 
@@ -63,6 +65,7 @@ public interface StudentMapper {
     List<PaperVO> getPaperInformation(Integer offset,Integer limit);
 
     List<ParticipateProjectVO> getParticipateProject(Integer offset,Integer limit);
+
 
     List<ScoreVO> getAllScore(Integer offset,Integer limit);
 
