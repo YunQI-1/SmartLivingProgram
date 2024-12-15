@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 @Data
 @NoArgsConstructor
@@ -18,9 +18,19 @@ public class EnglishExamDetail implements Serializable {
     private String idCard;
     //类型名
     private String typeName;
+
+    //证书编号
+    private String certificateNumber;
+
+    //得分
+    private int score;
+
     //颁发部门
     private String issuingDepartment;
 
+    //获取时间
     private Date getTime;
+
+    //照片
     private  String photo;
 }

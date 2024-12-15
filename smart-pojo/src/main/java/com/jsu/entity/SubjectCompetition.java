@@ -17,14 +17,17 @@ public class SubjectCompetition {
     private String certificateName;
     //证书编号
     private String certificateNumber;
+
     //证书id
     private String certificationId;
     //举办单位
     private String organizer;
-    //获奖等级
-    private int awardLevel;
+    //获奖级别
+    private String awardLevel;
     //参加形式
-    private int participateForm;
+    private String participateForm;
+    //排名
+    private String rank;
     //获取时间
     private Date getTime;
     //证书照片

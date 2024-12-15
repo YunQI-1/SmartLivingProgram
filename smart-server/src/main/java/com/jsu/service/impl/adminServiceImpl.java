@@ -1,6 +1,7 @@
 package com.jsu.service.impl;
 
 import com.jsu.entity.EnglishExamDetail;
+import com.jsu.entity.SubjectCompetition;
 import com.jsu.mapper.StudentMapper;
 import com.jsu.result.PageResult;
 
@@ -88,6 +89,24 @@ public class adminServiceImpl implements adminService {
         return new PageResult(total, list);
     }
 
+    @Override
+    public PageResult getDevelopmentPatent(Integer page, Integer pageSize) {
+        Integer offset =(page-1)*pageSize;
+        List<String> studentNumberList =studentMapper.getStudentNumbersByDEP(offset,pageSize);
+        List<DevelopmentPatentVO> list = new ArrayList<>();
+        if(studentNumberList.size()>0 && studentNumberList != null){
+            studentNumberList.forEach(s -> {
+                //获得每个学生的考试详细信息并添加到list中
+                DevelopmentPatentVO developmentPatentVO = new DevelopmentPatentVO();
+                developmentPatentVO.setDevelopmentPatents(studentMapper.getDevelopmentPatents(s));
+                developmentPatentVO.setDevelopmentPatentNumbers(studentMapper.getDevelopmentPatentCount(s));
+                list.add(developmentPatentVO);
+            });
+        }
+        Long total = 100L;
+        return new PageResult(total, list);
+    }
+
     /**
      * 获取所有学生的英语水平
      * @return
@@ -134,16 +153,26 @@ public class adminServiceImpl implements adminService {
     }
 
     /**
-     * 获取学生软件开发能力
+     * 获取学生的软著情况
      * @return
      */
 
     @Override
-    public SoftwareDevelopmentCapabilityVO getSoftwareDevelopmentCapability() {
-        List<SoftwareCopyrightVO> list1 = studentMapper.getSoftwareCopyright();
-        List<SoftwareSystemVO> list2 = studentMapper.SoftwareSystem();
-        SoftwareDevelopmentCapabilityVO softwareDevelopmentCapabilityVO = new SoftwareDevelopmentCapabilityVO(list2,list1);
-        return softwareDevelopmentCapabilityVO;
+    public PageResult getSoftwareCopyright(Integer page, Integer pageSize) {
+        Integer offset = (page - 1) * pageSize;
+        List<String> studentNumberList =studentMapper.getStudentNumbersBySOC(offset,pageSize);
+        List<SoftwareCopyrightVO> list = new ArrayList<>();
+        if(studentNumberList != null && studentNumberList.size() > 0) {
+            studentNumberList.forEach(s -> {
+                //获取每个学生的详细信息并添加到list中
+                SoftwareCopyrightVO softwareCopyrightVO=new SoftwareCopyrightVO();
+                softwareCopyrightVO.setSoftwareCopyrights(studentMapper.getSoftwareCopyright(s));
+                softwareCopyrightVO.setCopyrightNumbers(studentMapper.getSoftwareCopyrightCount(s));
+                list.add(softwareCopyrightVO);
+            });
+        }
+        Long total= 100L;
+        return new PageResult(total, list);
     }
 
     /**
@@ -165,7 +194,17 @@ public class adminServiceImpl implements adminService {
     @Override
     public PageResult getSubjectCompetition(Integer page, Integer pageSize) {
         Integer offset =(page-1)*pageSize;
-        List<SubjectCompetitionVO> list = studentMapper.getSubjectCompetition(offset,pageSize);
+        List<String> studentNumberList =studentMapper.getStudentNumbersBySUC(offset,pageSize);
+        List<SubjectCompetitionVO> list = new ArrayList<>();
+        if (studentNumberList != null && !studentNumberList.isEmpty()) {
+            studentNumberList.forEach(s -> {
+                // 获取每个学生的考试详细信息并添加到 list 中
+                SubjectCompetitionVO subjectCompetitionVO=new SubjectCompetitionVO();
+                subjectCompetitionVO.setSubjectCompetitions(studentMapper.getSubjectCompetition(s));
+                subjectCompetitionVO.setCompetitionNumbers(studentMapper.getSubjectCompetitionCount(s));
+                list.add(subjectCompetitionVO);
+            });
+        }
         Long total= 100L;
         return new PageResult(total, list);
     }
@@ -200,9 +239,8 @@ public class adminServiceImpl implements adminService {
     @Override
     public PageResult getParticipateProject(Integer page, Integer pageSize) {
         Integer offset =(page-1)*pageSize;
-        List<ParticipateProjectVO> list = studentMapper.getParticipateProject(offset,pageSize);
         Long total= 100L;
-        return new PageResult(total, list);
+        return null;
     }
 
     /**

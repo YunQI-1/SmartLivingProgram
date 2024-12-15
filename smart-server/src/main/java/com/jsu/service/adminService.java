@@ -1,5 +1,6 @@
 package com.jsu.service;
 
+import com.jsu.entity.SoftwareCopyright;
 import com.jsu.result.PageResult;
 import com.jsu.vo.*;
 
@@ -18,7 +19,7 @@ public interface adminService {
 
     PageResult getProfessionalQualifications(Integer page, Integer pageSize);
 
-    SoftwareDevelopmentCapabilityVO getSoftwareDevelopmentCapability();
+    PageResult getSoftwareCopyright(Integer page, Integer pageSize);
 
     PageResult getProgrammingCapabilities(Integer page, Integer pageSize);
 
@@ -32,4 +33,6 @@ public interface adminService {
 
 
     PageResult getAcademicCompetition(Integer page, Integer pageSize);
+
+    PageResult getDevelopmentPatent(Integer page, Integer pageSize);
 }

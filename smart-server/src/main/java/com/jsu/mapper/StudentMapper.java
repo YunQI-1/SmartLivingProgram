@@ -1,9 +1,6 @@
 package com.jsu.mapper;
 
-import com.jsu.entity.AcademicCompetitionDetail;
-import com.jsu.entity.EnglishExamDetail;
-import com.jsu.entity.Paper;
-import com.jsu.entity.ProfessionalQualifications;
+import com.jsu.entity.*;
 import com.jsu.vo.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -41,30 +38,21 @@ public interface StudentMapper {
     Long getProfessionalQualificationsCount();
 
 
-    @Select("select student_number,student_name,software_name,invention_patent from software_copyright")
-    List<SoftwareCopyrightVO> getSoftwareCopyright();
-
-    @Select("select student_number, student_name, " +
-            "software_system_name, " +
-            "software_system_display_diagram1, " +
-            "software_system_display_diagram2, " +
-            "software_system_display_diagram3, " +
-            "development_documents from software_system")
-    List<SoftwareSystemVO> SoftwareSystem();
 
     List<ProgrammingCapabilitiesVO> getProgrammingCapabilities(Integer offset,Integer limit);
 
     Long getProgrammingCapabilitiesCount();
 
 
-    List<SubjectCompetitionVO> getSubjectCompetition(Integer offset,Integer limit);
+    List<SubjectCompetition> getSubjectCompetition(String studentNumber);
 
-    Long getSubjectCompetitionCount();
+    @Select("select Count(student_number) from subject_competition where student_number = #{studentNumber} group by student_number")
+    int getSubjectCompetitionCount(String studentNumber);
 
 
     List<PaperVO> getPaperInformation(Integer offset,Integer limit);
 
-    List<ParticipateProjectVO> getParticipateProject(Integer offset,Integer limit);
+    List<ParticipateProjectVO> getParticipateProject(String studentNumber);
 
 
     List<ScoreVO> getAllScore(Integer offset,Integer limit);
@@ -113,4 +101,23 @@ public interface StudentMapper {
     List<Paper> getPaperList(String studentNumber);
     @Select("select Count(student_number) from paper where student_number = #{studentNumber} group by student_number")
     Integer getStudentPaperCount(String s);
+
+    List<String> getStudentNumbersBySUC(Integer offset, Integer limit);
+
+
+    List<String> getStudentNumbersBySOC(Integer offset, Integer limit);
+
+
+    List<SoftwareCopyright> getSoftwareCopyright(String s);
+
+    @Select("select Count(student_number) from software_copyright where student_number = #{studentNumber} group by student_number")
+    int getSoftwareCopyrightCount(String s);
+
+    List<String> getStudentNumbersByDEP(Integer offset, Integer limit);
+
+    List<DevelopmentPatent> getDevelopmentPatents(String s);
+
+    @Select("select Count(student_number) from development_patent where student_number = #{studentNumber} group by student_number")
+    int getDevelopmentPatentCount(String s);
+
 }
