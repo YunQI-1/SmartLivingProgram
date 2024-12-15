@@ -6,17 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class PaperVO implements Serializable {
-
-    //论文数
-    private int paperNumbers;
-
-    //论文详情
-    private List<Paper> paperList;
+@AllArgsConstructor
+public class PaperListVO implements Serializable {
+    private Integer paperNumber;  //论文数
+    
+    private List<Paper> paperList;//论文详细内容
 }

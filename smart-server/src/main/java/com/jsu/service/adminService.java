@@ -1,5 +1,6 @@
 package com.jsu.service;
 
+import com.jsu.entity.SoftwareCopyright;
 import com.jsu.result.PageResult;
 import com.jsu.vo.*;
 
@@ -8,21 +9,30 @@ import java.util.List;
 public interface adminService {
     PageResult getStudentInformation();
 
-    List<CourseVO> getCourses();
+    PageResult getStudentInformationByPage(Integer page, Integer pageSize);
 
-    List<AcademicPerformanceVO> getAcademicPerformance();
+    PageResult getCourses(Integer page, Integer pageSize);
 
-    List<EnglishLevelVO> getEnglishLevel();
+    PageResult getAcademicPerformance(Integer page, Integer pageSize);
 
-    List<ProfessionnalQualificationVO> getProfessionalQualifications();
+    PageResult getEnglishLevel(Integer page, Integer pageSize);
 
-    SoftwareDevelopmentCapabilityVO getSoftwareDevelopmentCapability();
+    PageResult getProfessionalQualifications(Integer page, Integer pageSize);
 
-    List<ProgrammingCapabilitiesVO> getProgrammingCapabilities();
+    PageResult getSoftwareCopyright(Integer page, Integer pageSize);
 
-    List<SubjectCompetitionVO> getSubjectCompetition();
+    PageResult getProgrammingCapabilities(Integer page, Integer pageSize);
 
-    List<PaperVO> getPaperInformation();
+    PageResult getSubjectCompetition(Integer page, Integer pageSize);
 
-    List<ParticipateProjectVO> getParticipateProject();
+    PageResult getPaperInformation(Integer page, Integer pageSize);
+
+    PageResult getParticipateProject(Integer page, Integer pageSize);
+
+    PageResult getAllScore(Integer page, Integer pageSize);
+
+
+    PageResult getAcademicCompetition(Integer page, Integer pageSize);
+
+    PageResult getDevelopmentPatent(Integer page, Integer pageSize);
 }

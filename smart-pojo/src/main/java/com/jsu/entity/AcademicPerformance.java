@@ -19,7 +19,7 @@ public class AcademicPerformance {
 
     private List<ProfessionalQualifications> professionalQualifications;//职业资格
 
-    private List<AcademicCompetition> academicCompetition;//学科竞赛
+    private List<StudentAward> studentAward;//学科竞赛
 
     private ProgrammingCapabilities programmingCapabilities;//编程能力
 
