@@ -31,5 +31,8 @@ public class ProfessionalQualifications implements Serializable {
 
     private String photo;//证书照片1
 
+    //准考证号
+
+    private String examinationCertificateNumber;
 
 }
