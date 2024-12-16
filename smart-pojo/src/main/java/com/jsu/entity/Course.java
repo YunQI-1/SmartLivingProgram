@@ -19,6 +19,6 @@ public class Course implements Serializable {
 
     private Integer studyTime;//学时
 
-    private LocalDateTime courseStartDateTime;//开课日期
+    private String courseStartDateTime;//开课日期
 
 }

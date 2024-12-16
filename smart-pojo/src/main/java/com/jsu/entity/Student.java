@@ -12,7 +12,7 @@ public class Student {
 
     private Integer sex;//性别
 
-    private LocalDateTime birthday;
+    private String birthday;
 
     private String nativePlace;//籍贯
 

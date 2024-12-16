@@ -1,5 +1,6 @@
 package com.jsu.service;
 
+import com.jsu.dto.StudentDTO;
 import com.jsu.entity.SoftwareCopyright;
 import com.jsu.result.PageResult;
 import com.jsu.vo.*;
@@ -7,6 +8,12 @@ import com.jsu.vo.*;
 import java.util.List;
 
 public interface adminService {
+
+    /**
+     *  查询功能接口
+     *
+     *
+     */
     PageResult getStudentInformation();
 
     PageResult getStudentInformationByPage(Integer page, Integer pageSize);
@@ -35,4 +42,24 @@ public interface adminService {
     PageResult getAcademicCompetition(Integer page, Integer pageSize);
 
     PageResult getDevelopmentPatent(Integer page, Integer pageSize);
+
+
+    /**
+     *
+     *  新增功能接口
+     *
+     */
+
+    void createStudentInformation(StudentDTO studentDTO);
+
+
+
+    /**
+     *
+     *  修改功能接口
+     *
+     */
+
+    void updateStudentInformation(StudentDTO studentDTO);
+
 }

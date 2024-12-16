@@ -19,7 +19,7 @@ public class StudentVO implements Serializable {
 
     private Integer sex;
 
-    private LocalDateTime birthday;
+    private String birthday;
 
     private String nativePlace;//籍贯
 

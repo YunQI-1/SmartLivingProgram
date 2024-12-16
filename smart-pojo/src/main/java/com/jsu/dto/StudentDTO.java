@@ -11,19 +11,19 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StudentDTO implements Serializable {
-    private String studentNumber;
+    private String studentNumber;//学号
 
-    private String studentName;
+    private String studentName;//学生名
 
-    private Integer sex;
+    private Integer sex;//性别
 
-    private LocalDateTime birthday;
+    private String birthday;
 
     private String nativePlace;//籍贯
 
     private Integer height;//身高
 
-    private String idCard;
+    private String idCard;//身份证号
 
     private String familyPlace;//家庭住址
 
@@ -56,6 +56,8 @@ public class StudentDTO implements Serializable {
     private String college;//学院
 
     private String major;//专业
+
+    private String grade;//年级
 
     private String classes;//班级
 

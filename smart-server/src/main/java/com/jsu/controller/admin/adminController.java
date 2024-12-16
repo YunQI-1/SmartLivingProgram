@@ -1,5 +1,6 @@
 package com.jsu.controller.admin;
 
+import com.jsu.dto.StudentDTO;
 import com.jsu.result.PageResult;
 import com.jsu.result.Result;
 import com.jsu.service.adminService;
@@ -14,6 +15,14 @@ import org.springframework.web.bind.annotation.*;
 public class adminController {
     @Autowired
     adminService adminService;
+
+    /*
+
+     查询功能
+
+     */
+
+
     /**
      * 获取所有学生基本信息
      *
@@ -169,5 +178,45 @@ public class adminController {
         log.info("管理端查询学生参加项目的情况");
         return Result.success(adminService.getParticipateProject(page,pageSize));
     }
+
+
+    /*
+
+     增加功能
+
+     */
+
+    /**
+     * 新增学生信息
+     * @param studentDTO
+     * @return
+     */
+    @PostMapping("/admin/getStudentInformation/createStudentInformation")
+    public Result createStudentInformation(@RequestBody StudentDTO studentDTO){
+        adminService.createStudentInformation(studentDTO);
+        return Result.success();
+    }
+
+
+
+    /*
+
+     修改功能
+
+     */
+
+    /**
+     * 修改单个学生信息
+     *
+     * @return
+     */
+
+    @PutMapping("/admin/getStudentInformation/updateStudentInformation")
+     public Result updateStudentInformation(@RequestBody StudentDTO studentDTO){
+         log.info("修改单个学生信息");
+         adminService.updateStudentInformation(studentDTO);
+         return Result.success();
+     }
+
 
 }

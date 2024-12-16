@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,6 +16,12 @@ public class ScoreVO implements Serializable {
     private String studentNumber;//学号
 
     private String studentName;//学生名
+
+    private String major;//专业
+
+    private String grade;//年级
+
+    private String classes;//班级
 
     private String courseNumber;//课程编码
 
@@ -28,4 +36,5 @@ public class ScoreVO implements Serializable {
 
     private String courseName;//课程名
 
+    private String courseStartDateTime;//开课日期
 }

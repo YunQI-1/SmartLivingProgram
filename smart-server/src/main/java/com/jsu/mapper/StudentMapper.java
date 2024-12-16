@@ -9,9 +9,16 @@ import java.util.List;
 
 @Mapper
 public interface StudentMapper {
+    /**
+     *
+     * 查询功能Mapper
+     * Research
+     */
     List<StudentVO> getStudentInformation();
 
     Long getStudentInformationCount();
+
+    StudentVO getStudentInformationByStudentNumber(String studentNumber);
 
     List<StudentVO> getStudentInformationByPage(Integer offset,Integer limit);
     @Select("select * from course")
@@ -73,15 +80,15 @@ public interface StudentMapper {
      * @param pageSize
      * @return
      */
-    List<String> getStudentNumbersByACP(Integer offset, Integer pageSize);
+    List<String> getStudentNumbersBySA(Integer offset, Integer pageSize);
 
     @Select("select COUNT(DISTINCT student_number) from academic_performance")
-    Long getStudentACPCount();
+    Long getStudentAwardCount();
 
-    List<StudentAwardDetail> getAcademicCompetitionDetail(String studentNumber);
+    List<StudentAwardDetail> getStudentAwardDetail(String studentNumber);
 
     @Select("select Count(student_number) from student_award where student_number = #{studentNumber} group by student_number")
-    int getStudentExamNumberByACP(String studentNumber);
+    int getStudentExamNumberBySA(String studentNumber);
 
     /**
      *  获取符职业资格表中的有记录的学习列表
@@ -132,9 +139,30 @@ public interface StudentMapper {
     @Select("select Count(student_number) from development_patent where student_number = #{studentNumber} group by student_number")
     int getDevelopmentPatentCount(String s);
 
-    List<ParticipateProjectVO> getParticipateProject(Integer offset, Integer limit);
+    List<ParticipateProjectDetail> getParticipateProject(String studentNumber);
 
-    @Select("select COUNT(*) from participate_project")
+    List<String> getStudentNumberByParticipateProject(Integer offset, Integer limit);
+
+    @Select("select COUNT(student_number) from participate_project where student_number=#{s} group by student_number")
+    Integer getProjectCount(String s);
+    @Select("select COUNT(DISTINCT student_number) from participate_project")
     Long getPPCount();
 
+
+    /**
+     *
+     * 增加数据功能Mapper
+     *  Create
+     */
+
+    //新增学生信息(单条增加)
+    void createStudentInformation(Student student);
+
+    /**
+     *
+     * 修改数据功能Mapper
+     *  Update
+     */
+
+    void updateStudentInformation(Student student);
 }

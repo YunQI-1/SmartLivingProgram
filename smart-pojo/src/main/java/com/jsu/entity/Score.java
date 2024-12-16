@@ -11,6 +11,13 @@ public class Score implements Serializable {
 
     private String studentName;//学生名
 
+    private String major;//专业
+
+    private String grade;//年级
+
+    private String classes;//班级
+
+
     private String courseNumber;//课程编码
 
     private Double courseScore;//课程考试分数
@@ -23,5 +30,7 @@ public class Score implements Serializable {
     private String studyMethod;//修读方式
 
     private String courseName;//课程名
+
+    private String courseStartDateTime;//开课日期
 
 }

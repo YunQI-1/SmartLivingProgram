@@ -1,13 +1,18 @@
 package com.jsu.service.impl;
 
+import com.jsu.dto.StudentDTO;
+import com.jsu.entity.Student;
+import com.jsu.exception.BaseException;
 import com.jsu.mapper.StudentMapper;
 import com.jsu.result.PageResult;
 
 import com.jsu.service.adminService;
 import com.jsu.vo.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,18 +77,18 @@ public class adminServiceImpl implements adminService {
     @Override
     public PageResult getAcademicCompetition(Integer page, Integer pageSize) {
         Integer offset =(page-1)*pageSize;
-        List<String> studentNumberList =studentMapper.getStudentNumbersByACP(offset,pageSize);
+        List<String> studentNumberList =studentMapper.getStudentNumbersBySA(offset,pageSize);
         List<StudentAwardVO> list = new ArrayList<>();
         if(studentNumberList.size()>0 && studentNumberList != null){
             studentNumberList.forEach(studentNumber -> {
                 //获得每个学生的考试详细信息并添加到list中
                 StudentAwardVO studentAwardVO = new StudentAwardVO();
-                studentAwardVO.setStudentAwardDetails(studentMapper.getAcademicCompetitionDetail(studentNumber));
-                studentAwardVO.setAwards(studentMapper.getStudentExamNumberByACP(studentNumber));
+                studentAwardVO.setStudentAwardDetails(studentMapper.getStudentAwardDetail(studentNumber));
+                studentAwardVO.setAwards(studentMapper.getStudentExamNumberBySA(studentNumber));
                 list.add(studentAwardVO);
             });
         }
-        Long total= studentMapper.getStudentACPCount();
+        Long total= studentMapper.getStudentAwardCount();
         return new PageResult(total, list);
     }
 
@@ -104,6 +109,7 @@ public class adminServiceImpl implements adminService {
         Long total= studentMapper.getDEPCount();
         return new PageResult(total, list);
     }
+
 
     /**
      * 获取所有学生的英语水平
@@ -236,25 +242,68 @@ public class adminServiceImpl implements adminService {
     @Override
     public PageResult getParticipateProject(Integer page, Integer pageSize) {
         Integer offset =(page-1)*pageSize;
-        List list=studentMapper.getParticipateProject(offset,pageSize);
+        List<String> studentNumberList=studentMapper.getStudentNumberByParticipateProject(offset,pageSize);
+        List<ParticipateProjectVO> list = new ArrayList<>();
+        if (studentNumberList != null && !studentNumberList.isEmpty()) {
+            studentNumberList.forEach(s -> {
+                ParticipateProjectVO participateProjectVO=new ParticipateProjectVO();
+                participateProjectVO.setParticipateProjectDetails(studentMapper.getParticipateProject(s));
+                participateProjectVO.setProjectNumber(studentMapper.getProjectCount(s));
+                list.add(participateProjectVO);
+            });
+        }
+        log.info("{}",list);
         Long total= studentMapper.getPPCount();
         return new PageResult(total,list);
     }
 
     /**
-     * 获取所有学生成绩信息，将来更改为分页查询
+     * 获取所有学生成绩信息
      *
-     * @return
+     *
      */
     @Override
     public PageResult getAllScore(Integer page, Integer pageSize) {
         Integer offset =(page-1)*pageSize;
         List list=studentMapper.getAllScore(offset,pageSize);
         Long total=studentMapper.getScoreCount();
+        log.info(list.toString());
         return new PageResult(total, list);
     }
 
+    /**
+     *
+     * 新增学生信息
+     * @param studentDTO
+     */
 
+    @Override
+    @Transactional
+    public void createStudentInformation(StudentDTO studentDTO) {
+        log.info("新增学生信息：{}",studentDTO);
+         StudentVO studentVO=studentMapper.getStudentInformationByStudentNumber(studentDTO.getStudentNumber());
+         if(studentVO!=null){
+             throw new BaseException("该学号学生已存在!");
+         }
+         Student student = new Student();
+         BeanUtils.copyProperties(studentDTO,student);
+         studentMapper.createStudentInformation(student);
+    }
+
+
+
+    @Override
+    @Transactional
+    public void updateStudentInformation(StudentDTO studentDTO) {
+        log.info("修改学生信息:{}",studentDTO);
+        StudentVO studentVO=studentMapper.getStudentInformationByStudentNumber(studentDTO.getStudentNumber());
+        if(studentVO==null){
+            throw new BaseException("该学号学生不存在!");
+        }
+        Student student = new Student();
+        BeanUtils.copyProperties(studentDTO,student);
+        studentMapper.updateStudentInformation(student);
+    }
 
 
 }

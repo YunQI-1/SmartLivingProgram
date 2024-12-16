@@ -25,7 +25,7 @@ public class SubjectCompetition {
     //获奖级别
     private String awardLevel;
     //参加形式
-    private String participateForm;
+    private String participationForm;
     //排名
     private String rank;
     //获取时间

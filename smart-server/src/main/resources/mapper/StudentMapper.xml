@@ -2,8 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jsu.mapper.StudentMapper">
+
+    <!-- Search语句 -->
     <select id="getStudentInformation" resultType="com.jsu.vo.StudentVO">
         select * from student_information
+    </select>
+
+    <select id="getStudentInformationByStudentNumber" resultType="com.jsu.vo.StudentVO">
+        select * from student_information where student_number=#{studentNumber}
     </select>
 
     <select id="getStudentInformationCount" resultType="Long">
@@ -23,7 +29,15 @@
 
 
     <select id="getAllScore" resultType="com.jsu.vo.ScoreVO">
-        select score.* , course.course_name,course_module,course_start_date_time,study_method from score join course on course.course_number=score.course_number limit #{offset},#{limit}
+        select score.* ,
+               student_information.major,grade,classes,
+               course.course_name,course_module,study_method
+        from score
+        left join course on
+        score.course_number=course.course_number
+        left join student_information on
+        score.student_number=student_information.student_number
+        limit #{offset},#{limit}
     </select>
     <select id="getScoreCount" resultType="Long">
         select COUNT(*) from smart_living_program.score
@@ -49,6 +63,7 @@
             pq.obtaining_time,
             pq.issuing_department,
             pq.photo,
+            pq.examination_certificate_number,
             (SELECT COUNT(*) FROM professional_qualifications WHERE student_number = pq.student_number) AS qualification_number
         FROM professional_qualifications pq
         WHERE pq.student_number = #{studentNumber}
@@ -107,18 +122,21 @@
         el.issuing_department,
         el.get_time,
         el.photo,
+        el.college,
+        el.major,
+        el.examination_certificate_number,
         COUNT(*) OVER (PARTITION BY el.student_number) AS exam_number
         FROM english_level el
         WHERE el.student_number = #{studentNumber}
         ORDER BY el.student_number, el.get_time;
     </select>
-    <select id="getStudentNumbersByACP" resultType="java.lang.String">
+    <select id="getStudentNumbersBySA" resultType="java.lang.String">
         select student_number
         from student_award
         group by student_number
         limit #{offset},#{pageSize}
     </select>
-    <select id="getAcademicCompetitionDetail" resultType="com.jsu.entity.StudentAwardDetail">
+    <select id="getStudentAwardDetail" resultType="com.jsu.entity.StudentAwardDetail">
         select
             ac.student_number,
             ac.student_name,
@@ -130,6 +148,8 @@
             ac.participate_form,
             ac.ranks,
             ac.photo,
+            ac.college,
+            ac.major,
             count(*) over (partition by ac.student_number) as exam_number
         from student_award  ac
         where ac.student_number = #{studentNumber}
@@ -176,9 +196,21 @@
     </select>
 
     <!--  获取参加的项目情况  -->
-    <select id="getParticipateProject" resultType="com.jsu.vo.ParticipateProjectVO">
-        select * from participate_project limit #{offset}, #{limit}
+    <select id="getParticipateProject" resultType="com.jsu.entity.ParticipateProjectDetail">
+        SELECT
+            *,
+            COUNT(*) OVER (PARTITION BY pp.student_number) AS copyright_count
+        FROM participate_project pp
+        WHERE pp.student_number = #{studentNumber}
+        ORDER BY pp.student_number, pp.develop_time;
     </select>
+    <select id="getStudentNumberByParticipateProject" resultType="String">
+        select student_number
+        from participate_project
+        GROUP BY student_number
+            LIMIT #{offset}, #{limit}
+    </select>
+
     <select id="getStudentNumbersBySOC" resultType="java.lang.String">
         SELECT student_number
         FROM software_copyright
@@ -232,7 +264,57 @@
         <result property="issuingDepartment" column="issuing_department"/>
         <result property="getTime" column="get_time"/>
         <result property="photo" column="photo"/>
+        <result property="college" column="college"/>
+        <result property="major" column="major"/>
+        <result property="examinationCertificateNumber" column="examination_certificate_number"/>
     </resultMap>
 
 
+    <!-- Create语句 -->
+    
+    <insert id="createStudentInformation">
+        insert into
+            student_information
+            (student_number, student_name, sex, birthday, native_place, height, id_card, family_place, student_phone_number1, student_phone_number2, guardian_ship1, guardian_ship2, guardian_phone_number1, guardian_phone_number2, qq_number, email, wechat_number, health_status, specialty, hobby, political_status, classes, major, grade, college, job1, job2, job3, dormitory_number)
+        VALUES
+            (#{studentNumber},#{studentName},#{sex},#{birthday},#{nativePlace},#{height},#{idCard},#{familyPlace},#{studentPhoneNumber1},#{studentPhoneNumber2},#{guardianShip1},#{guardianPhoneNumber1},#{guardianShip2},#{guardianPhoneNumber2},#{qqNumber},#{email},#{wechatNumber},#{healthStatus},#{specialty},#{hobby},#{politicalStatus},#{college},#{major},#{grade},#{classes},#{job1},#{job2},#{job3},#{dormitoryNumber})
+    </insert>
+
+
+
+    <!-- Update语句 -->
+    <update id="updateStudentInformation">
+        UPDATE student_information
+        <set>
+            <if test="studentName != null">student_name = #{studentName},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="birthday != null">birthday = #{birthday},</if>
+            <if test="nativePlace != null">native_place = #{nativePlace},</if>
+            <if test="height != null">height = #{height},</if>
+            <if test="idCard != null">id_card = #{idCard},</if>
+            <if test="familyPlace != null">family_place = #{familyPlace},</if>
+            <if test="studentPhoneNumber1 != null">student_phone_number1 = #{studentPhoneNumber1},</if>
+            <if test="studentPhoneNumber2 != null">student_phone_number2 = #{studentPhoneNumber2},</if>
+            <if test="guardianShip1 != null">guardian_ship1 = #{guardianShip1},</if>
+            <if test="guardianPhoneNumber1 != null">guardian_phone_number1 = #{guardianPhoneNumber1},</if>
+            <if test="guardianShip2 != null">guardian_ship2 = #{guardianShip2},</if>
+            <if test="guardianPhoneNumber2 != null">guardian_phone_number2 = #{guardianPhoneNumber2},</if>
+            <if test="qqNumber != null">qq_number = #{qqNumber},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="wechatNumber != null">wechat_number = #{wechatNumber},</if>
+            <if test="healthStatus != null">health_status = #{healthStatus},</if>
+            <if test="specialty != null">specialty = #{specialty},</if>
+            <if test="hobby != null">hobby = #{hobby},</if>
+            <if test="politicalStatus != null">political_status = #{politicalStatus},</if>
+            <if test="college != null">college = #{college},</if>
+            <if test="major != null">major = #{major},</if>
+            <if test="grade != null">grade = #{grade},</if>
+            <if test="classes != null">classes = #{classes},</if>
+            <if test="job1 != null">job1 = #{job1},</if>
+            <if test="job2 != null">job2 = #{job2},</if>
+            <if test="job3 != null">job3 = #{job3},</if>
+            <if test="dormitoryNumber != null">dormitory_number = #{dormitoryNumber},</if>
+        </set>
+        WHERE student_number = #{studentNumber}
+    </update>
 </mapper>
