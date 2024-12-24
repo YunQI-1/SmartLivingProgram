@@ -43,13 +43,6 @@
         select COUNT(*) from smart_living_program.score
     </select>
 
-    <select id="getAcademicPerformance" resultType="com.jsu.vo.AcademicPerformanceVO">
-        select student_number,student_name,classes from academic_performance limit #{offset},#{limit}
-    </select>
-
-    <select id="getAcademicPerformanceCount" resultType="Long">
-        select COUNT(*) from academic_performance
-    </select>
 
     <!-- 获取学生职业资格证的详细内容 -->
     <select id="getProfessionalQualifications" resultType="com.jsu.entity.ProfessionalQualifications">
@@ -92,10 +85,14 @@
             sc.certificate_number,
             sc.certification_photo,
             sc.sign_up_file,
-            COUNT(*) OVER (PARTITION BY sc.student_number) AS competition_number
-        FROM subject_competition sc
-        WHERE sc.student_number = #{studentNumber}
-        ORDER BY sc.student_number, sc.get_time;
+            (SELECT COUNT(*) FROM subject_competition sc2 WHERE sc2.student_number = sc.student_number) AS competition_number
+        FROM
+            subject_competition sc
+        WHERE
+            sc.student_number = #{studentNumber}
+        ORDER BY
+            sc.student_number,
+            sc.get_time;
     </select>
     
     <select id="getPaperInformation" resultType="com.jsu.vo.PaperVO">
@@ -113,22 +110,26 @@
     <!-- MyBatis 查询语句：根据学生编号查询英语水平 -->
     <select id="getEnglishExamDetail" resultMap="englishLevelResultMap">
         SELECT
-        el.student_number,
-        el.student_name,
-        el.id_card,
-        el.type_name,
-        el.certificate_number,
-        el.score,
-        el.issuing_department,
-        el.get_time,
-        el.photo,
-        el.college,
-        el.major,
-        el.examination_certificate_number,
-        COUNT(*) OVER (PARTITION BY el.student_number) AS exam_number
-        FROM english_level el
-        WHERE el.student_number = #{studentNumber}
-        ORDER BY el.student_number, el.get_time;
+            el.student_number,
+            el.student_name,
+            el.id_card,
+            el.type_name,
+            el.certificate_number,
+            el.score,
+            el.issuing_department,
+            el.get_time,
+            el.photo,
+            el.college,
+            el.major,
+            el.examination_certificate_number,
+            (SELECT COUNT(*) FROM english_level el2 WHERE el2.student_number = el.student_number) AS exam_number
+        FROM
+            english_level el
+        WHERE
+            el.student_number = #{studentNumber}
+        ORDER BY
+            el.student_number,
+            el.get_time;
     </select>
     <select id="getStudentNumbersBySA" resultType="java.lang.String">
         select student_number
@@ -137,7 +138,7 @@
         limit #{offset},#{pageSize}
     </select>
     <select id="getStudentAwardDetail" resultType="com.jsu.entity.StudentAwardDetail">
-        select
+        SELECT
             ac.student_number,
             ac.student_name,
             ac.award_name,
@@ -150,10 +151,14 @@
             ac.photo,
             ac.college,
             ac.major,
-            count(*) over (partition by ac.student_number) as exam_number
-        from student_award  ac
-        where ac.student_number = #{studentNumber}
-        order by ac.student_number,ac.get_time;
+            (SELECT COUNT(*) FROM student_award ac2 WHERE ac2.student_number = ac.student_number) as exam_number
+        FROM
+            student_award ac
+        WHERE
+            ac.student_number = #{studentNumber}
+        ORDER BY
+            ac.student_number,
+            ac.get_time;
     </select>
     <!-- 获取职业资格表中符合要求的学生学号-->
     <select id="getStudentNumbersByPRQ" resultType="java.lang.String">
@@ -183,10 +188,14 @@
             p.doi,
             p.editor_ranking,
             p.instructor,
-            COUNT(*) OVER (PARTITION BY p.student_number) AS exam_number
-        FROM paper p
-        WHERE p.student_number = #{studentNumber}
-        ORDER BY p.student_number, p.year_of_publication;
+            (SELECT COUNT(*) FROM paper p2 WHERE p2.student_number = p.student_number) AS exam_number
+        FROM
+            paper p
+        WHERE
+            p.student_number = #{studentNumber}
+        ORDER BY
+            p.student_number,
+            p.year_of_publication;
     </select>
     <select id="getStudentNumbersBySUC" resultType="java.lang.String">
         SELECT student_number
@@ -198,11 +207,11 @@
     <!--  获取参加的项目情况  -->
     <select id="getParticipateProject" resultType="com.jsu.entity.ParticipateProjectDetail">
         SELECT
-            *,
-            COUNT(*) OVER (PARTITION BY pp.student_number) AS copyright_count
-        FROM participate_project pp
-        WHERE pp.student_number = #{studentNumber}
-        ORDER BY pp.student_number, pp.develop_time;
+            student_number,
+            COUNT(*) AS copyright_count
+        FROM participate_project
+        WHERE student_number = #{studentNumber}
+        GROUP BY student_number;
     </select>
     <select id="getStudentNumberByParticipateProject" resultType="String">
         select student_number
@@ -228,11 +237,14 @@
             sc.registration_number,
             sc.issuing_department,
             sc.issue_date,
-            COUNT(*) OVER (PARTITION BY sc.student_number) AS copyright_count
-        FROM software_copyright sc
-        WHERE sc.student_number = #{studentNumber}
-        ORDER BY sc.student_number, sc.issue_date;
-
+            (SELECT COUNT(*) FROM software_copyright sc2 WHERE sc2.student_number = sc.student_number) AS copyright_count
+        FROM
+            software_copyright sc
+        WHERE
+            sc.student_number = #{studentNumber}
+        ORDER BY
+            sc.student_number,
+            sc.issue_date;
     </select>
     <select id="getStudentNumbersByDEP" resultType="java.lang.String">
         SELECT student_number
@@ -250,10 +262,14 @@
             dp.patentee,
             dp.authorization_announcement_date,
             dp.issuing_department,
-            COUNT(*) OVER (PARTITION BY dp.student_number) AS patent_count
-        FROM development_patent dp
-        WHERE dp.student_number = #{studentNumber}
-        ORDER BY dp.student_number, dp.authorization_announcement_date;
+            (SELECT COUNT(*) FROM development_patent dp2 WHERE dp2.student_number = dp.student_number) AS patent_count
+        FROM
+            development_patent dp
+        WHERE
+            dp.student_number = #{studentNumber}
+        ORDER BY
+            dp.student_number,
+            dp.authorization_announcement_date;
     </select>
 
     <resultMap id="englishLevelResultMap" type="com.jsu.entity.EnglishExamDetail">
@@ -317,4 +333,9 @@
         </set>
         WHERE student_number = #{studentNumber}
     </update>
+
+    <!-- Delete语句 -->
+    <delete id="deleteStudentInformation">
+        delete from student_information where student_number=#{studentNumber}
+    </delete>
 </mapper>

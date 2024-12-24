@@ -20,7 +20,6 @@ public interface adminService {
 
     PageResult getCourses(Integer page, Integer pageSize);
 
-    PageResult getAcademicPerformance(Integer page, Integer pageSize);
 
     PageResult getEnglishLevel(Integer page, Integer pageSize);
 
@@ -62,4 +61,11 @@ public interface adminService {
 
     void updateStudentInformation(StudentDTO studentDTO);
 
+
+    /**
+     *
+     *  删除功能接口
+     *
+     */
+    void deleteStudentInformation(String studentNumber);
 }

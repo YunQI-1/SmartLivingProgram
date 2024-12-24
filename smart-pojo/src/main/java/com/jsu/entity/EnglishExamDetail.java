@@ -45,7 +45,4 @@ public class EnglishExamDetail implements Serializable {
 
     private String college;
 
-    private String major;
-
-    private String examinationCertificateNumber;
 }

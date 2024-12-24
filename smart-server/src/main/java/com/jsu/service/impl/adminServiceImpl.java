@@ -56,17 +56,6 @@ public class adminServiceImpl implements adminService {
         return new PageResult(total, list);
     }
 
-    /**
-     * 获取学生学业情况
-     * @return
-     */
-    @Override
-    public PageResult getAcademicPerformance(Integer page, Integer pageSize) {
-        Integer offset =(page-1)*pageSize;
-        List<AcademicPerformanceVO> list = studentMapper.getAcademicPerformance(offset,pageSize);
-        Long total=studentMapper.getAcademicPerformanceCount();
-        return new PageResult(total, list);
-    }
 
     /**
      * 获取所有学生的学科竞赛
@@ -305,5 +294,14 @@ public class adminServiceImpl implements adminService {
         studentMapper.updateStudentInformation(student);
     }
 
-
+    @Override
+    public void deleteStudentInformation(String studentNumber) {
+        log.info("删除学号为：{}的学生信息",studentNumber);
+        StudentVO studentVO=studentMapper.getStudentInformationByStudentNumber(studentNumber);
+        if(studentVO==null){
+            throw new BaseException("不存在该学号学生！");
+        }
+        //考虑到之后的多表的关联，之后需要完善多表之间的关联性删除
+        studentMapper.deleteStudentInformation(studentNumber);
+    }
 }

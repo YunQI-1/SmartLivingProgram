@@ -5,6 +5,7 @@ import com.jsu.result.PageResult;
 import com.jsu.result.Result;
 import com.jsu.service.adminService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -77,17 +78,6 @@ public class adminController {
     public Result<PageResult> getAcademicCompetition(@RequestParam Integer page, @RequestParam Integer pageSize){
         log.info("管理端查询所有学生的荣誉情况");
         return Result.success(adminService.getAcademicCompetition(page,pageSize));
-    }
-
-
-    /**
-     * 获取所有学生的学业情况
-     * @return
-     */
-    @GetMapping("/admin/getAcademicPerformance")
-    public Result<PageResult> getAcademicPerformance(@RequestParam Integer page, @RequestParam Integer pageSize){
-        log.info("管理端查看所有学生的学业新情况");
-        return Result.success(adminService.getAcademicPerformance(page,pageSize));
     }
 
 
@@ -218,5 +208,17 @@ public class adminController {
          return Result.success();
      }
 
+    /**
+     * 删除单个学生信息
+     *
+     * @param studentNumber
+     * @return
+     */
+     @DeleteMapping("/admin/deleteStudentInformation")
+     public Result deleteStudentInformation(@RequestParam String studentNumber){
+        log.info("删除单个学生信息");
+        adminService.deleteStudentInformation(studentNumber);
+        return Result.success();
+     }
 
 }

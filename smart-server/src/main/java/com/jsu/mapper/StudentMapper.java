@@ -28,9 +28,6 @@ public interface StudentMapper {
 
     Long getCoursesCount();
 
-    List<AcademicPerformanceVO> getAcademicPerformance(Integer offset,Integer limit);
-
-    Long getAcademicPerformanceCount();
 
 
     /**
@@ -82,7 +79,7 @@ public interface StudentMapper {
      */
     List<String> getStudentNumbersBySA(Integer offset, Integer pageSize);
 
-    @Select("select COUNT(DISTINCT student_number) from academic_performance")
+    @Select("select COUNT(DISTINCT student_number) from student_award")
     Long getStudentAwardCount();
 
     List<StudentAwardDetail> getStudentAwardDetail(String studentNumber);
@@ -165,4 +162,11 @@ public interface StudentMapper {
      */
 
     void updateStudentInformation(Student student);
+
+    /**
+     *
+     *  删除数据功能Mapper
+     *  Delete
+     */
+    void deleteStudentInformation(String studentNumber);
 }
