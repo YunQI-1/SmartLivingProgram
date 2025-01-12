@@ -103,46 +103,33 @@ public interface StudentMapper {
     @Select("select Count(student_number) from professional_qualifications where student_number = #{studentNumber} group by student_number")
     int getStudentExamNumberByPRQ(String s);
 
-    List<String> getStudentNumbersByPaper(Integer offset, Integer limit);
-    List<Paper> getPaperList(String studentNumber);
-    @Select("select Count(student_number) from paper where student_number = #{studentNumber} group by student_number")
-    Integer getStudentPaperCount(String s);
+    List<Paper> getPaperList(Integer offset, Integer limit);
 
-    @Select("select COUNT(DISTINCT student_number) from paper")
+    @Select("select COUNT(*) from paper")
     Long getPaperCount();
 
     List<String> getStudentNumbersBySUC(Integer offset, Integer limit);
     @Select("select COUNT(DISTINCT student_number) from subject_competition")
     Long getSUCCount();
 
-
-    List<String> getStudentNumbersBySOC(Integer offset, Integer limit);
-    @Select("select COUNT(DISTINCT student_number) from software_copyright")
+    @Select("select COUNT(*) from software_copyright")
     Long getSOCCount();
 
 
-    List<SoftwareCopyright> getSoftwareCopyright(String s);
+    List<SoftwareCopyright> getSoftwareCopyright(Integer offset, Integer limit);
 
-    @Select("select Count(student_number) from software_copyright where student_number = #{studentNumber} group by student_number")
-    int getSoftwareCopyrightCount(String s);
+    List<DevelopmentPatent> getDevelopmentPatents(Integer offset, Integer limit);
 
-    List<String> getStudentNumbersByDEP(Integer offset, Integer limit);
-
-    List<DevelopmentPatent> getDevelopmentPatents(String s);
-
-    @Select("select COUNT(DISTINCT student_number) from development_patent")
+    @Select("select COUNT(*) from development_patent")
     Long getDEPCount();
 
     @Select("select Count(student_number) from development_patent where student_number = #{studentNumber} group by student_number")
     int getDevelopmentPatentCount(String s);
 
-    List<ParticipateProjectDetail> getParticipateProject(String studentNumber);
+    List<ParticipateProjectDetail> getParticipateProject(Integer offset, Integer limit);
 
-    List<String> getStudentNumberByParticipateProject(Integer offset, Integer limit);
 
-    @Select("select COUNT(student_number) from participate_project where student_number=#{s} group by student_number")
-    Integer getProjectCount(String s);
-    @Select("select COUNT(DISTINCT student_number) from participate_project")
+    @Select("select COUNT(*) from participate_project")
     Long getPPCount();
 
 

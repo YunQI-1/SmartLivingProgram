@@ -13,10 +13,33 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PaperVO implements Serializable {
+    private String studentNumber;
 
-    //论文数
-    private int paperNumbers;
+    private String studentName;
+    //论文名
+    private String paperName;
 
-    //论文详情
-    private List<Paper> paperList;
+    //期刊名
+    private String journalName;
+
+    //发布时间
+    private String yearOfPublication;
+
+    //卷号
+    private int volumeNumber;
+
+    //期号
+    private int issue;
+
+    //文章页面
+    private int year;
+
+    //doi
+    private String doi;
+
+    //编辑排名
+    private String editorRanking;
+
+    //指导老师
+    private String instructor;
 }

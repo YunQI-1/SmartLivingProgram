@@ -168,34 +168,8 @@
             limit #{offset},#{pageSize}
     </select>
 
-    <select id="getStudentNumbersByPaper" resultType="String">
-        SELECT student_number
-        FROM paper
-        GROUP BY student_number
-        LIMIT #{offset}, #{limit}
-    </select>
-
     <select id="getPaperList" resultType="com.jsu.entity.Paper">
-        SELECT
-            p.student_number,
-            p.student_name,
-            p.paper_name,
-            p.journal_name,
-            p.year_of_publication,
-            p.volume_number,
-            p.issue,
-            p.article_page,
-            p.doi,
-            p.editor_ranking,
-            p.instructor,
-            (SELECT COUNT(*) FROM paper p2 WHERE p2.student_number = p.student_number) AS exam_number
-        FROM
-            paper p
-        WHERE
-            p.student_number = #{studentNumber}
-        ORDER BY
-            p.student_number,
-            p.year_of_publication;
+       select * from paper limit #{offset},#{limit}
     </select>
     <select id="getStudentNumbersBySUC" resultType="java.lang.String">
         SELECT student_number
@@ -206,70 +180,15 @@
 
     <!--  获取参加的项目情况  -->
     <select id="getParticipateProject" resultType="com.jsu.entity.ParticipateProjectDetail">
-        SELECT
-            student_number,
-            COUNT(*) AS copyright_count
-        FROM participate_project
-        WHERE student_number = #{studentNumber}
-        GROUP BY student_number;
-    </select>
-    <select id="getStudentNumberByParticipateProject" resultType="String">
-        select student_number
-        from participate_project
-        GROUP BY student_number
-            LIMIT #{offset}, #{limit}
+        SELECT * from participate_project LIMIT #{offset}, #{limit}
     </select>
 
-    <select id="getStudentNumbersBySOC" resultType="java.lang.String">
-        SELECT student_number
-        FROM software_copyright
-        GROUP BY student_number
-            LIMIT #{offset}, #{limit}
-    </select>
     <select id="getSoftwareCopyright" resultType="com.jsu.entity.SoftwareCopyright">
-        SELECT
-            sc.student_number,
-            sc.student_name,
-            sc.software_name,
-            sc.completion_date,
-            sc.how_to_obtain_rights,
-            sc.scope_of_rights,
-            sc.registration_number,
-            sc.issuing_department,
-            sc.issue_date,
-            (SELECT COUNT(*) FROM software_copyright sc2 WHERE sc2.student_number = sc.student_number) AS copyright_count
-        FROM
-            software_copyright sc
-        WHERE
-            sc.student_number = #{studentNumber}
-        ORDER BY
-            sc.student_number,
-            sc.issue_date;
+        select * from software_copyright LIMIT #{offset}, #{limit}
     </select>
-    <select id="getStudentNumbersByDEP" resultType="java.lang.String">
-        SELECT student_number
-        FROM development_patent
-        GROUP BY student_number
-            LIMIT #{offset}, #{limit}
-    </select>
+
     <select id="getDevelopmentPatents" resultType="com.jsu.entity.DevelopmentPatent">
-        SELECT
-            dp.student_number,
-            dp.student_name,
-            dp.patent_name,
-            dp.patent_number,
-            dp.patent_application_time,
-            dp.patentee,
-            dp.authorization_announcement_date,
-            dp.issuing_department,
-            (SELECT COUNT(*) FROM development_patent dp2 WHERE dp2.student_number = dp.student_number) AS patent_count
-        FROM
-            development_patent dp
-        WHERE
-            dp.student_number = #{studentNumber}
-        ORDER BY
-            dp.student_number,
-            dp.authorization_announcement_date;
+        select * from development_patent LIMIT #{offset}, #{limit}
     </select>
 
     <resultMap id="englishLevelResultMap" type="com.jsu.entity.EnglishExamDetail">

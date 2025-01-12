@@ -1,7 +1,7 @@
 package com.jsu.service.impl;
 
 import com.jsu.dto.StudentDTO;
-import com.jsu.entity.Student;
+import com.jsu.entity.*;
 import com.jsu.exception.BaseException;
 import com.jsu.mapper.StudentMapper;
 import com.jsu.result.PageResult;
@@ -84,17 +84,7 @@ public class adminServiceImpl implements adminService {
     @Override
     public PageResult getDevelopmentPatent(Integer page, Integer pageSize) {
         Integer offset =(page-1)*pageSize;
-        List<String> studentNumberList =studentMapper.getStudentNumbersByDEP(offset,pageSize);
-        List<DevelopmentPatentVO> list = new ArrayList<>();
-        if(studentNumberList.size()>0 && studentNumberList != null){
-            studentNumberList.forEach(s -> {
-                //获得每个学生的考试详细信息并添加到list中
-                DevelopmentPatentVO developmentPatentVO = new DevelopmentPatentVO();
-                developmentPatentVO.setDevelopmentPatents(studentMapper.getDevelopmentPatents(s));
-                developmentPatentVO.setDevelopmentPatentNumbers(studentMapper.getDevelopmentPatentCount(s));
-                list.add(developmentPatentVO);
-            });
-        }
+        List<DevelopmentPatent>list=studentMapper.getDevelopmentPatents(offset,pageSize);
         Long total= studentMapper.getDEPCount();
         return new PageResult(total, list);
     }
@@ -152,17 +142,7 @@ public class adminServiceImpl implements adminService {
     @Override
     public PageResult getSoftwareCopyright(Integer page, Integer pageSize) {
         Integer offset = (page - 1) * pageSize;
-        List<String> studentNumberList =studentMapper.getStudentNumbersBySOC(offset,pageSize);
-        List<SoftwareCopyrightVO> list = new ArrayList<>();
-        if(studentNumberList != null && studentNumberList.size() > 0) {
-            studentNumberList.forEach(s -> {
-                //获取每个学生的详细信息并添加到list中
-                SoftwareCopyrightVO softwareCopyrightVO=new SoftwareCopyrightVO();
-                softwareCopyrightVO.setSoftwareCopyrights(studentMapper.getSoftwareCopyright(s));
-                softwareCopyrightVO.setCopyrightNumbers(studentMapper.getSoftwareCopyrightCount(s));
-                list.add(softwareCopyrightVO);
-            });
-        }
+        List<SoftwareCopyright> list=studentMapper.getSoftwareCopyright(offset,pageSize);
         Long total= studentMapper.getSOCCount();
         return new PageResult(total, list);
     }
@@ -208,18 +188,7 @@ public class adminServiceImpl implements adminService {
     @Override
     public PageResult getPaperInformation(Integer page, Integer pageSize) {
         Integer offset =(page-1)*pageSize;
-        List<String> studentNumberList=studentMapper.getStudentNumbersByPaper(offset,pageSize);
-        List<PaperListVO> list = new ArrayList<>();
-        if (studentNumberList != null && !studentNumberList.isEmpty()) {
-            studentNumberList.forEach(s -> {
-                // 获取每个学生的考试详细信息并添加到 list 中
-                PaperListVO paperListVO=new PaperListVO();
-                paperListVO.setPaperList(studentMapper.getPaperList(s));
-                paperListVO.setPaperNumber(studentMapper.getStudentPaperCount(s));
-                list.add(paperListVO);
-            });
-        }
-        log.info("{}",list);
+        List<Paper> list=studentMapper.getPaperList(offset,pageSize);
         Long total= studentMapper.getPaperCount();
         return new PageResult(total, list);
     }
@@ -231,16 +200,7 @@ public class adminServiceImpl implements adminService {
     @Override
     public PageResult getParticipateProject(Integer page, Integer pageSize) {
         Integer offset =(page-1)*pageSize;
-        List<String> studentNumberList=studentMapper.getStudentNumberByParticipateProject(offset,pageSize);
-        List<ParticipateProjectVO> list = new ArrayList<>();
-        if (studentNumberList != null && !studentNumberList.isEmpty()) {
-            studentNumberList.forEach(s -> {
-                ParticipateProjectVO participateProjectVO=new ParticipateProjectVO();
-                participateProjectVO.setParticipateProjectDetails(studentMapper.getParticipateProject(s));
-                participateProjectVO.setProjectNumber(studentMapper.getProjectCount(s));
-                list.add(participateProjectVO);
-            });
-        }
+        List<ParticipateProjectDetail> list=studentMapper.getParticipateProject(offset,pageSize);
         log.info("{}",list);
         Long total= studentMapper.getPPCount();
         return new PageResult(total,list);
