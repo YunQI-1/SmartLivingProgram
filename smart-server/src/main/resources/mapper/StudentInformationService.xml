@@ -4,11 +4,11 @@
 <mapper namespace="com.jsu.mapper.StudentMapper">
 
     <!-- Search语句 -->
-    <select id="getStudentInformation" resultType="com.jsu.vo.StudentVO">
+    <select id="getStudentInformation" resultType="com.jsu.vo.StudentInformationVO">
         select * from student_information
     </select>
 
-    <select id="getStudentInformationByStudentNumber" resultType="com.jsu.vo.StudentVO">
+    <select id="getStudentInformationByStudentNumber" resultType="com.jsu.vo.StudentInformationVO">
         select * from student_information where student_number=#{studentNumber}
     </select>
 
@@ -16,7 +16,7 @@
         select COUNT(*) from student_information
     </select>
 
-    <select id="getStudentInformationByPage" resultType="com.jsu.vo.StudentVO">
+    <select id="getStudentInformationByPage" resultType="com.jsu.vo.StudentInformationVO">
         select * from student_information limit #{offset},#{limit}
     </select>
 
@@ -137,29 +137,7 @@
         group by student_number
         limit #{offset},#{pageSize}
     </select>
-    <select id="getStudentAwardDetail" resultType="com.jsu.entity.StudentAwardDetail">
-        SELECT
-            ac.student_number,
-            ac.student_name,
-            ac.award_name,
-            ac.get_time,
-            ac.certificate_number,
-            ac.issuing_department,
-            ac.classification,
-            ac.participate_form,
-            ac.ranks,
-            ac.photo,
-            ac.college,
-            ac.major,
-            (SELECT COUNT(*) FROM student_award ac2 WHERE ac2.student_number = ac.student_number) as exam_number
-        FROM
-            student_award ac
-        WHERE
-            ac.student_number = #{studentNumber}
-        ORDER BY
-            ac.student_number,
-            ac.get_time;
-    </select>
+
     <!-- 获取职业资格表中符合要求的学生学号-->
     <select id="getStudentNumbersByPRQ" resultType="java.lang.String">
         select student_number
@@ -179,7 +157,7 @@
     </select>
 
     <!--  获取参加的项目情况  -->
-    <select id="getParticipateProject" resultType="com.jsu.entity.ParticipateProjectDetail">
+    <select id="getParticipateProject" resultType="com.jsu.entity.ParticipateProject">
         SELECT * from participate_project LIMIT #{offset}, #{limit}
     </select>
 
@@ -191,7 +169,7 @@
         select * from development_patent LIMIT #{offset}, #{limit}
     </select>
 
-    <resultMap id="englishLevelResultMap" type="com.jsu.entity.EnglishExamDetail">
+    <resultMap id="englishLevelResultMap" type="com.jsu.entity.EnglishLevel">
         <id property="studentNumber" column="student_number"/>
         <result property="studentName" column="student_name"/>
         <result property="idCard" column="id_card"/>

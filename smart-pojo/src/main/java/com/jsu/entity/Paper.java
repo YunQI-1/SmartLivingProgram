@@ -29,7 +29,7 @@ public class Paper {
     private int issue;
 
     //文章页面
-    private int year;
+    private String articlePage;
 
     //doi
     private String doi;

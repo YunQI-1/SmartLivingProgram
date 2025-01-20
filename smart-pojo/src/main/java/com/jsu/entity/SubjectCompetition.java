@@ -19,10 +19,10 @@ public class SubjectCompetition {
     private String certificateNumber;
 
     //证书id
-    private String certificationId;
+    private String certificateId;
     //举办单位
     private String organizer;
-    //获奖级别
+    //获奖级别student_information
     private String awardLevel;
     //参加形式
     private String participationForm;

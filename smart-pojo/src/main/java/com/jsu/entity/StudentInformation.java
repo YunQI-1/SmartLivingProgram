@@ -2,10 +2,8 @@ package com.jsu.entity;
 
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
-public class Student {
+public class StudentInformation {
     private String studentNumber;//学号
 
     private String studentName;//学生名

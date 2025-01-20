@@ -19,7 +19,7 @@ public class ParticipateProject {
 
     private String projectSource;
 
-    private Integer teamRank;//团队排名
+    private String teamRank;//团队排名
 
     private String developTechnology;
 

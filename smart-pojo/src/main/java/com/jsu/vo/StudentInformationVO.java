@@ -6,13 +6,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class StudentVO implements Serializable {
+public class StudentInformationVO implements Serializable {
     private String studentNumber;
 
     private String studentName;

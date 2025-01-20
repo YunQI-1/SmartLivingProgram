@@ -8,19 +8,19 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 @Mapper
-public interface StudentMapper {
+public interface StudentMapper  {
     /**
      *
      * 查询功能Mapper
      * Research
      */
-    List<StudentVO> getStudentInformation();
+    List<StudentInformationVO> getStudentInformation();
 
     Long getStudentInformationCount();
 
-    StudentVO getStudentInformationByStudentNumber(String studentNumber);
+    StudentInformationVO getStudentInformationByStudentNumber(String studentNumber);
 
-    List<StudentVO> getStudentInformationByPage(Integer offset,Integer limit);
+    List<StudentInformationVO> getStudentInformationByPage(Integer offset, Integer limit);
     @Select("select * from course")
     List<CourseVO> getCourse();
 
@@ -61,7 +61,7 @@ public interface StudentMapper {
 
     Long getScoreCount();
 
-    List<EnglishExamDetail> getEnglishExamDetail(String studentNumber);
+    List<EnglishLevel> getEnglishExamDetail(String studentNumber);
 
     List<String> getStudentNumbersByEnglish(Integer offset, Integer limit);
 
@@ -82,7 +82,7 @@ public interface StudentMapper {
     @Select("select COUNT(DISTINCT student_number) from student_award")
     Long getStudentAwardCount();
 
-    List<StudentAwardDetail> getStudentAwardDetail(String studentNumber);
+    List<StudentAward> getStudentAwardDetail(String studentNumber);
 
     @Select("select Count(student_number) from student_award where student_number = #{studentNumber} group by student_number")
     int getStudentExamNumberBySA(String studentNumber);
@@ -126,7 +126,7 @@ public interface StudentMapper {
     @Select("select Count(student_number) from development_patent where student_number = #{studentNumber} group by student_number")
     int getDevelopmentPatentCount(String s);
 
-    List<ParticipateProjectDetail> getParticipateProject(Integer offset, Integer limit);
+    List<ParticipateProject> getParticipateProject(Integer offset, Integer limit);
 
 
     @Select("select COUNT(*) from participate_project")
@@ -140,7 +140,7 @@ public interface StudentMapper {
      */
 
     //新增学生信息(单条增加)
-    void createStudentInformation(Student student);
+    void createStudentInformation(StudentInformation student);
 
     /**
      *
@@ -148,7 +148,7 @@ public interface StudentMapper {
      *  Update
      */
 
-    void updateStudentInformation(Student student);
+    void updateStudentInformation(StudentInformation student);
 
     /**
      *

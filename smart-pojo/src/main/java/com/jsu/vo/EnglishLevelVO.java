@@ -1,22 +1,47 @@
 package com.jsu.vo;
 
-import com.jsu.entity.EnglishExamDetail;
+import com.jsu.entity.EnglishLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class EnglishLevelVO implements Serializable {
-    private int examNumber;  //参加考试数
+    private String studentNumber;
+    private String studentName;
+    private String idCard;
+    //类型名
+    private String typeName;
 
+    //证书编号
+    private String certificateNumber;
 
-    //考试详细内容
-    private List<EnglishExamDetail> EnglishExamDetails;
+    //得分
+    private int score;
 
+    //颁发部门
+    private String issuingDepartment;
 
+    //获取时间
+    private Date getTime;
+
+    //学校
+    private String school;
+
+    //专业
+    private String major;
+
+    //准考证号
+    private String examinationCertificateNumber;
+
+    //照片
+    private  String photo;
+
+    private String college;
 }
