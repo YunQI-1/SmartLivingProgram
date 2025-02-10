@@ -31,6 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 
 /**
@@ -639,7 +640,7 @@ public class ExcelUtils {
                     continue;
                 }
                 String val = kvMap.get(data.toString());
-                if (isNumeric(val)) {
+                if (isNumeric(val) && val.length()<8) {
                     rowList.add(Double.valueOf(val));
                 } else {
                     rowList.add(val);
@@ -1009,4 +1010,90 @@ public class ExcelUtils {
         return s.trim();
     }
 
+    public static <T> void exportWithDynamicColumns(
+            HttpServletResponse response,
+            String fileName,
+            List<T> dataList,
+            Class<T> clazz,
+            List<String> fields,
+            Map<String, String> customColumnNames
+    ) {
+        try {
+            // 1. 验证字段合法性
+            validateExportFields(clazz, fields);
+
+            // 2. 动态生成表头
+            List<String> headers = generateHeaders(clazz, fields, customColumnNames);
+
+            // 3. 提取数据
+            List<List<Object>> sheetData = new ArrayList<>();
+            sheetData.add(Collections.singletonList(headers)); // 添加表头
+
+            for (T item : dataList) {
+                List<Object> rowData = new ArrayList<>();
+                for (String field : fields) {
+                    Object value = getFieldValue(item, field);
+                    rowData.add(value);
+                }
+                sheetData.add(rowData);
+            }
+
+            // 4. 导出
+            export(response, fileName, sheetData);
+        } catch (Exception e) {
+            // 异常处理
+        }
+    }
+
+    // 校验字段是否合法
+    private static void validateExportFields(Class<?> clazz, List<String> fields) {
+        List<String> validFields = Arrays.stream(clazz.getDeclaredFields())
+                .map(Field::getName)
+                .collect(Collectors.toList());
+
+        for (String field : fields) {
+            if (!validFields.contains(field)) {
+                throw new IllegalArgumentException("非法字段: " + field);
+            }
+        }
+    }
+
+    // 生成表头（支持自定义列名）
+    private static List<String> generateHeaders(
+            Class<?> clazz,
+            List<String> fields,
+            Map<String, String> customNames
+    ) {
+        List<String> headers = new ArrayList<>();
+        Map<String, String> fieldAnnotationMap = getAnnotationColumnNames(clazz);
+
+        for (String field : fields) {
+            String header = customNames != null && customNames.containsKey(field)
+                    ? customNames.get(field)
+                    : fieldAnnotationMap.getOrDefault(field, field);
+            headers.add(header);
+        }
+        return headers;
+    }
+
+    // 获取注解配置的列名
+    private static Map<String, String> getAnnotationColumnNames(Class<?> clazz) {
+        return Arrays.stream(clazz.getDeclaredFields())
+                .filter(f -> f.isAnnotationPresent(ExcelExport.class))
+                .collect(Collectors.toMap(
+                        Field::getName,
+                        f -> f.getAnnotation(ExcelExport.class).value()
+                ));
+    }
+
+    // 反射获取字段值
+    private static Object getFieldValue(Object obj, String fieldName) {
+        try {
+            Field field = obj.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            return field.get(obj);
+        } catch (Exception e) {
+            return "";
+        }
+    }
 }

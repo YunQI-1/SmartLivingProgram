@@ -1,6 +1,7 @@
 package com.jsu.controller.admin;
 
 import com.jsu.dto.PageDTO;
+import com.jsu.entity.ProfessionalQualifications;
 import com.jsu.query.PageQuery;
 import com.jsu.result.Result;
 import com.jsu.service.ProfessionalQualificationsService;
@@ -30,5 +31,10 @@ public class ProfessionalQualificationsController {
         return Result.success(profQualService.getProfessionalQualifications(pageQuery));
     }
 
+    @PostMapping("/createProfessionalQualifications")
+    public Result createProfessionalQualifications(){
+
+        return Result.success();
+    }
 
 }

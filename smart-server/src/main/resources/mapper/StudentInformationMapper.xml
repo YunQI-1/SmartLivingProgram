@@ -64,9 +64,7 @@
     </select>
 
 
-    <select id="getProgrammingCapabilities" resultType="com.jsu.vo.ProgrammingCapabilitiesVO">
-        select * from programming_capabilities limit #{offset},#{limit}
-    </select>
+
     <select id="getProgrammingCapabilitiesCount" resultType="java.lang.Long">
         select count(*) from programming_capabilities
     </select>

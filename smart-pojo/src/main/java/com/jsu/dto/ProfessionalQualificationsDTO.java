@@ -1,20 +1,20 @@
-package com.jsu.vo;
+package com.jsu.dto;
 
-import com.jsu.entity.ProfessionalQualifications;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
-import java.util.List;
-@NoArgsConstructor
+
 @Data
 @AllArgsConstructor
-public class ProfessionalQualificationsVO {
+@NoArgsConstructor
+public class ProfessionalQualificationsDTO {
     //学业情况-职业资格
     private String studentName;
 
     private String studentNumber;
+
     //身份证号
     private String idCard;
 

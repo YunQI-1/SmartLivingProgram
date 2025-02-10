@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jsu.mapper.ProgrammingCapabilitiesMapper">
+    <!-- Search语句 -->
+    <!-- Create语句 -->
+     <insert id="createProgrammingCapabilities">
+         insert into programming_capabilities
+         (student_number, student_name, id_card, c_language_code_volume, java_code_volume, data_structure_code_volume, java_web_code_volume, python_code_volume, oj_practice_number, other_practice_number)
+         VALUES
+         (#{studentNumber}, #{studentName}, #{idCard},
+          #{cLanguageCodeVolume}, #{javaCodeVolume}, #{dataStructureCodeVolume},
+          #{javaWebCodeVolume}, #{pythonCodeVolume},
+          #{ojPracticeNumber}, #{otherPracticeNumber})
+     </insert>
+    <!-- Update语句 -->
+    <update id="updateProgrammingCapabilities">
+        UPDATE programming_capabilities
+        <set>
+            <if test="cLanguageCodeVolume != null">
+                c_language_code_volume = #{cLanguageCodeVolume},
+            </if>
+            <if test="javaCodeVolume != null">
+                java_code_volume = #{javaCodeVolume},
+            </if>
+            <if test="dataStructureCodeVolume != null">
+                data_structure_code_volume = #{dataStructureCodeVolume},
+            </if>
+            <if test="javaWebCodeVolume != null">
+                java_web_code_volume = #{javaWebCodeVolume},
+            </if>
+            <if test="pythonCodeVolume != null">
+                python_code_volume = #{pythonCodeVolume},
+            </if>
+            <if test="ojPracticeNumber != null">
+                oj_practice_number = #{ojPracticeNumber},
+            </if>
+            <if test="otherPracticeNumber != null">
+                other_practice_number = #{otherPracticeNumber}
+            </if>
+        </set>
+        WHERE student_number = #{studentNumber}
+    </update>
+    <!-- Delete语句 -->
+    <delete id="deleteProgrammingCapabilities">
+      delete from programming_capabilities where student_number=#{studentNumber}
+    </delete>
+
+</mapper>
