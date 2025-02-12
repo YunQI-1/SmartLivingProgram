@@ -721,6 +721,7 @@ public class ExcelUtils {
 
     private static void export(HttpServletResponse response, File file, String fileName,
                                Map<String, List<List<Object>>> sheetMap, Map<Integer, List<String>> selectMap) {
+        System.out.println("开始导出");
         // 整个 Excel 表格 book 对象
         SXSSFWorkbook book = new SXSSFWorkbook();
         // 每个 Sheet 页
@@ -778,11 +779,13 @@ public class ExcelUtils {
         if (response != null) {
             // 前端导出
             try {
+                System.out.println("前端导出");
                 write(response, book, fileName);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
+            System.out.println("本地导出");
             // 本地导出
             FileOutputStream fos;
             try {
@@ -1023,11 +1026,11 @@ public class ExcelUtils {
             validateExportFields(clazz, fields);
 
             // 2. 动态生成表头
-            List<String> headers = generateHeaders(clazz, fields, customColumnNames);
-
+            List<Object> headers = generateHeaders(clazz, fields, customColumnNames);
+            System.out.println(headers);
             // 3. 提取数据
             List<List<Object>> sheetData = new ArrayList<>();
-            sheetData.add(Collections.singletonList(headers)); // 添加表头
+            sheetData.add(headers); // 添加表头
 
             for (T item : dataList) {
                 List<Object> rowData = new ArrayList<>();
@@ -1037,7 +1040,7 @@ public class ExcelUtils {
                 }
                 sheetData.add(rowData);
             }
-
+            System.out.println(sheetData);
             // 4. 导出
             export(response, fileName, sheetData);
         } catch (Exception e) {
@@ -1059,12 +1062,12 @@ public class ExcelUtils {
     }
 
     // 生成表头（支持自定义列名）
-    private static List<String> generateHeaders(
+    private static List<Object> generateHeaders(
             Class<?> clazz,
             List<String> fields,
             Map<String, String> customNames
     ) {
-        List<String> headers = new ArrayList<>();
+        List<Object> headers = new ArrayList<>();
         Map<String, String> fieldAnnotationMap = getAnnotationColumnNames(clazz);
 
         for (String field : fields) {

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jsu.mapper.SubjectCompetitionMapper">
+    <insert id="createSubjectCompetition">
+        INSERT IGNORE INTO subject_competition (
+        student_number,
+        student_name,
+        certificate_name,
+        organizer,
+        award_level,
+        participation_form,
+        `rank`,
+        get_time,
+        certificate_id,
+        certificate_number,
+        certification_photo,
+        sign_up_file
+        ) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.studentNumber},
+            #{item.studentName},
+            #{item.certificateName},
+            #{item.organizer},
+            #{item.awardLevel},
+            #{item.participateForm},
+            #{item.rank},
+            #{item.getTime},
+            #{item.certificationId},
+            #{item.certificateNumber},
+            #{item.certificationPhoto},
+            #{item.signUpFile}
+            )
+        </foreach>
+    </insert>
+    <update id="updateSubjectCompetition">
+        UPDATE subject_competition
+        <set>
+            <if test="studentName != null and studentName != ''">
+                student_name = #{studentName},
+            </if>
+            <if test="certificateName != null and certificateName != ''">
+                certificate_name = #{certificateName},
+            </if>
+            <if test="organizer != null and organizer != ''">
+                organizer = #{organizer},
+            </if>
+            <if test="awardLevel != null and awardLevel != ''">
+                award_level = #{awardLevel},
+            </if>
+            <if test="participateForm != null and participateForm != ''">
+                participation_form = #{participationForm},
+            </if>
+            <if test="rank != null and rank != ''">
+                `rank` = #{rank},
+            </if>
+            <if test="getTime != null">
+                get_time = #{getTime},
+            </if>
+            <if test="certificationId != null and certificationId != ''">
+                certificate_id = #{certificateId},
+            </if>
+            <if test="certificationPhoto != null and certificationPhoto != ''">
+                certification_photo = #{certificationPhoto},
+            </if>
+            <if test="signUpFile != null and signUpFile != ''">
+                sign_up_file = #{signUpFile},
+            </if>
+        </set>
+        WHERE student_number = #{studentNumber}
+        AND certificate_number = #{certificateNumber}
+    </update>
+</mapper>

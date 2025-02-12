@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jsu.mapper.SoftwareCopyrightMapper">
+ <insert id="createSoftwareCopyright">
+     INSERT IGNORE INTO software_copyright
+     (student_number,
+      student_name,
+      software_name,
+      completion_date,
+      how_to_obtain_rights,
+      scope_of_rights,
+      registration_number,
+      issuing_department,
+      issue_date)
+     VALUES
+     <foreach collection="list" item="item" separator=",">
+         (
+         #{item.studentNumber},
+         #{item.studentName},
+         #{item.softwareName},
+         #{item.completionDate},
+         #{item.howToObtainRights},
+         #{item.scopeOfRights},
+         #{item.registrationNumber},
+         #{item.issuingDepartment},
+         #{item.issueDate}
+         )
+     </foreach>
+ </insert>
+ <update id="updateSoftwareCopyright">
+  update software_copyright
+  <set>
+      <if test="softwareName!=null and softwareName!=''">
+          software_name=#{softwareName},
+      </if>
+      <if test="completionDate!=null and completionDate!=''">
+          completion_date=#{completionDate},
+      </if>
+      <if test="howToObtainRights!=null and howToObtainRights!=''">
+          how_to_obtain_rights=#{howToObtainRights},
+      </if>
+      <if test="scopeOfRights!=null and scopeOfRights!='' ">
+          scope_of_rights=#{scopeOfRights},
+      </if>
+      <if test="registrationNumber!=null and registrationNumber !='' ">
+          registration_number=#{registrationNumber},
+      </if>
+      <if test="issuingDepartment!=null and issuingDepartment!='' ">
+          issuing_department=#{issuingDepartment},
+      </if>
+      <if test="issueDate!=null and issueDate !=''">
+          issue_date=#{issueDate},
+      </if>
+  </set>
+   where student_number=#{studentNumber} and registration_number=#{registrationNumber}
+ </update>
+
+</mapper>

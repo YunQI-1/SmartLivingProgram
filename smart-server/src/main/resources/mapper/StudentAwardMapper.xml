@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jsu.mapper.StudentAwardMapper">
+<insert id="createStudentAward">
+    insert ignore into student_award
+    (student_name,
+     student_number,
+     college,
+     major,
+     award_name,
+     get_time,
+     certificate_number,
+     issuing_department,
+     classification,
+     participate_form,
+     ranks,
+     photo)
+    VALUES
+    <foreach collection="list" item="item" separator=",">
+        (
+        #{item.studentNumber},
+        #{item.studentName},
+        #{item.college},
+        #{item.major},
+        #{item.awardName},
+        #{item.getTime},
+        #{item.certificateNumber},
+        #{item.issuingDepartment},
+        #{item.classification},
+        #{item.participateForm},
+        #{item.ranks},
+        #{item.photo}
+        )
+    </foreach>
+</insert>
+
+<update id="updateStudentAward">
+  update student_award
+  <set>
+      <if test="college!=null and college!=''">
+          college=#{college},
+      </if>
+      <if test="major!=null and major!=''">
+          major=#{major},
+      </if>
+      <if test="awardName!=null and awardName!=''">
+          award_name=#{awardName},
+      </if>
+      <if test="getTime!=null and getTime!=''">
+          get_time=#{getTime},
+      </if>
+      <if test="classification!=null and classification!='' ">
+          classification=#{classification},
+      </if>
+      <if test="participateForm!=null and participateForm !='' ">
+          participate_form=#{participateForm},
+      </if>
+      <if test="issuingDepartment!=null and issuingDepartment!='' ">
+          issuing_department=#{issuingDepartment},
+      </if>
+      <if test="ranks!=null and ranks !=''">
+          ranks=#{ranks},
+      </if>
+      <if test="photo!=null and photo !=''">
+          photo=#{photo},
+      </if>
+  </set>
+    where student_number=#{studentNumber} and certificate_number=#{certificateNumber}
+</update>
+
+</mapper>

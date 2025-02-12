@@ -52,8 +52,8 @@ public class ScoreServiceImpl extends ServiceImpl<ScoreMapper, Score> implements
     }
 
     @Override
-    public void deleteStudentsGrade(List<String> list) {
-        list.forEach(s->scoreMapper.deleteStudentsGrade(s));
+    public void deleteStudentsGrade(List<ScoreDTO> list) {
+        list.forEach(s->scoreMapper.deleteStudentsGrade(s.getStudentNumber(),s.getCourseNumber()));
     }
 
     @Override

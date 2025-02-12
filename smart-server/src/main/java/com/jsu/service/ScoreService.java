@@ -20,7 +20,7 @@ public interface ScoreService extends IService<Score> {
 
     void updateStudentsGrade(ScoreDTO scoreDTO);
 
-    void deleteStudentsGrade(List<String> list);
+    void deleteStudentsGrade(List<ScoreDTO> list);
 
     void importStudentsGrade(MultipartFile file) throws Exception;
 

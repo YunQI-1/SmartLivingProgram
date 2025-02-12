@@ -30,8 +30,8 @@ public interface ScoreMapper extends BaseMapper<Score> {
 
     void updateStudentsGrade(ScoreDTO scoreDTO);
 
-    @Delete("DELETE from score where student_number=#{studentNumber}")
-    void deleteStudentsGrade(String studentNumber);
+    @Delete("DELETE from score where student_number=#{studentNumber} and course_number=#{courseNumber}")
+    void deleteStudentsGrade(String studentNumber,String courseNumber);
     @Select("select * from score")
     List<ScoreVO> getAllScores();
 }

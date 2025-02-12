@@ -64,7 +64,7 @@ public class ScoreController {
      * @return
      */
     @DeleteMapping("/deleteStudentsGrade")
-    public Result deleteStudentsGrade(@RequestParam List<String> list){
+    public Result deleteStudentsGrade(@RequestBody List<ScoreDTO> list){
         scoreService.deleteStudentsGrade(list);
         return Result.success();
     }
@@ -84,7 +84,7 @@ public class ScoreController {
      * @return
      */
     @GetMapping("/exportStudentsGrade")
-    public Result exportStudentsGrade(HttpServletResponse response, ExportConfigDTO exportConfigDTO){
+    public Result exportStudentsGrade(HttpServletResponse response,@RequestBody ExportConfigDTO exportConfigDTO){
         scoreService.exportStudentsGrade(response,exportConfigDTO);
         return Result.success();
     }

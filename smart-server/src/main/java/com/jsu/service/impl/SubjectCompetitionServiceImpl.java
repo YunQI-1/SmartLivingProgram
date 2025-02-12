@@ -2,16 +2,25 @@ package com.jsu.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jsu.dto.ExportConfigDTO;
 import com.jsu.dto.PageDTO;
+import com.jsu.dto.SubjectCompetitionDTO;
 import com.jsu.entity.SubjectCompetition;
 import com.jsu.mapper.SubjectCompetitionMapper;
 import com.jsu.query.PageQuery;
 import com.jsu.service.SubjectCompetitionService;
+import com.jsu.utils.ExcelUtils;
 import com.jsu.vo.SubjectCompetitionVO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Service
+@Slf4j
 public class SubjectCompetitionServiceImpl extends ServiceImpl<SubjectCompetitionMapper, SubjectCompetition> implements SubjectCompetitionService {
 
     @Autowired
@@ -25,5 +34,40 @@ public class SubjectCompetitionServiceImpl extends ServiceImpl<SubjectCompetitio
 
         return PageDTO.of(p,SubjectCompetitionVO.class);
 
+    }
+
+    @Override
+    public void createSubjectCompetition(List<SubjectCompetitionDTO> list) {
+        subjectCompetitionMapper.createSubjectCompetition(list);
+    }
+
+    @Override
+    public void updateSubjectCompetition(SubjectCompetitionDTO subjectCompetitionDTO) {
+       subjectCompetitionMapper.updateSubjectCompetition(subjectCompetitionDTO);
+    }
+
+    @Override
+    public void deleteSubjectCompetition(List<SubjectCompetitionDTO> list) {
+       list.forEach(s->subjectCompetitionMapper.deleteSubjectCompetition(s.getStudentNumber(),s.getCertificateNumber()));
+    }
+
+    @Override
+    public void importSubjectCompetition(MultipartFile file) throws Exception {
+       List<SubjectCompetitionDTO> list= ExcelUtils.readMultipartFile(file,SubjectCompetitionDTO.class);
+       subjectCompetitionMapper.createSubjectCompetition(list);
+    }
+
+    @Override
+    public void exportSubjectCompetition(HttpServletResponse response, ExportConfigDTO exportConfigDTO) {
+        List<SubjectCompetitionVO> list=subjectCompetitionMapper.getAllSubjectCompetitionVO();
+        log.info("导出字段为{}的学科竞赛表",exportConfigDTO);
+        ExcelUtils.exportWithDynamicColumns(
+                response,
+                "学科竞赛表",
+                list,
+                SubjectCompetitionVO.class,
+                exportConfigDTO.getFields(),
+                exportConfigDTO.getColumnNames()
+        );
     }
 }

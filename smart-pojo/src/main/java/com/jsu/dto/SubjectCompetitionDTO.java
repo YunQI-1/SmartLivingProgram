@@ -1,54 +1,50 @@
-package com.jsu.vo;
+package com.jsu.dto;
 
 import com.jsu.annotation.ExcelExport;
-import com.jsu.entity.SubjectCompetition;
+import com.jsu.annotation.ExcelImport;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SubjectCompetitionVO implements Serializable {
-    @ExcelExport(value = "学号", sort = 0)
+public class SubjectCompetitionDTO {
+    @ExcelImport(value = "学号", required = true ,maxLength = 20)
     private String studentNumber;
-    @ExcelExport(value = "学生姓名", sort = 1)
+    @ExcelImport(value = "学生姓名", required = true)
     private String studentName;
-
     //证书名
-    @ExcelExport(value = "证书名", sort = 2)
+    @ExcelImport(value = "证书名", required = true)
     private String certificateName;
     //证书编号
-    @ExcelExport(value = "证书编号", sort = 3)
+    @ExcelImport(value = "证书编号", required = true)
     private String certificateNumber;
 
     //证书id
-    @ExcelExport(value = "证书id", sort = 4)
+    @ExcelImport(value = "证书id", required = true)
     private String certificateId;
     //举办单位
-    @ExcelExport(value = "举办单位", sort = 5)
+    @ExcelImport(value = "举办单位", required = true)
     private String organizer;
     //获奖级别student_information
-    @ExcelExport(value = "获奖级别", sort = 6)
+    @ExcelImport(value = "获奖级别", required = true)
     private String awardLevel;
     //参加形式
-    @ExcelExport(value = "参加形式", sort = 7)
+    @ExcelImport(value = "参加形式", required = true)
     private String participationForm;
     //排名
-    @ExcelExport(value = "排名", sort = 8)
+    @ExcelImport(value = "排名", required = true)
     private String rank;
     //获取时间
-    @ExcelExport(value = "获取时间", sort = 9)
+    @ExcelImport(value = "获取时间", required = true)
     private Date getTime;
     //证书照片
-    @ExcelExport(value = "证书照片", sort = 10)
+    @ExcelImport(value = "证书照片", required = true)
     private String certificationPhoto;
     //参赛文件
-    @ExcelExport(value = "参赛文件", sort = 11)
+    @ExcelImport(value = "参赛文件", required = true)
     private String signUpFile;
-
 }

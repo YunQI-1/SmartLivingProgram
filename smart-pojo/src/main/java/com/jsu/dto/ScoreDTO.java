@@ -27,7 +27,4 @@ public class ScoreDTO {
     @ExcelImport(value = "开课日期", required = true)
     private String courseStartDateTime;//开课日期
 
-    private String rowData;
-
-    private String rowTips;
 }
