@@ -15,7 +15,8 @@
         certificate_id,
         certificate_number,
         certification_photo,
-        sign_up_file
+        sign_up_file,
+               photo
         ) VALUES
         <foreach collection="list" item="item" separator=",">
             (
@@ -30,7 +31,8 @@
             #{item.certificationId},
             #{item.certificateNumber},
             #{item.certificationPhoto},
-            #{item.signUpFile}
+            #{item.signUpFile},
+            #{item.photo}
             )
         </foreach>
     </insert>
@@ -66,6 +68,9 @@
             </if>
             <if test="signUpFile != null and signUpFile != ''">
                 sign_up_file = #{signUpFile},
+            </if>
+            <if test="photo != null and photo != ''">
+                photo = #{photo},
             </if>
         </set>
         WHERE student_number = #{studentNumber}

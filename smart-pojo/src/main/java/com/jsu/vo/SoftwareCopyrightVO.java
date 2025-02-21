@@ -46,4 +46,8 @@ public class SoftwareCopyrightVO implements Serializable {
     @ExcelExport(value = "发布日期", sort = 8)
     private Date issueDate;
 
+    @ExcelExport(value = "照片", sort = 9)
+    private String photo;
+
+
 }

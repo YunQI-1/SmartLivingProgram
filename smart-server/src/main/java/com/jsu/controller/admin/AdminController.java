@@ -23,47 +23,5 @@ public class AdminController {
 
      */
 
-    /**
-     * 新增学生信息
-     * @param studentDTO
-     * @return
-     */
-    @PostMapping("/admin/getStudentInformation/createStudentInformation")
-    public Result createStudentInformation(@RequestBody StudentDTO studentDTO){
-        adminService.createStudentInformation(studentDTO);
-        return Result.success();
-    }
-
-    /*
-
-     修改功能
-
-     */
-
-    /**
-     * 修改单个学生信息
-     *
-     * @return
-     */
-
-    @PutMapping("/admin/getStudentInformation/updateStudentInformation")
-     public Result updateStudentInformation(@RequestBody StudentDTO studentDTO){
-         log.info("修改单个学生信息");
-         adminService.updateStudentInformation(studentDTO);
-         return Result.success();
-     }
-
-    /**
-     * 删除单个学生信息
-     *
-     * @param studentNumber
-     * @return
-     */
-     @DeleteMapping("/admin/deleteStudentInformation")
-     public Result deleteStudentInformation(@RequestParam String studentNumber){
-        log.info("删除单个学生信息");
-        adminService.deleteStudentInformation(studentNumber);
-        return Result.success();
-     }
 
 }

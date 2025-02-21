@@ -38,6 +38,9 @@
             <if test="instructor != null and instructor != ''">
                 instructor = #{instructor},
             </if>
+            <if test="photo != null and photo != ''">
+                photo = #{photo},
+            </if>
         </set>
         WHERE doi = #{doi}
     </update>
@@ -53,7 +56,8 @@
         article_page,
         doi,
         editor_ranking,
-        instructor
+        instructor,
+               photo
         ) VALUES
         <foreach collection="paperList" item="item" separator=",">
             (
@@ -68,6 +72,7 @@
             #{item.doi},
             #{item.editorRanking},
             #{item.instructor},
+            #{item.photo}
             )
         </foreach>
     </update>

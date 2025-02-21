@@ -51,4 +51,6 @@ public class SubjectCompetitionVO implements Serializable {
     @ExcelExport(value = "参赛文件", sort = 11)
     private String signUpFile;
 
+    @ExcelExport(value = "照片", sort = 12)
+    private String photo;
 }

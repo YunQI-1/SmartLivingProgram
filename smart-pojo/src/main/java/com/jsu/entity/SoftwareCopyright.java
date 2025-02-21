@@ -31,4 +31,6 @@ public class SoftwareCopyright {
 
     //发布日期
     private Date issueDate;
+
+    private String photo;
 }

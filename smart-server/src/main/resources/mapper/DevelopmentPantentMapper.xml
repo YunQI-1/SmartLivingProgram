@@ -29,6 +29,9 @@
             <if test="issuingDepartment != null and issuingDepartment != ''">
                 issuing_department = #{issuingDepartment},
             </if>
+            <if test="photo != null and photo != ''">
+                photo = #{photo},
+            </if>
         </set>
         WHERE patent_number = #{patentNumber}
     </update>
@@ -41,7 +44,8 @@
         patent_application_time,
         patentee,
         authorization_announcement_date,
-        issuing_department
+        issuing_department,
+               photo,
         ) VALUES
         <foreach collection="developmentPatents" item="item" separator=",">
             (
@@ -52,7 +56,8 @@
                 #{item.patentApplicationTime},
                 #{item.patentee},
                 #{item.authorizationAnnouncementDate},
-                #{item.issuingDepartment}
+                #{item.issuingDepartment},
+                #{photo}
             )
         </foreach>
     </update>

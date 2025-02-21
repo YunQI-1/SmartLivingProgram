@@ -35,4 +35,6 @@ public class DevelopmentPatentVO implements Serializable {
     //颁发部门
     private String issuingDepartment;
 
+    private String photo;
+
 }
