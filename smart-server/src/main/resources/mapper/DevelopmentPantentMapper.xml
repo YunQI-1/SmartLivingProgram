@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jsu.mapper.DevelopmentMapper">
+
+
+    <update id="updateByPatentNumber" parameterType="com.jsu.entity.DevelopmentPatent">
+        UPDATE development_patent
+        <set>
+            <!-- 动态更新字段 -->
+            <if test="studentNumber != null and studentNumber != ''">
+                student_number = #{studentNumber},
+            </if>
+            <if test="studentName != null and studentName != ''">
+                student_name = #{studentName},
+            </if>
+            <if test="patentName != null and patentName != ''">
+                patent_name = #{patentName},
+            </if>
+            <if test="patentApplicationTime != null">
+                patent_application_time = #{patentApplicationTime},
+            </if>
+            <if test="patentee != null and patentee != ''">
+                patentee = #{patentee},
+            </if>
+            <if test="authorizationAnnouncementDate != null">
+                authorization_announcement_date = #{authorizationAnnouncementDate},
+            </if>
+            <if test="issuingDepartment != null and issuingDepartment != ''">
+                issuing_department = #{issuingDepartment},
+            </if>
+        </set>
+        WHERE patent_number = #{patentNumber}
+    </update>
+    <update id="createDevelopmentPatent">
+        INSERT IGNORE INTO development_patent (
+        student_number,
+        student_name,
+        patent_name,
+        patent_number,
+        patent_application_time,
+        patentee,
+        authorization_announcement_date,
+        issuing_department
+        ) VALUES
+        <foreach collection="developmentPatents" item="item" separator=",">
+            (
+                #{item.studentNumber},
+                #{item.studentName},
+                #{item.patentName},
+                #{item.patentNumber},
+                #{item.patentApplicationTime},
+                #{item.patentee},
+                #{item.authorizationAnnouncementDate},
+                #{item.issuingDepartment}
+            )
+        </foreach>
+    </update>
+    <select id="getAllDevelopmentPatent" resultType="com.jsu.entity.DevelopmentPatent">
+        SELECT * FROM development_patent
+    </select>
+</mapper>

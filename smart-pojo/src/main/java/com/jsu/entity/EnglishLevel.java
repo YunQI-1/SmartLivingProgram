@@ -31,6 +31,9 @@ public class EnglishLevel implements Serializable {
     //获取时间
     private Date getTime;
 
+    //学校
+    private String school;
+
     //专业
     private String major;
 

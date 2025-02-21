@@ -17,8 +17,6 @@ public class AdminController {
     AdminService adminService;
 
 
-
-
     /*
 
      增加功能
@@ -35,8 +33,6 @@ public class AdminController {
         adminService.createStudentInformation(studentDTO);
         return Result.success();
     }
-
-
 
     /*
 

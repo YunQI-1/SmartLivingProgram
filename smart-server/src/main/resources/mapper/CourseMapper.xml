@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jsu.mapper.CourseMapper">
+
+    <insert id="createCourse">
+        INSERT IGNORE INTO course (
+        course_number,
+        course_name,
+        course_module,
+        study_method,
+        course_start_date_time,
+        study_time,
+        credit
+        ) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.courseNumber},
+            #{item.courseName},
+            #{item.courseModule},
+            #{item.studyMethod},
+            #{item.courseStartDateTime},
+            #{item.studyTime},
+            #{item.credit}
+            )
+        </foreach>
+
+    </insert>
+    <update id="updateByCourseName" parameterType="com.jsu.entity.Course">
+        UPDATE course
+        <set>
+            <!-- 动态更新字段 -->
+            <if test="courseModule != null and courseModule != ''">
+                course_module = #{courseModule},
+            </if>
+            <if test="studyMethod != null and studyMethod != ''">
+                study_method = #{studyMethod},
+            </if>
+            <if test="courseName != null and courseName != ''">
+                course_name = #{courseName},
+            </if>
+            <if test="credit != null">
+                credit = #{credit},
+            </if>
+            <if test="studyTime != null">
+                study_time = #{studyTime},
+            </if>
+            <if test="courseStartDateTime != null and courseStartDateTime != ''">
+                course_start_date_time = #{courseStartDateTime},
+            </if>
+        </set>
+        WHERE course_name = #{courseName}
+    </update>
+    <select id="getAllCourses" resultType="com.jsu.entity.Course">
+        select * from course
+    </select>
+</mapper>
