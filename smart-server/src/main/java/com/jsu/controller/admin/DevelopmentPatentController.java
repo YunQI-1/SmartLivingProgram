@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST})
+@CrossOrigin(origins = "*")
 
 @RequestMapping("/admin")
 public class DevelopmentPatentController {
