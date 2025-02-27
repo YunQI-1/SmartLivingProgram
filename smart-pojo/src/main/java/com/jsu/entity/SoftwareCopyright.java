@@ -15,7 +15,7 @@ public class SoftwareCopyright {
     private String softwareName;//软件名
 
     //完成时间
-    private String completionDate;
+    private Date completionDate;
 
     //权利获取方式
     private String howToObtainRights;

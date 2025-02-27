@@ -63,7 +63,7 @@ public class SubjectCompetitionServiceImpl extends ServiceImpl<SubjectCompetitio
         log.info("导出字段为{}的学科竞赛表",exportConfigDTO);
         ExcelUtils.exportWithDynamicColumns(
                 response,
-                "学科竞赛表",
+                "学科竞赛表.xlsx",
                 list,
                 SubjectCompetitionVO.class,
                 exportConfigDTO.getFields(),

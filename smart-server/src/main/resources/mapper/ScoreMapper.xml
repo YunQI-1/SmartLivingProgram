@@ -25,10 +25,10 @@
     <update id="updateStudentsGrade">
        update score
        <set>
-          <if test="courseScore!=null">
+          <if test="courseScore!=null and courseScore != ''">
               course_score=#{courseScore},
           </if>
-          <if test="courseCredit!=null">
+          <if test="courseCredit!=null and  courseCredit != ''">
               course_credit=#{courseCredit},
           </if>
        </set>

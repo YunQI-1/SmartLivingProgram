@@ -18,4 +18,6 @@ public interface DevelopmentPatentService extends IService<DevelopmentPatent> {
     void importDevelopmentPatent(MultipartFile file) throws Exception;
 
     void exportDevelopmentPatent(HttpServletResponse response, ExportConfigDTO exportConfigDTO);
+
+    void deleteByp(String patentNumber);
 }

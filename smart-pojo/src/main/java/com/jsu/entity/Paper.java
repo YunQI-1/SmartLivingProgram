@@ -27,7 +27,7 @@ public class Paper {
 
     @ExcelExport(value = "发表时间", sort = 4)
     //发布时间
-    private String yearOfPublication;
+    private Date yearOfPublication;
 
     @ExcelExport(value = "卷号", sort = 5)
     //卷号

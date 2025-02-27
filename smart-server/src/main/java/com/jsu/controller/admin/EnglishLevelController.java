@@ -37,12 +37,12 @@ public class EnglishLevelController {
     }
 
     /**
-     * 根据证明证书编号查询英语水平
+     * 根据证明学生学号查询英语水平
      */
-    @GetMapping("/getEnglishLevelByCertificateNumber")
-    public Result getEnglishLevelByCertificateNumber(@RequestParam String certificateNumber){
-        log.info("根据证明证书编号查询英语水平");
-        return Result.success(englishLevelService.getOne(new QueryWrapper<EnglishLevel>().eq("certificate_number",certificateNumber)));
+    @GetMapping("/getEnglishLevelByStudentNumber")
+    public Result getEnglishLevelByCertificateNumber(@RequestParam String studentNumber){
+        log.info("根据学生学号查询英语水平");
+        return Result.success(englishLevelService.list(new QueryWrapper<EnglishLevel>().eq("student_number",studentNumber)));
     }
 
     /**
@@ -69,7 +69,7 @@ public class EnglishLevelController {
     @DeleteMapping("/deleteEnglishLevel")
     public Result deleteEnglishLevel(@RequestParam String certificateNumber){
         log.info("删除英语水平等级");
-        return Result.success(englishLevelService.removeById(certificateNumber)?"删除成功":"删除失败");
+        return Result.success(englishLevelService.removeByCertificateNumber(certificateNumber)?"删除成功":"删除失败");
     }
 
     /**

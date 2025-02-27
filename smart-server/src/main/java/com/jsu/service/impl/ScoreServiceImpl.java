@@ -69,7 +69,7 @@ public class ScoreServiceImpl extends ServiceImpl<ScoreMapper, Score> implements
         log.info("导出自选字段为：{}的学生成绩表",exportConfigDTO);
         ExcelUtils.exportWithDynamicColumns(
                 response,
-                "成绩表",
+                "成绩表.xlsx",
                 scoreVOList,
                 ScoreVO.class,
                 exportConfigDTO.getFields(),

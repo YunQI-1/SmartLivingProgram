@@ -51,7 +51,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         List<Course> courseList = courseMapper.getAllCourses();
         ExcelUtils.exportWithDynamicColumns(
                 response,
-                "课程表",
+                "课程表.xlsx",
                 courseList,
                 Course.class,
                 exportConfigDTO.getFields(),
@@ -60,8 +60,14 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     }
 
     @Override
-    public boolean updateByCourseName(Course course) {
-        return courseMapper.updateByCourseName(course);
+    public boolean updateByCourseNumber(Course course) {
+        log.info("修改课程信息"+course);
+        if (courseMapper.updateByCourseNumber(course)){
+            log.info("修改成功返回的是true!");
+        }else{
+            log.info("修改失败返回的是false!");
+        }
+        return courseMapper.updateByCourseNumber(course);
     }
 
 }

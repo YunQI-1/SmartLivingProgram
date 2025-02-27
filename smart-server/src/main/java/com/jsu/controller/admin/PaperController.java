@@ -7,6 +7,7 @@ import com.jsu.entity.Paper;
 import com.jsu.query.PageQuery;
 import com.jsu.result.Result;
 import com.jsu.service.PaperService;
+import com.jsu.utils.OperationalJudgment;
 import com.jsu.vo.PaperVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,13 +36,24 @@ public class PaperController {
     }
 
     /**
-     *根据doi 查询论文信息
+     *根据studentNumber 查询论文信息
      */
-    @GetMapping("/getAcademicPerformance/getPaperByDoi")
-    public Result getPaperByDoi(@RequestParam String doi){
-        log.info("管理端根据doi查询论文信息");
-        return Result.success(paperService.getOne(new QueryWrapper<Paper>().eq("doi",doi)));
+    @GetMapping("/getAcademicPerformance/getStudentNumber")
+    public Result getPaperByDoi(@RequestParam String studentNumber){
+        log.info("管理端根据studentNumber查询论文信息");
+        return Result.success(paperService.list(new QueryWrapper<Paper>().eq("student_number",studentNumber)));
     }
+
+
+    /**
+     * 添加论文信息
+     */
+    @PutMapping("/getAcademicPerformance/createPaper")
+    public Result createPaper(@RequestBody Paper paper){
+        log.info("管理端添加论文信息");
+        return OperationalJudgment.check(paperService.save(paper));
+    }
+
 
     /**
      * 修改论文信息
@@ -59,7 +71,7 @@ public class PaperController {
     @DeleteMapping("/getAcademicPerformance/deletePaper")
     public Result deletePaper(@RequestParam String doi){
         log.info("管理端删除论文信息");
-        return Result.success(paperService.removeById(doi)?"删除成功":"删除失败");
+        return Result.success(paperService.removeByDoi(doi)?"删除成功":"删除失败");
     }
 
     /**

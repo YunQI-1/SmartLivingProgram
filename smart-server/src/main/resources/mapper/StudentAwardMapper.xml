@@ -47,7 +47,7 @@
       <if test="awardName!=null and awardName!=''">
           award_name=#{awardName},
       </if>
-      <if test="getTime!=null and getTime!=''">
+      <if test="getTime!=null">
           get_time=#{getTime},
       </if>
       <if test="classification!=null and classification!='' ">

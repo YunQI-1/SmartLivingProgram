@@ -63,6 +63,7 @@ public class StudentInformationController {
     @PutMapping("/admin/getStudentInformation/updateStudentInformation")
     public Result updateStudentInformation(@RequestBody StudentDTO studentDTO){
         log.info("修改单个学生信息");
+        log.info("修改学生信息:{}",studentDTO);
         adminService.updateStudentInformation(studentDTO);
         return Result.success();
     }

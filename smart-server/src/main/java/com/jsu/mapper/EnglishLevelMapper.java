@@ -15,4 +15,6 @@ public interface EnglishLevelMapper extends BaseMapper<EnglishLevel> {
     void createEnglishLevel(List<EnglishLevel> englishLevelList);
 
     List<EnglishLevel> getAllEnglishLevel();
+
+    boolean removeByCertificateNumber(String certificateNumber);
 }

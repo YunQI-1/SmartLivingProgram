@@ -23,7 +23,7 @@ public class SoftwareCopyrightDTO {
 
     //完成时间
     @ExcelImport(value = "完成时间", required = true)
-    private String completionDate;
+    private Date completionDate;
 
     //权利获取方式
     @ExcelImport(value = "权利获取方式", required = true)
@@ -44,4 +44,7 @@ public class SoftwareCopyrightDTO {
     //发布日期
     @ExcelImport(value = "发布日期", required = true)
     private Date issueDate;
+
+    @ExcelImport(value = "照片", required = true)
+    private String photo;
 }

@@ -46,11 +46,9 @@ public class SubjectCompetitionVO implements Serializable {
     private Date getTime;
     //证书照片
     @ExcelExport(value = "证书照片", sort = 10)
-    private String certificationPhoto;
+    private String certificatePhoto;
     //参赛文件
     @ExcelExport(value = "参赛文件", sort = 11)
     private String signUpFile;
 
-    @ExcelExport(value = "照片", sort = 12)
-    private String photo;
 }

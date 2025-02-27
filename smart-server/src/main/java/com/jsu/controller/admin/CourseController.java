@@ -8,6 +8,7 @@ import com.jsu.entity.Course;
 import com.jsu.query.PageQuery;
 import com.jsu.result.Result;
 import com.jsu.service.CourseService;
+import com.jsu.utils.OperationalJudgment;
 import com.jsu.vo.CourseVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Slf4j
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST})
+@CrossOrigin(origins = "*")
 
 @RequestMapping("/admin")
 public class CourseController {
@@ -28,7 +30,7 @@ public class CourseController {
     private CourseService courseService;
 
     @GetMapping("/getCourses")
-    public Result<PageDTO<CourseVO>> getCourses(PageQuery pageQuery){
+    public Result getCourses(PageQuery pageQuery){
         log.info("管理端查询课表信息");
         return Result.success(courseService.getCourses(pageQuery));
     }
@@ -47,9 +49,13 @@ public class CourseController {
      * 根据课程名查询课程信息
      */
     @GetMapping("/getCourseByCourseName")
-    public Result<Course> getCourseByCourseName(@RequestParam String courseName){
+    public Result getCourseByCourseName(@RequestParam String courseName){
         log.info("管理端根据课程名查询课程信息");
+        return Result.success(courseService.list(new QueryWrapper<Course>().eq("course_name",courseName)));
+/*
         return Result.success(courseService.getOne(new QueryWrapper<Course>().eq("course_name",courseName)));
+*/
+
     }
 
     /**
@@ -58,7 +64,9 @@ public class CourseController {
     @PostMapping
     public Result updateCourse(@RequestBody Course course){
         log.info("管理端修改课程信息");
-        return Result.success(courseService.updateByCourseName(course)?"修改成功":"修改失败");
+
+
+        return OperationalJudgment.check(courseService.updateByCourseNumber(course));
 /*
         return Result.success(courseService.update(new QueryWrapper<Course>().eq("course_name",course.getCourseName())));
 */
@@ -70,7 +78,10 @@ public class CourseController {
     @DeleteMapping("/deleteCourse")
     public Result deleteCourse(@RequestParam String CourseNumber){
         log.info("管理端删除课程信息");
+        return OperationalJudgment.check(courseService.remove(new QueryWrapper<Course>().eq("course_number",CourseNumber)));
+/*
         return Result.success(courseService.remove(new QueryWrapper<Course>().eq("course_number",CourseNumber))?"删除成功":"删除失败");
+*/
     }
 
     /**

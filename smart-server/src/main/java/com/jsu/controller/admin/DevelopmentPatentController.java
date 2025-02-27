@@ -8,6 +8,8 @@ import com.jsu.entity.DevelopmentPatent;
 import com.jsu.query.PageQuery;
 import com.jsu.result.Result;
 import com.jsu.service.DevelopmentPatentService;
+import com.jsu.utils.OperationalJudgment;
+import com.jsu.utils.OssUtil;
 import com.jsu.vo.DevelopmentPatentVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST})
+@CrossOrigin(origins = "*")
 
 @RequestMapping("/admin")
 public class DevelopmentPatentController {
@@ -38,21 +40,24 @@ public class DevelopmentPatentController {
     }
 
     /**
-     * 根据专利号查询详细发明专利
+     * 根据studentNumber查询详细发明专利
      */
     @GetMapping("/getAcademicPerformance/getDevelopmentPatentDetail")
-    public Result getDevelopmentPatentDetail(@RequestParam String patentNumber){
-        log.info("管理端根据专利号查询详细发明专利");
-        return Result.success(developmentPatentService.getOne(new QueryWrapper<DevelopmentPatent>().eq("patent_number",patentNumber)));
+    public Result getDevelopmentPatentDetail(@RequestParam String studentNumber){
+        log.info("管理端根据studentNumber查询详细发明专利");
+        return Result.success(developmentPatentService.list(new QueryWrapper<DevelopmentPatent>().eq("student_number",studentNumber)));
     }
 
     /**
      * 新增专利信息
      */
-    @PutMapping("//createDevelopmentPatent")
+    @PutMapping("/createDevelopmentPatent")
     public Result createDevelopmentPatent(@RequestBody DevelopmentPatent developmentPatent) {
         log.info("管理端新增专利信息");
+        return OperationalJudgment.check(developmentPatentService.save(developmentPatent));
+/*
         return Result.success(developmentPatentService.save(developmentPatent) ? "新增成功" : "新增失败");
+*/
     }
 
     /**
@@ -61,7 +66,10 @@ public class DevelopmentPatentController {
     @PostMapping("/getAcademicPerformance/updateDevelopmentPatent")
     public Result updateDevelopmentPatent(@RequestBody DevelopmentPatent developmentPatent) {
         log.info("管理端修改专利信息");
+        return OperationalJudgment.check(developmentPatentService.updateByPatentNumber(developmentPatent));
+/*
         return Result.success(developmentPatentService.updateByPatentNumber(developmentPatent) ? "修改成功" : "修改失败");
+*/
     }
 
     /**
@@ -70,7 +78,11 @@ public class DevelopmentPatentController {
     @DeleteMapping("/getAcademicPerformance/deleteDevelopmentPatent")
     public Result deleteDevelopmentPatent(@RequestParam String patentNumber) {
         log.info("管理端删除专利信息");
+        developmentPatentService.deleteByp(patentNumber);
+        return Result.success();
+/*
         return Result.success(developmentPatentService.removeById(patentNumber) ? "删除成功" : "删除失败");
+*/
     }
 
     /**

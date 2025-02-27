@@ -70,7 +70,7 @@ public class StudentAwardServiceImpl extends ServiceImpl<StudentAwardMapper, Stu
         List<StudentAwardVO> list=studentAwardMapper.getAllStudentAward();
         ExcelUtils.exportWithDynamicColumns(
                 response,
-                "学生荣誉表",
+                "学生荣誉表.xlsx",
                 list,
                 StudentAwardVO.class,
                 exportConfigDTO.getFields(),

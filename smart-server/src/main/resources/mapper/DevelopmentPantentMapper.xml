@@ -11,24 +11,34 @@
             <if test="studentNumber != null and studentNumber != ''">
                 student_number = #{studentNumber},
             </if>
+
             <if test="studentName != null and studentName != ''">
                 student_name = #{studentName},
             </if>
+
             <if test="patentName != null and patentName != ''">
                 patent_name = #{patentName},
             </if>
+            <if test="patentNumber != null and patentNumber != ''">
+                patent_number = #{patentNumber},
+            </if>
+
             <if test="patentApplicationTime != null">
                 patent_application_time = #{patentApplicationTime},
             </if>
+
             <if test="patentee != null and patentee != ''">
                 patentee = #{patentee},
             </if>
+
             <if test="authorizationAnnouncementDate != null">
                 authorization_announcement_date = #{authorizationAnnouncementDate},
             </if>
+
             <if test="issuingDepartment != null and issuingDepartment != ''">
                 issuing_department = #{issuingDepartment},
             </if>
+
             <if test="photo != null and photo != ''">
                 photo = #{photo},
             </if>

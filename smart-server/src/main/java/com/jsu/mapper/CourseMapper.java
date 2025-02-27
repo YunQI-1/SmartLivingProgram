@@ -14,5 +14,5 @@ public interface CourseMapper extends BaseMapper<Course> {
 
     List<Course> getAllCourses();
 
-    boolean updateByCourseName(Course course);
+    boolean updateByCourseNumber(Course course);
 }

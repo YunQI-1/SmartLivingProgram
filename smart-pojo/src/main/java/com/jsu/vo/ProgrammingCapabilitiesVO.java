@@ -22,10 +22,10 @@ public class ProgrammingCapabilitiesVO implements Serializable {
     private String idCard;
 
     @ExcelExport(value = "C语言代码量", sort = 3)
-    private Long CLanguageCodeVolume;//C语言代码量
+    private Long cLanguageCodeVolume;//C语言代码量
 
     @ExcelExport(value = "Java代码量", sort = 4)
-    private Long JavaCodeVolume;//java代码量
+    private Long javaCodeVolume;//java代码量
 
     @ExcelExport(value = "数据结构代码量", sort = 5)
     private Long dataStructureCodeVolume;//数据结构代码量
@@ -38,9 +38,9 @@ public class ProgrammingCapabilitiesVO implements Serializable {
 
     @ExcelExport(value = "OJ刷题数", sort = 8)
 
-    private Integer OjPracticeNumber;//oj刷题数
+    private Integer ojPracticeNumber;//oj刷题数
 
     @ExcelExport(value = "其他刷题数", sort = 9)
-    private Integer OtherPracticeNumber;//其他刷题数
+    private Integer otherPracticeNumber;//其他刷题数
 
 }
