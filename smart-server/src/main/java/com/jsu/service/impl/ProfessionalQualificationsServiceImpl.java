@@ -59,7 +59,7 @@ public class ProfessionalQualificationsServiceImpl extends ServiceImpl<Professio
         log.info(professionalQualifications.toString());
         ExcelUtils.exportWithDynamicColumns(
                 response,
-                "专业资质信息表",
+                "专业资质信息表.xlsx",
                 professionalQualifications,
                 ProfessionalQualifications.class,
                 exportConfigDTO.getFields(),

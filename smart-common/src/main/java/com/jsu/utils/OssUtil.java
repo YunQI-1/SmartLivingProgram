@@ -31,20 +31,14 @@ public class OssUtil {
      * @return 文件的 OSS URL
      */
     public String upload(InputStream inputStream, String originalFileName) {
-        // 生成唯一的文件名
         String fileName = "uploads/" + UUID.randomUUID().toString() + "-" + originalFileName;
 
-        // 创建 OSS 客户端实例
         OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
 
         try {
-            // 上传文件到 OSS
             ossClient.putObject(bucketName, fileName, inputStream);
-
-            // 拼接文件 URL
             return "https://" + bucketName + "." + endpoint.replace("https://", "") + "/" + fileName;
         } finally {
-            // 关闭 OSS 客户端
             ossClient.shutdown();
         }
     }

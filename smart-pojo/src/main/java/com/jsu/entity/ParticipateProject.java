@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -40,7 +41,7 @@ public class ParticipateProject {
     private String instructor;
 
     @ExcelExport(value = "开发时间", sort = 9)
-    private LocalDateTime developTime;
+    private Date developTime;
 
     @ExcelExport(value = "开发周期", sort = 10)
     private String duration;

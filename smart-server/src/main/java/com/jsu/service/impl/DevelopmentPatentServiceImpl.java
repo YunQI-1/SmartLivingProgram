@@ -52,11 +52,16 @@ public class DevelopmentPatentServiceImpl extends ServiceImpl<DevelopmentMapper,
         List<DevelopmentPatent> developmentPatents = developmentMapper.getAllDevelopmentPatent();
         ExcelUtils.exportWithDynamicColumns(
                 response,
-                "专利表",
+                "专利表.xlsx",
                 developmentPatents,
                 DevelopmentPatent.class,
                 exportConfigDTO.getFields(),
                 exportConfigDTO.getColumnNames()
         );
+    }
+
+    @Override
+    public void deleteByp(String patentNumber) {
+        developmentMapper.deleteByPatentNumber(patentNumber);
     }
 }

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -30,7 +31,7 @@ public class ParticipateProjectVO implements Serializable {
 
     private String instructor;
 
-    private LocalDateTime developTime;
+    private Date developTime;
 
     private String duration;
 

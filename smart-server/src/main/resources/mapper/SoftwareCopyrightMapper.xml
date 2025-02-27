@@ -34,7 +34,7 @@
       <if test="softwareName!=null and softwareName!=''">
           software_name=#{softwareName},
       </if>
-      <if test="completionDate!=null and completionDate!=''">
+      <if test="completionDate!=null">
           completion_date=#{completionDate},
       </if>
       <if test="howToObtainRights!=null and howToObtainRights!=''">
@@ -49,8 +49,11 @@
       <if test="issuingDepartment!=null and issuingDepartment!='' ">
           issuing_department=#{issuingDepartment},
       </if>
-      <if test="issueDate!=null and issueDate !=''">
+      <if test="issueDate!=null">
           issue_date=#{issueDate},
+      </if>
+      <if test= "photo != null and photo !=''">
+          photo=#{photo},
       </if>
   </set>
    where student_number=#{studentNumber} and registration_number=#{registrationNumber}

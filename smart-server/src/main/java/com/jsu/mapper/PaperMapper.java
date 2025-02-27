@@ -13,4 +13,6 @@ public interface PaperMapper extends BaseMapper<Paper> {
     void createPaper(List<Paper> paperList);
 
     List<Paper> getAllPaper();
+
+    boolean removeByDoi(String doi);
 }

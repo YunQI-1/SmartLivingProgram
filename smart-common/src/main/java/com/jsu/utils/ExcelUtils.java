@@ -865,7 +865,7 @@ public class ExcelUtils {
     }
 
     private static void write(HttpServletResponse response, SXSSFWorkbook book, String fileName) throws IOException {
-        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setContentType("application/vnd.ms-excel");
         response.setCharacterEncoding("utf-8");
         String name = new String(fileName.getBytes("GBK"), "ISO8859_1") + XLSX;
         response.addHeader("Content-Disposition", "attachment;filename=" + name);

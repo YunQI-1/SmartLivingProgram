@@ -15,9 +15,8 @@
         certificate_id,
         certificate_number,
         certification_photo,
-        sign_up_file,
-               photo
-        ) VALUES
+        sign_up_file
+               ) VALUES
         <foreach collection="list" item="item" separator=",">
             (
             #{item.studentNumber},
@@ -25,15 +24,14 @@
             #{item.certificateName},
             #{item.organizer},
             #{item.awardLevel},
-            #{item.participateForm},
+            #{item.participationForm},
             #{item.rank},
             #{item.getTime},
-            #{item.certificationId},
+            #{item.certificateId},
             #{item.certificateNumber},
             #{item.certificationPhoto},
-            #{item.signUpFile},
-            #{item.photo}
-            )
+            #{item.signUpFile}
+                        )
         </foreach>
     </insert>
     <update id="updateSubjectCompetition">
@@ -51,7 +49,7 @@
             <if test="awardLevel != null and awardLevel != ''">
                 award_level = #{awardLevel},
             </if>
-            <if test="participateForm != null and participateForm != ''">
+            <if test="participationForm != null and participationForm != ''">
                 participation_form = #{participationForm},
             </if>
             <if test="rank != null and rank != ''">
@@ -60,17 +58,14 @@
             <if test="getTime != null">
                 get_time = #{getTime},
             </if>
-            <if test="certificationId != null and certificationId != ''">
+            <if test="certificateId != null and certificateId != ''">
                 certificate_id = #{certificateId},
             </if>
-            <if test="certificationPhoto != null and certificationPhoto != ''">
-                certification_photo = #{certificationPhoto},
+            <if test="certificatePhoto != null and certificatePhoto != ''">
+                certificate_photo = #{certificatePhoto},
             </if>
             <if test="signUpFile != null and signUpFile != ''">
                 sign_up_file = #{signUpFile},
-            </if>
-            <if test="photo != null and photo != ''">
-                photo = #{photo},
             </if>
         </set>
         WHERE student_number = #{studentNumber}

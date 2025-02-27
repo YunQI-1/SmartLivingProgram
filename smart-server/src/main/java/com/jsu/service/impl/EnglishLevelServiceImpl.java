@@ -58,11 +58,16 @@ public class EnglishLevelServiceImpl extends ServiceImpl<EnglishLevelMapper, Eng
         List<EnglishLevel> englishLevelList = englishLevelMapper.getAllEnglishLevel();
         ExcelUtils.exportWithDynamicColumns(
                 response,
-                "英语水平等级",
+                "英语水平等级.xlsx",
                 englishLevelList,
                 EnglishLevel.class,
                 exportConfigDTO.getFields(),
                 exportConfigDTO.getColumnNames()
         );
+    }
+
+    @Override
+    public boolean removeByCertificateNumber(String certificateNumber) {
+        return englishLevelMapper.removeByCertificateNumber(certificateNumber);
     }
 }

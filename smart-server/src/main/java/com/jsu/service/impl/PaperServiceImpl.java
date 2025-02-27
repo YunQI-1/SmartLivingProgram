@@ -53,12 +53,17 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
         List<Paper> paperList = paperMapper.getAllPaper();
         ExcelUtils.exportWithDynamicColumns(
                 response,
-                "论文信息",
+                "论文信息.xlsx",
                 paperList,
                 Paper.class,
                 exportConfigDTO.getFields(),
                 exportConfigDTO.getColumnNames()
         );
 
+    }
+
+    @Override
+    public boolean removeByDoi(String doi) {
+        return paperMapper.removeByDoi(doi);
     }
 }

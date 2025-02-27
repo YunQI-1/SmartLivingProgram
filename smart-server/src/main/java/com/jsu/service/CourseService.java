@@ -19,5 +19,5 @@ public interface CourseService extends IService<Course> {
 
     void exportCourse(HttpServletResponse response, ExportConfigDTO exportConfigDTO);
 
-    boolean updateByCourseName(Course course);
+    boolean updateByCourseNumber(Course course);
 }

@@ -76,6 +76,9 @@
             )
         </foreach>
     </update>
+    <delete id="removeByDoi">
+        DELETE FROM paper WHERE doi = #{doi}
+    </delete>
     <select id="getAllPaper" resultType="com.jsu.entity.Paper">
         SELECT * FROM paper
     </select>

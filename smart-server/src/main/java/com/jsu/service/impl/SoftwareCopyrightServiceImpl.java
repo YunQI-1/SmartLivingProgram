@@ -64,7 +64,7 @@ public class SoftwareCopyrightServiceImpl extends ServiceImpl<SoftwareCopyrightM
          log.info("导出自选字段为：{}的学生软著表",exportConfigDTO);
          ExcelUtils.exportWithDynamicColumns(
           response,
-                 "软著表",
+                 "软著表.xlsx",
                  list,
                  SoftwareCopyrightVO.class,
                  exportConfigDTO.getFields(),

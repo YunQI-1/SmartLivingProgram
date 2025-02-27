@@ -26,7 +26,7 @@
         </foreach>
 
     </insert>
-    <update id="updateByCourseName" parameterType="com.jsu.entity.Course">
+    <update id="updateByCourseNumber" parameterType="com.jsu.entity.Course">
         UPDATE course
         <set>
             <!-- 动态更新字段 -->
@@ -45,11 +45,11 @@
             <if test="studyTime != null">
                 study_time = #{studyTime},
             </if>
-            <if test="courseStartDateTime != null and courseStartDateTime != ''">
+            <if test="courseStartDateTime != null">
                 course_start_date_time = #{courseStartDateTime},
             </if>
         </set>
-        WHERE course_name = #{courseName}
+        WHERE course_number = #{courseNumber}
     </update>
     <select id="getAllCourses" resultType="com.jsu.entity.Course">
         select * from course

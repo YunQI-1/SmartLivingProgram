@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 public class Course implements Serializable {
@@ -28,6 +29,6 @@ public class Course implements Serializable {
     private Integer studyTime;//学时
 
     @ExcelExport(value = "开课日期", sort = 6)
-    private String courseStartDateTime;//开课日期
+    private Date courseStartDateTime;//开课日期
 
 }

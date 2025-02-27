@@ -53,7 +53,7 @@ public class ParticipateProjectServiceImpl extends ServiceImpl<ParticipateProjec
         List<ParticipateProject> participateProjects = participateProjectMapper.getAllParticipateProject();
         ExcelUtils.exportWithDynamicColumns(
                 response,
-                "参与项目表",
+                "参与项目表.xlsx",
                 participateProjects,
                 ParticipateProject.class,
                 exportConfigDTO.getFields(),

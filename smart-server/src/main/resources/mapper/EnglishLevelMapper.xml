@@ -3,7 +3,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jsu.mapper.EnglishLevelMapper">
 
-
     <update id="updateByCertificateNumber" parameterType="com.jsu.entity.EnglishLevel">
         UPDATE english_level
         <set>
@@ -41,6 +40,9 @@
             <if test="photo != null and photo != ''">
                 photo = #{photo},
             </if>
+            <if test="school != null and school != ''">
+                school = #{school},
+            </if>
         </set>
         WHERE certificate_number = #{certificateNumber}
     </update>
@@ -76,6 +78,10 @@
                     )
                 </foreach>
     </update>
+    <delete id="removeByCertificateNumber">
+        DELETE FROM english_level
+        WHERE certificate_number = #{certificateNumber}
+    </delete>
     <select id="getAllEnglishLevel" resultType="com.jsu.entity.EnglishLevel">
         SELECT * FROM english_level
     </select>

@@ -39,10 +39,10 @@ public class ProfessionalQualificationsController {
     /**
      * 获取单个学生的职业资格情况
      */
-    @GetMapping("/getAcademicPerformance/getProfessionalQualificationsByCertificateNumber")
-    public Result getProfessionalQualificationsByCertificateNumber(String certificateNumber){
+    @GetMapping("/getAcademicPerformance/getProfessionalQualificationsByStudentNumber")
+    public Result getProfessionalQualificationsByStudentNumber(@RequestParam String studentNumber){
         log.info("管理端查看单个学生的职业资格");
-        return Result.success(profQualService.getOne(new QueryWrapper<ProfessionalQualifications>().eq("certificate_number",certificateNumber)));
+        return Result.success(profQualService.getOne(new QueryWrapper<ProfessionalQualifications>().eq("student_number",studentNumber)));
     }
 
     /**
@@ -69,7 +69,7 @@ public class ProfessionalQualificationsController {
      * 删除学生职业资格情况
      */
     @DeleteMapping("/getAcademicPerformance/deleteProfessionalQualifications")
-    public Result deleteProfessionalQualifications(String certificateNumber){
+    public Result deleteProfessionalQualifications( String certificateNumber){
         log.info("管理端删除学生职业资格");
         profQualService.remove(new QueryWrapper<ProfessionalQualifications>().eq("certificate_number",certificateNumber));
         return Result.success();
