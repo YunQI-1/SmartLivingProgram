@@ -55,8 +55,8 @@ public class StudentInformationController {
      */
 
     /**
-     * 修改单个学生信息
-     *
+     * 修改学生信息
+     * @param studentDTO
      * @return
      */
 
