@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jsu.mapper.ProgrammingCapabilitiesMapper">
+<mapper namespace="com.jsu.old.mapper.ProgrammingCapabilitiesMapper">
     <!-- Search语句 -->
     <!-- Create语句 -->
      <insert id="createProgrammingCapabilities">
@@ -45,5 +45,28 @@
     <delete id="deleteProgrammingCapabilities">
       delete from programming_capabilities where student_number=#{studentNumber}
     </delete>
+    <select id="getProgrammingCapabilitiesDetail"  parameterType="com.jsu.dto.QueryDTO" resultType="com.jsu.entity.ProgrammingCapabilities">
+        SELECT * FROM programming_capabilities pc join student_information si on pc.student_number = si.student_number
+        <where>
+            <if test="studentName != null and studentName != ''">
+                AND pc.student_name LIKE CONCAT('%',#{studentName},'%')
+            </if>
+            <if test="studentNumber != null and studentNumber != ''">
+                AND pc.student_number LIKE CONCAT('%',#{studentNumber},'%')
+            </if>
+            <if test="classes != null and classes != ''">
+                AND si.classes = #{classes}
+            </if>
+            <if test="grade != null and grade != ''">
+                AND si.grade = #{grade}
+            </if>
+            <if test="major != null and major != ''">
+                AND si.major = #{major}
+            </if>
+            <if test="college != null and college != ''">
+                AND si.college = #{college}
+            </if>
+        </where>
+    </select>
 
 </mapper>

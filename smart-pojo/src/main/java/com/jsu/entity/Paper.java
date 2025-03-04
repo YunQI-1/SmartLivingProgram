@@ -54,6 +54,6 @@ public class Paper {
     private String instructor;
 
     @ExcelExport(value = "证书图片", sort = 11)
-    private String photo;
+    private String file;
 
 }

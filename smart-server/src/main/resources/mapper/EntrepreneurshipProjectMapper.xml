@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jsu.entrepreneurshipProject.mapper.EntrepreneurshipProjectMapper">
+    <insert id="createEntrepreneurshipProject">
+        INSERT IGNORE INTO entrepreneurship_project (
+        student_number,
+        student_name,
+        project_name,
+        project_introduce,
+        project_areas,
+        instructor,
+        group_member,
+        file,
+        start_date
+        )Values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.studentNumber},
+            #{item.studentName},
+            #{item.projectName},
+            #{item.projectIntroduction},
+            #{item.projectAreas},
+            #{item.instructor},
+            #{item.groupMember},
+            #{item.file},
+            #{item.startDate}
+            )
+        </foreach>
+    </insert>
+
+    <select id="getEntrepreneurshipProjectDetail"
+        parameterType="com.jsu.dto.QueryDTO"    resultType="com.jsu.entrepreneurshipProject.domain.po.EntrepreneurshipProject">
+        Select * from entrepreneurship_project  as ep join student_information as si on ep.student_number = si.student_number\
+        <where>
+            <if test="studentName != null and studentName != ''">
+                AND ep.student_name LIKE CONCAT('%',#{studentName},'%')
+            </if>
+            <if test="studentNumber != null and studentNumber != ''">
+                AND ep.student_number LIKE CONCAT('%',#{studentNumber},'%')
+            </if>
+            <if test="classes != null and classes != ''">
+                and si.classes = #{classes}
+            </if>
+            <if test="grade != null and grade != ''">
+                and si.grade = #{grade}
+            </if>
+            <if test="major != null and major != ''">
+                and si.major = #{major}
+            </if>
+            <if test="college != null and college != ''">
+                and si.college = #{college}
+            </if>
+        </where>
+    </select>
+</mapper>
