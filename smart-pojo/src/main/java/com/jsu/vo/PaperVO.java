@@ -42,4 +42,6 @@ public class PaperVO implements Serializable {
 
     //指导老师
     private String instructor;
+
+    private String file;
 }

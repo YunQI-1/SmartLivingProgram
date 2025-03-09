@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jsu.mapper.PaperMapper">
+<mapper namespace="com.jsu.old.mapper.PaperMapper">
 
 
     <update id="updateByDoi" parameterType="com.jsu.entity.Paper">
@@ -38,8 +38,8 @@
             <if test="instructor != null and instructor != ''">
                 instructor = #{instructor},
             </if>
-            <if test="photo != null and photo != ''">
-                photo = #{photo},
+            <if test="file != null and file != ''">
+                file = #{file},
             </if>
         </set>
         WHERE doi = #{doi}
@@ -57,7 +57,7 @@
         doi,
         editor_ranking,
         instructor,
-               photo
+        file
         ) VALUES
         <foreach collection="paperList" item="item" separator=",">
             (
@@ -72,7 +72,7 @@
             #{item.doi},
             #{item.editorRanking},
             #{item.instructor},
-            #{item.photo}
+            #{item.file}
             )
         </foreach>
     </update>
@@ -81,5 +81,29 @@
     </delete>
     <select id="getAllPaper" resultType="com.jsu.entity.Paper">
         SELECT * FROM paper
+    </select>
+    <select id="getPaperDetail" parameterType="com.jsu.dto.QueryDTO" resultType="com.jsu.entity.Paper">
+        Select *
+        from Paper p join student_information as si on p.student_number = si.student_number
+        <where>
+            <if test="studentName != null and studentName != ''">
+                AND p.student_name LIKE CONCAT('%',#{studentName},'%')
+            </if>
+            <if test="studentNumber != null and studentNumber != ''">
+                AND p.student_number LIKE CONCAT('%',#{studentNumber},'%')
+            </if>
+            <if test="classes != null and classes != ''">
+                and si.classes = #{classes}
+            </if>
+            <if test="grade != null and grade != ''">
+                and si.grade= #{grade}
+            </if>
+            <if test="major != null and major != ''">
+                and si.major = #{major}
+            </if>
+            <if test="college != null and college != ''">
+                and si.college = #{college}
+            </if>
+        </where>
     </select>
 </mapper>
