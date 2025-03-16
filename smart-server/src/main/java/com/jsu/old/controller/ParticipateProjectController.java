@@ -89,7 +89,7 @@ public class ParticipateProjectController {
     /**
      * 导出学生参加项目信息
      */
-    @GetMapping("/getAcademicPerformance/exportParticipateProject")
+    @PostMapping("/getAcademicPerformance/exportParticipateProject")
     public Result exportParticipateProject(HttpServletResponse response, @RequestBody ExportConfigDTO exportConfigDTO){
         participateProjectService.exportParticipateProject(response,exportConfigDTO);
         return Result.success();
