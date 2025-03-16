@@ -1,4 +1,4 @@
-package com.jsu.service.impl;
+package com.jsu.old.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -10,11 +10,13 @@ import com.jsu.old.service.StudentInformationService;
 import com.jsu.query.PageQuery;
 
 import com.jsu.vo.StudentInformationVO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 public class StudentInformationServiceImpl extends ServiceImpl<StudentInformationMapper, StudentInformation> implements StudentInformationService {
 
@@ -41,6 +43,7 @@ public class StudentInformationServiceImpl extends ServiceImpl<StudentInformatio
 
     @Override
     public List<StudentInformationVO> getStudentInformationDetail(QueryDTO queryDTO) {
+        log.info(studentInformationMapper.getStudentInformationDetail(queryDTO).toString());
         return studentInformationMapper.getStudentInformationDetail(queryDTO);
     }
 }

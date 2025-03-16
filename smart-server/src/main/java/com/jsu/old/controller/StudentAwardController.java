@@ -98,7 +98,7 @@ public class StudentAwardController {
      * @param exportConfigDTO
      * @return
      */
-    @GetMapping("/exportStudentAward")
+    @PostMapping("/exportStudentAward")
     public Result exportStudentAward(HttpServletResponse response,@RequestBody ExportConfigDTO exportConfigDTO){
         studentAwardService.exportStudentAward(response,exportConfigDTO);
         return Result.success();

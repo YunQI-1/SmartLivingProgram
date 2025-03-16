@@ -94,7 +94,7 @@ public class SoftwareCopyrightController {
      * @param exportConfigDTO
      * @return
      */
-    @GetMapping("/exportSoftwareCopyright")
+    @PostMapping("/exportSoftwareCopyright")
     public Result exportSoftwareCopyright(HttpServletResponse response,@RequestBody ExportConfigDTO exportConfigDTO){
         softwareCopyrightService.exportSoftwareCopyright(response,exportConfigDTO);
         return Result.success();

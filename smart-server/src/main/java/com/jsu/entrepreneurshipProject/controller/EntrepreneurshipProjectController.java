@@ -22,6 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author authorXuan
  * @since 2025-03-04
  */
+@CrossOrigin(origins = "*")
+
 @Slf4j
 @RestController
 @RequestMapping("/admin")

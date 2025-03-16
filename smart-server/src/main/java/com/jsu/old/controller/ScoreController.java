@@ -92,7 +92,7 @@ public class ScoreController {
      *
      * @return
      */
-    @GetMapping("/exportStudentsGrade")
+    @PostMapping("/exportStudentsGrade")
     public Result exportStudentsGrade(HttpServletResponse response,@RequestBody ExportConfigDTO exportConfigDTO){
         scoreService.exportStudentsGrade(response,exportConfigDTO);
         return Result.success();

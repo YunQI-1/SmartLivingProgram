@@ -32,7 +32,7 @@ public class StudentInformationController {
      */
     @GetMapping("/getStudentInformation")
     public Result<PageDTO<StudentInformationVO>> getStudentInformation(PageQuery pageQuery){
-        log.info("管理端查询所有学生信息数据");
+        log.info("管理端查询所有学生信息数据"+pageQuery );
         return Result.success(studentInformationService.getStudentInformation(pageQuery));
     }
 
@@ -41,7 +41,7 @@ public class StudentInformationController {
      */
     @PostMapping("/getStudentInformation/getStudentInformationDetail")
     public Result getStudentInformationDetail(@RequestBody QueryDTO queryDTO){
-        log.info("管理端根据学生学号查询学生详细信息");
+        log.info("管理端根据学生学号查询学生详细信息"+queryDTO);
         return Result.success(studentInformationService.getStudentInformationDetail(queryDTO));
     }
 
