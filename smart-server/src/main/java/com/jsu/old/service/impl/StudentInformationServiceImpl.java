@@ -2,22 +2,28 @@ package com.jsu.old.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jsu.dto.ExportConfigDTO;
 import com.jsu.dto.PageDTO;
 import com.jsu.dto.QueryDTO;
+import com.jsu.dto.StudentInformationDTO;
 import com.jsu.entity.StudentInformation;
 import com.jsu.old.mapper.StudentInformationMapper;
 import com.jsu.old.service.StudentInformationService;
 import com.jsu.query.PageQuery;
 
+import com.jsu.utils.ExcelUtils;
 import com.jsu.vo.StudentInformationVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Slf4j
 @Service
+@Slf4j
 public class StudentInformationServiceImpl extends ServiceImpl<StudentInformationMapper, StudentInformation> implements StudentInformationService {
 
     @Autowired
@@ -45,5 +51,24 @@ public class StudentInformationServiceImpl extends ServiceImpl<StudentInformatio
     public List<StudentInformationVO> getStudentInformationDetail(QueryDTO queryDTO) {
         log.info(studentInformationMapper.getStudentInformationDetail(queryDTO).toString());
         return studentInformationMapper.getStudentInformationDetail(queryDTO);
+    }
+
+    @Override
+    public void importStudentInformation(MultipartFile file) throws Exception {
+        List<StudentInformationDTO> list= ExcelUtils.readMultipartFile(file, StudentInformationDTO.class);
+    }
+
+    @Override
+    public void exportStudentInformation(HttpServletResponse response, ExportConfigDTO exportConfigDTO) {
+       List<StudentInformationVO> studentInformationVOList=studentInformationMapper.getAll();
+        log.info("导出自选字段为：{}的学生成绩表",exportConfigDTO);
+        ExcelUtils.exportWithDynamicColumns(
+                response,
+                "学生信息表",
+                studentInformationVOList,
+                StudentInformationVO.class,
+                exportConfigDTO.getFields(),
+                exportConfigDTO.getColumnNames()
+        );
     }
 }

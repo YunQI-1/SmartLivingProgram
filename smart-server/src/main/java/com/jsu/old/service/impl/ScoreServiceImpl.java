@@ -1,4 +1,4 @@
-package com.jsu.service.impl;
+package com.jsu.old.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

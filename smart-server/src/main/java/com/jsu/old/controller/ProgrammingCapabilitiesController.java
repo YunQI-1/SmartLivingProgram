@@ -1,5 +1,6 @@
 package com.jsu.old.controller;
 
+import com.jsu.dto.ExportConfigDTO;
 import com.jsu.dto.PageDTO;
 import com.jsu.dto.ProgrammingCapabilitiesDTO;
 import com.jsu.dto.QueryDTO;
@@ -11,6 +12,9 @@ import com.jsu.vo.ProgrammingCapabilitiesVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
 
 @RequestMapping("/admin")
 @RestController
@@ -74,6 +78,25 @@ public class ProgrammingCapabilitiesController {
         programmingCapabilitiesService.updateProgrammingCapabilities(programmingCapabilitiesDTO);
         return Result.success();
     }
+    /**
+     * 导入学生编程能力
+     *
+     * @return
+     */
+    @PostMapping("/importProgrammingCapabilities")
+    public Result importProgrammingCapabilities(@RequestParam("file") MultipartFile file) throws Exception {
 
+        return Result.success();
+    }
+    /**
+     * 导出学生编程能力
+     *
+     * @return
+     */
+    @PostMapping("/exportProgrammingCapabilities")
+    public Result exportProgrammingCapabilities(HttpServletResponse response, @RequestBody ExportConfigDTO exportConfigDTO){
+
+        return Result.success();
+    }
 
 }
