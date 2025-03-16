@@ -14,4 +14,28 @@
             <if test="college != null and college!=''">and college = #{college}</if>
         </where>
     </select>
+
+    <insert id="creatStudentInformation">
+         INSERT Ignore INTO student_information (
+         student_number, student_name, sex, birthday, native_place, height, id_card,
+         family_place, student_phone_number1, student_phone_number2, guardian_ship1,
+         guardian_ship2, guardian_phone_number1, guardian_phone_number2, qq_number,
+         email, wechat_number, health_status, specialty, hobby, political_status,
+         classes, major, grade, college, job1, job2, job3, dormitory_number, photo
+         )
+         VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.studentNumber}, #{item.studentName}, #{item.sex}, #{item.birthday},
+            #{item.nativePlace}, #{item.height}, #{item.idCard}, #{item.familyPlace},
+            #{item.studentPhoneNumber1}, #{item.studentPhoneNumber2}, #{item.guardianShip1},
+            #{item.guardianShip2}, #{item.guardianPhoneNumber1}, #{item.guardianPhoneNumber2},
+            #{item.qqNumber}, #{item.email}, #{item.wechatNumber}, #{item.healthStatus},
+            #{item.specialty}, #{item.hobby}, #{item.politicalStatus}, #{item.classes},
+            #{item.major}, #{item.grade}, #{item.college}, #{item.job1}, #{item.job2},
+            #{item.job3}, #{item.dormitoryNumber}, #{item.photo}
+            )
+        </foreach>
+
+    </insert>
 </mapper>

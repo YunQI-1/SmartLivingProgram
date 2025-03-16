@@ -95,7 +95,7 @@ public class SubjectCompetitionController {
      * @param exportConfigDTO
      * @return
      */
-    @GetMapping("/exportSubjectCompetition")
+    @PostMapping("/exportSubjectCompetition")
     public Result exportSubjectCompetition(HttpServletResponse response,@RequestBody ExportConfigDTO exportConfigDTO){
         subjectCompetitionService.exportSubjectCompetition(response,exportConfigDTO);
         return Result.success();

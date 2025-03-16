@@ -2,6 +2,7 @@ package com.jsu.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jsu.dto.ExportConfigDTO;
 import com.jsu.dto.PageDTO;
 import com.jsu.dto.ProgrammingCapabilitiesDTO;
 import com.jsu.dto.QueryDTO;
@@ -10,12 +11,15 @@ import com.jsu.exception.BaseException;
 import com.jsu.old.mapper.ProgrammingCapabilitiesMapper;
 import com.jsu.old.service.ProgrammingCapabilitiesService;
 import com.jsu.query.PageQuery;
+import com.jsu.utils.ExcelUtils;
 import com.jsu.vo.ProgrammingCapabilitiesVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Service
@@ -74,6 +78,26 @@ public class ProgrammingCapabilitiesServiceImpl extends ServiceImpl<ProgrammingC
     public List<ProgrammingCapabilities> getProgrammingCapabilitiesDetail(QueryDTO queryDTO) {
         return programmingCapabilitiesMapper.getProgrammingCapabilitiesDetail(queryDTO);
 
+    }
+
+    @Override
+    public void importProgrammingCapabilities(MultipartFile file) throws Exception {
+         List<ProgrammingCapabilitiesDTO> list= ExcelUtils.readMultipartFile(file,ProgrammingCapabilitiesDTO.class);
+         programmingCapabilitiesMapper.creat(list);
+
+    }
+
+    @Override
+    public void exportProgrammingCapabilities(HttpServletResponse response, ExportConfigDTO exportConfigDTO) {
+            List<ProgrammingCapabilitiesVO> list=programmingCapabilitiesMapper.getAll();
+            ExcelUtils.exportWithDynamicColumns(
+                    response,
+                    "编程能力表.xlsx",
+                    list,
+                    ProgrammingCapabilitiesVO.class,
+                    exportConfigDTO.getFields(),
+                    exportConfigDTO.getColumnNames()
+            );
     }
 
 

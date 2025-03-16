@@ -94,7 +94,7 @@ public class CourseController {
     /**
      * 导出课程数据
      */
-    @GetMapping("/exportCourse")
+    @PostMapping("/exportCourse")
     public Result exportCourse(HttpServletResponse response, @RequestBody ExportConfigDTO exportConfigDTO){
         courseService.exportCourse(response,exportConfigDTO);
         return Result.success();

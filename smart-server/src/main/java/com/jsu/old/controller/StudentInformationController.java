@@ -1,5 +1,6 @@
 package com.jsu.old.controller;
 
+import com.jsu.dto.ExportConfigDTO;
 import com.jsu.dto.PageDTO;
 import com.jsu.dto.QueryDTO;
 import com.jsu.dto.StudentDTO;
@@ -12,6 +13,9 @@ import com.jsu.vo.StudentInformationVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
 @RestController
@@ -90,4 +94,28 @@ public class StudentInformationController {
         return Result.success();
     }
 
+    /**
+     * 导入学生信息表
+     * @param file
+     * @return
+     * @throws Exception
+     */
+
+    @PostMapping("/importStudentInformation")
+    public Result importStudentInformation(@RequestParam("file") MultipartFile file) throws Exception {
+        studentInformationService.importStudentInformation(file);
+        return Result.success();
+    }
+
+    /**
+     * 导出学生信息表
+     * @param response
+     * @param exportConfigDTO
+     * @return
+     */
+    @PostMapping("/exportStudentInformation")
+    public Result exportStudentInformation(HttpServletResponse response, @RequestBody ExportConfigDTO exportConfigDTO){
+        studentInformationService.exportStudentInformation(response,exportConfigDTO);
+        return Result.success();
+    }
 }
