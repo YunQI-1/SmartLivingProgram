@@ -23,7 +23,6 @@ import java.util.List;
 
 @Slf4j
 @Service
-@Slf4j
 public class StudentInformationServiceImpl extends ServiceImpl<StudentInformationMapper, StudentInformation> implements StudentInformationService {
 
     @Autowired

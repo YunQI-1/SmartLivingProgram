@@ -61,4 +61,9 @@ public class StudentInformation {
     private String job3;//职务3
 
     private String dormitoryNumber;//寝室号
+
+    /**
+     * 照片
+     */
+    private String photo;
 }
