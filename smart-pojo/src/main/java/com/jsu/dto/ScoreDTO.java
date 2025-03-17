@@ -1,5 +1,6 @@
 package com.jsu.dto;
 
+import com.jsu.annotation.ExcelExport;
 import com.jsu.annotation.ExcelImport;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,7 +25,27 @@ public class ScoreDTO {
     @ExcelImport(value = "学分", required = true)
     private Double courseCredit;//获得的课程学分
 
-    @ExcelImport(value = "开课日期", required = true)
+    @ExcelImport(value = "开课日期")
     private String courseStartDateTime;//开课日期
+
+    @ExcelImport(value = "专业")
+    private String major;//专业
+
+    @ExcelImport(value = "年级")
+    private String grade;//年级
+
+    @ExcelImport(value = "班级")
+    private String classes;//班级
+
+    @ExcelImport(value = "课程名")
+    private String courseName;//课程名
+
+    @ExcelImport(value = "课程模块")
+    private String courseModule;//课程模块
+
+    @ExcelImport(value = "修读方式")
+    private String studyMethod;//修读方式
+
+
 
 }

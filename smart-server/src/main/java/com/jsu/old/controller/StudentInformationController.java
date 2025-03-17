@@ -1,9 +1,6 @@
 package com.jsu.old.controller;
 
-import com.jsu.dto.ExportConfigDTO;
-import com.jsu.dto.PageDTO;
-import com.jsu.dto.QueryDTO;
-import com.jsu.dto.StudentDTO;
+import com.jsu.dto.*;
 import com.jsu.old.service.AdminService;
 import com.jsu.old.service.StudentInformationService;
 import com.jsu.query.PageQuery;
@@ -114,7 +111,7 @@ public class StudentInformationController {
      * @return
      */
     @PostMapping("/exportStudentInformation")
-    public Result exportStudentInformation(HttpServletResponse response, @RequestBody ExportConfigDTO exportConfigDTO){
+    public Result exportStudentInformation(HttpServletResponse response, @RequestBody ExportConfigDTO<StudentInformationDTO> exportConfigDTO){
         studentInformationService.exportStudentInformation(response,exportConfigDTO);
         return Result.success();
     }

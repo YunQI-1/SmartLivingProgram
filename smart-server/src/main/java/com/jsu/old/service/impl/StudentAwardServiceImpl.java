@@ -1,5 +1,6 @@
-package com.jsu.service.impl;
+package com.jsu.old.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jsu.dto.ExportConfigDTO;
@@ -11,6 +12,7 @@ import com.jsu.old.mapper.StudentAwardMapper;
 import com.jsu.old.service.StudentAwardService;
 import com.jsu.query.PageQuery;
 import com.jsu.utils.ExcelUtils;
+import com.jsu.utils.QueryUtils;
 import com.jsu.vo.StudentAwardVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,13 +67,15 @@ public class StudentAwardServiceImpl extends ServiceImpl<StudentAwardMapper, Stu
     }
 
     @Override
-    public void exportStudentAward(HttpServletResponse response, ExportConfigDTO exportConfigDTO) {
-        List<StudentAwardVO> list=studentAwardMapper.getAllStudentAward();
+    public void exportStudentAward(HttpServletResponse response, ExportConfigDTO<StudentAwardDTO> exportConfigDTO) {
+        QueryWrapper<StudentAward> wrapper=new QueryWrapper<>();
+        QueryUtils.buildFuzzyQuery(exportConfigDTO.getQueryParams(),wrapper);
+        List<StudentAward> list=studentAwardMapper.selectList(wrapper);
         ExcelUtils.exportWithDynamicColumns(
                 response,
                 "学生荣誉表.xlsx",
                 list,
-                StudentAwardVO.class,
+                StudentAward.class,
                 exportConfigDTO.getFields(),
                 exportConfigDTO.getColumnNames()
         );

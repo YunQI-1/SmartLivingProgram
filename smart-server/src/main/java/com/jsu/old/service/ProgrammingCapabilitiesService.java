@@ -27,5 +27,5 @@ public interface ProgrammingCapabilitiesService extends IService<ProgrammingCapa
 
     void importProgrammingCapabilities(MultipartFile file) throws Exception;
 
-    void exportProgrammingCapabilities(HttpServletResponse response, ExportConfigDTO exportConfigDTO);
+    void exportProgrammingCapabilities(HttpServletResponse response, ExportConfigDTO<ProgrammingCapabilitiesDTO> exportConfigDTO);
 }

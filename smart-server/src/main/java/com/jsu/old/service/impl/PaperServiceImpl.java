@@ -1,5 +1,6 @@
-package com.jsu.service.impl;
+package com.jsu.old.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jsu.dto.ExportConfigDTO;
@@ -11,6 +12,7 @@ import com.jsu.old.service.PaperService;
 import com.jsu.query.PageQuery;
 
 import com.jsu.utils.ExcelUtils;
+import com.jsu.utils.QueryUtils;
 import com.jsu.vo.PaperVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,8 +53,10 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
     }
 
     @Override
-    public void exportPaper(HttpServletResponse response, ExportConfigDTO exportConfigDTO) {
-        List<Paper> paperList = paperMapper.getAllPaper();
+    public void exportPaper(HttpServletResponse response, ExportConfigDTO<Paper> exportConfigDTO) {
+        QueryWrapper<Paper> wrapper=new QueryWrapper<>();
+        QueryUtils.buildFuzzyQuery(exportConfigDTO.getQueryParams(),wrapper);
+        List<Paper> paperList=paperMapper.selectList(wrapper);
         ExcelUtils.exportWithDynamicColumns(
                 response,
                 "论文信息.xlsx",

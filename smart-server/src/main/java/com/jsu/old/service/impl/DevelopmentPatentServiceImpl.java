@@ -1,5 +1,6 @@
 package com.jsu.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jsu.dto.QueryDTO;
@@ -11,6 +12,7 @@ import com.jsu.old.service.DevelopmentPatentService;
 import com.jsu.query.PageQuery;
 
 import com.jsu.utils.ExcelUtils;
+import com.jsu.utils.QueryUtils;
 import com.jsu.vo.DevelopmentPatentVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,8 +52,10 @@ public class DevelopmentPatentServiceImpl extends ServiceImpl<DevelopmentMapper,
     }
 
     @Override
-    public void exportDevelopmentPatent(HttpServletResponse response, ExportConfigDTO exportConfigDTO) {
-        List<DevelopmentPatent> developmentPatents = developmentMapper.getAllDevelopmentPatent();
+    public void exportDevelopmentPatent(HttpServletResponse response, ExportConfigDTO<DevelopmentPatent> exportConfigDTO) {
+        QueryWrapper<DevelopmentPatent> wrapper=new QueryWrapper<>();
+        QueryUtils.buildFuzzyQuery(exportConfigDTO.getQueryParams(),wrapper);
+        List<DevelopmentPatent> developmentPatents=developmentMapper.selectList(wrapper);
         ExcelUtils.exportWithDynamicColumns(
                 response,
                 "专利表.xlsx",

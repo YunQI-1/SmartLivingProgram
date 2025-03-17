@@ -85,7 +85,7 @@ public class ProgrammingCapabilitiesController {
      */
     @PostMapping("/importProgrammingCapabilities")
     public Result importProgrammingCapabilities(@RequestParam("file") MultipartFile file) throws Exception {
-
+        programmingCapabilitiesService.importProgrammingCapabilities(file);
         return Result.success();
     }
     /**
@@ -94,8 +94,8 @@ public class ProgrammingCapabilitiesController {
      * @return
      */
     @PostMapping("/exportProgrammingCapabilities")
-    public Result exportProgrammingCapabilities(HttpServletResponse response, @RequestBody ExportConfigDTO exportConfigDTO){
-
+    public Result exportProgrammingCapabilities(HttpServletResponse response, @RequestBody ExportConfigDTO<ProgrammingCapabilitiesDTO> exportConfigDTO){
+        programmingCapabilitiesService.exportProgrammingCapabilities(response,exportConfigDTO);
         return Result.success();
     }
 

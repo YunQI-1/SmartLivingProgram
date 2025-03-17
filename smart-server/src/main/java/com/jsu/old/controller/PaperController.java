@@ -90,7 +90,7 @@ public class PaperController {
      * 导出论文信息
      */
     @PostMapping("/getAcademicPerformance/exportPaper")
-    public Result exportPaper(HttpServletResponse response, @RequestBody ExportConfigDTO exportConfigDTO){
+    public Result exportPaper(HttpServletResponse response, @RequestBody ExportConfigDTO<Paper> exportConfigDTO){
         log.info("管理端导出论文信息");
         paperService.exportPaper(response,exportConfigDTO);
         return Result.success();

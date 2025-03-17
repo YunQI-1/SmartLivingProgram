@@ -27,7 +27,7 @@ public interface StudentAwardService extends IService<StudentAward> {
 
     void importStudentAward(MultipartFile file) throws Exception;
 
-    void exportStudentAward(HttpServletResponse response, ExportConfigDTO exportConfigDTO);
+    void exportStudentAward(HttpServletResponse response, ExportConfigDTO<StudentAwardDTO> exportConfigDTO);
 
     List<StudentAwardVO> getStudentAwardDetail(QueryDTO queryDTO);
 }

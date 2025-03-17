@@ -20,7 +20,7 @@ public interface EnglishLevelService extends IService<EnglishLevel> {
 
     void importEnglishLevel(MultipartFile file) throws Exception;
 
-    void exportEnglishLevel(HttpServletResponse response, ExportConfigDTO exportConfigDTO);
+    void exportEnglishLevel(HttpServletResponse response, ExportConfigDTO<EnglishLevel> exportConfigDTO);
 
     boolean removeByCertificateNumber(String certificateNumber);
 

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.jsu.dto.ExportConfigDTO;
 import com.jsu.dto.PageDTO;
 import com.jsu.dto.QueryDTO;
+import com.jsu.dto.StudentInformationDTO;
 import com.jsu.entity.StudentInformation;
 import com.jsu.query.PageQuery;
 import com.jsu.vo.StudentAwardVO;
@@ -24,5 +25,5 @@ public interface StudentInformationService extends IService<StudentInformation> 
 
     void importStudentInformation(MultipartFile file) throws Exception;
 
-    void exportStudentInformation(HttpServletResponse response, ExportConfigDTO exportConfigDTO);
+    void exportStudentInformation(HttpServletResponse response, ExportConfigDTO<StudentInformationDTO> exportConfigDTO);
 }

@@ -17,7 +17,7 @@ public interface CourseService extends IService<Course> {
 
     void importCourse(MultipartFile file) throws Exception;
 
-    void exportCourse(HttpServletResponse response, ExportConfigDTO exportConfigDTO);
+    void exportCourse(HttpServletResponse response, ExportConfigDTO<Course> exportConfigDTO);
 
     boolean updateByCourseNumber(Course course);
 }

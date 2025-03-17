@@ -1,5 +1,6 @@
-package com.jsu.service.impl;
+package com.jsu.old.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jsu.dto.ExportConfigDTO;
@@ -12,6 +13,7 @@ import com.jsu.old.service.SoftwareCopyrightService;
 import com.jsu.query.PageQuery;
 
 import com.jsu.utils.ExcelUtils;
+import com.jsu.utils.QueryUtils;
 import com.jsu.vo.SoftwareCopyrightVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,14 +63,15 @@ public class SoftwareCopyrightServiceImpl extends ServiceImpl<SoftwareCopyrightM
     }
 
     @Override
-    public void exportSoftwareCopyright(HttpServletResponse response, ExportConfigDTO exportConfigDTO) {
-         List<SoftwareCopyrightVO> list=softwareCopyrightMapper.getAllSoftwareCopyrights();
-         log.info("导出自选字段为：{}的学生软著表",exportConfigDTO);
+    public void exportSoftwareCopyright(HttpServletResponse response, ExportConfigDTO<SoftwareCopyrightDTO> exportConfigDTO) {
+         QueryWrapper<SoftwareCopyright> wrapper=new QueryWrapper<>();
+         QueryUtils.buildFuzzyQuery(exportConfigDTO.getQueryParams(),wrapper);
+         List<SoftwareCopyright> list=softwareCopyrightMapper.selectList(wrapper);
          ExcelUtils.exportWithDynamicColumns(
           response,
                  "软著表.xlsx",
                  list,
-                 SoftwareCopyrightVO.class,
+                 SoftwareCopyright.class,
                  exportConfigDTO.getFields(),
                  exportConfigDTO.getColumnNames()
          );

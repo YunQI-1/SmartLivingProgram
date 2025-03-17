@@ -91,7 +91,7 @@ public class ProfessionalQualificationsController {
      * 导出学生职业资格情况
      */
     @PostMapping("/getAcademicPerformance/exportProfessionalQualifications")
-    public Result exportProfessionalQualifications(HttpServletResponse response, @RequestBody ExportConfigDTO exportConfigDTO){
+    public Result exportProfessionalQualifications(HttpServletResponse response, @RequestBody ExportConfigDTO<ProfessionalQualifications> exportConfigDTO){
         log.info("管理端导出学生职业资格");
         profQualService.exportProfessionalQualifications(response,exportConfigDTO);
         return Result.success();

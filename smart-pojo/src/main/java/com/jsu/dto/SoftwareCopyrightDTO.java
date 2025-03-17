@@ -45,6 +45,6 @@ public class SoftwareCopyrightDTO {
     @ExcelImport(value = "发布日期", required = true)
     private Date issueDate;
 
-    @ExcelImport(value = "照片", required = true)
+    @ExcelImport(value = "照片")
     private String photo;
 }

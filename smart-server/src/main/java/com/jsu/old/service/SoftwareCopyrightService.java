@@ -26,7 +26,7 @@ public interface SoftwareCopyrightService extends IService<SoftwareCopyright> {
 
     void importSoftwareCopyright(MultipartFile file) throws Exception;
 
-    void exportSoftwareCopyright(HttpServletResponse response, ExportConfigDTO exportConfigDTO);
+    void exportSoftwareCopyright(HttpServletResponse response, ExportConfigDTO<SoftwareCopyrightDTO> exportConfigDTO);
 
     List<SoftwareCopyrightVO> getSoftwareCopyrightDetail(QueryDTO queryDTO);
 }

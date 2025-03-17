@@ -92,7 +92,7 @@ public class EnglishLevelController {
      * 导出英语水平等级
      */
     @PostMapping("/exportEnglishLevel")
-    public Result exportEnglishLevel(HttpServletResponse response, @RequestBody ExportConfigDTO exportConfigDTO){
+    public Result exportEnglishLevel(HttpServletResponse response, @RequestBody ExportConfigDTO<EnglishLevel> exportConfigDTO){
         log.info("导出英语水平等级");
         englishLevelService.exportEnglishLevel(response,exportConfigDTO);
         return Result.success();

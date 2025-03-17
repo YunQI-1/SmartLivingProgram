@@ -37,4 +37,6 @@ public interface ScoreMapper extends BaseMapper<Score> {
     List<ScoreVO> getAllScores();
 
     List<Score> getStudentsGradeDetail(QueryDTO queryDTO);
+
+    List<Score> getScoreToExport(ScoreDTO scoreDTO);
 }

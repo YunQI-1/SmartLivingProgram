@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class StudentInformationDTO {
     @ExcelImport(value = "学号", required = true)
     private String studentNumber;//学号

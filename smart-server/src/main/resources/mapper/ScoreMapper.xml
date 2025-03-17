@@ -57,4 +57,63 @@
             </if>
         </where>
     </select>
+
+    <select id="getScoreToExport" resultType="com.jsu.entity.Score">
+        select
+            s.* , student_information.major , grade, classes, course.course_name,course_module,study_method from score s
+            left join course on s.course_number= course.course_number
+            left join student_information on
+            s.student_number=student_information.student_number
+        <where>
+            <!-- 学号模糊查询 -->
+            <if test="studentNumber != null and studentNumber != ''">
+                AND s.student_number LIKE CONCAT('%', #{studentNumber}, '%')
+            </if>
+
+            <!-- 学生姓名模糊查询 -->
+            <if test="studentName != null and studentName != ''">
+                AND s.student_name LIKE CONCAT('%', #{studentName}, '%')
+            </if>
+
+            <!-- 专业模糊查询 -->
+            <if test="major != null and major != ''">
+                AND student_information.major LIKE CONCAT('%', #{major}, '%')
+            </if>
+
+            <!-- 年级模糊查询 -->
+            <if test="grade != null and grade != ''">
+                AND student_information.grade LIKE CONCAT('%', #{grade}, '%')
+            </if>
+
+            <!-- 班级模糊查询 -->
+            <if test="classes != null and classes != ''">
+                AND student_information.classes LIKE CONCAT('%', #{classes}, '%')
+            </if>
+
+            <!-- 课程名模糊查询 -->
+            <if test="courseName != null and courseName != ''">
+                AND course.course_name LIKE CONCAT('%', #{courseName}, '%')
+            </if>
+
+            <!-- 课程编码模糊查询 -->
+            <if test="courseNumber != null and courseNumber != ''">
+                AND s.course_number LIKE CONCAT('%', #{courseNumber}, '%')
+            </if>
+
+            <!-- 课程模块模糊查询 -->
+            <if test="courseModule != null and courseModule != ''">
+                AND course.course_module LIKE CONCAT('%', #{courseModule}, '%')
+            </if>
+
+            <!-- 修读方式模糊查询 -->
+            <if test="studyMethod != null and studyMethod != ''">
+                AND course.study_method LIKE CONCAT('%', #{studyMethod}, '%')
+            </if>
+
+            <!-- 开课日期范围查询（精确匹配） -->
+            <if test="courseStartDateTime != null and courseStartDateTime != ''">
+                AND s.course_start_date_time = #{courseStartDateTime}
+            </if>
+        </where>
+    </select>
 </mapper>

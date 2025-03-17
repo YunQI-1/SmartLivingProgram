@@ -1,5 +1,6 @@
 package com.jsu.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jsu.dto.ExportConfigDTO;
@@ -10,6 +11,7 @@ import com.jsu.old.service.CourseService;
 import com.jsu.query.PageQuery;
 
 import com.jsu.utils.ExcelUtils;
+import com.jsu.utils.QueryUtils;
 import com.jsu.vo.CourseVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,12 +48,14 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     }
 
     @Override
-    public void exportCourse(HttpServletResponse response, ExportConfigDTO exportConfigDTO) {
-        List<Course> courseList = courseMapper.getAllCourses();
+    public void exportCourse(HttpServletResponse response, ExportConfigDTO<Course> exportConfigDTO) {
+        QueryWrapper<Course> wrapper=new QueryWrapper<>();
+        QueryUtils.buildFuzzyQuery(exportConfigDTO.getQueryParams(),wrapper);
+        List<Course> courses=courseMapper.selectList(wrapper);
         ExcelUtils.exportWithDynamicColumns(
                 response,
                 "课程表.xlsx",
-                courseList,
+                courses,
                 Course.class,
                 exportConfigDTO.getFields(),
                 exportConfigDTO.getColumnNames()

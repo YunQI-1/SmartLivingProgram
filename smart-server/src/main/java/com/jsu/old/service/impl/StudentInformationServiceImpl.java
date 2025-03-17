@@ -1,5 +1,6 @@
 package com.jsu.old.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jsu.dto.ExportConfigDTO;
@@ -12,6 +13,7 @@ import com.jsu.old.service.StudentInformationService;
 import com.jsu.query.PageQuery;
 
 import com.jsu.utils.ExcelUtils;
+import com.jsu.utils.QueryUtils;
 import com.jsu.vo.StudentInformationVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,14 +60,18 @@ public class StudentInformationServiceImpl extends ServiceImpl<StudentInformatio
     }
 
     @Override
-    public void exportStudentInformation(HttpServletResponse response, ExportConfigDTO exportConfigDTO) {
-       List<StudentInformationVO> studentInformationVOList=studentInformationMapper.getAll();
+    public void exportStudentInformation(HttpServletResponse response, ExportConfigDTO<StudentInformationDTO> exportConfigDTO) {
         log.info("导出自选字段为：{}的学生成绩表",exportConfigDTO);
+        log.info("导出查询DTO为:{}的字段",exportConfigDTO);
+        QueryWrapper<StudentInformation> wrapper=new QueryWrapper<>();
+        QueryUtils.buildFuzzyQuery(exportConfigDTO.getQueryParams(),wrapper);
+        List<StudentInformation> studentInformation=studentInformationMapper.selectList(wrapper);
+        log.info(studentInformation.toString());
         ExcelUtils.exportWithDynamicColumns(
                 response,
                 "学生信息表",
-                studentInformationVOList,
-                StudentInformationVO.class,
+                studentInformation,
+                StudentInformation.class,
                 exportConfigDTO.getFields(),
                 exportConfigDTO.getColumnNames()
         );

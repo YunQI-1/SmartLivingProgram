@@ -1,5 +1,6 @@
 package com.jsu.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jsu.dto.ExportConfigDTO;
@@ -12,6 +13,7 @@ import com.jsu.old.mapper.ProgrammingCapabilitiesMapper;
 import com.jsu.old.service.ProgrammingCapabilitiesService;
 import com.jsu.query.PageQuery;
 import com.jsu.utils.ExcelUtils;
+import com.jsu.utils.QueryUtils;
 import com.jsu.vo.ProgrammingCapabilitiesVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -88,13 +90,15 @@ public class ProgrammingCapabilitiesServiceImpl extends ServiceImpl<ProgrammingC
     }
 
     @Override
-    public void exportProgrammingCapabilities(HttpServletResponse response, ExportConfigDTO exportConfigDTO) {
-            List<ProgrammingCapabilitiesVO> list=programmingCapabilitiesMapper.getAll();
+    public void exportProgrammingCapabilities(HttpServletResponse response, ExportConfigDTO<ProgrammingCapabilitiesDTO> exportConfigDTO) {
+            QueryWrapper<ProgrammingCapabilities> wrapper=new QueryWrapper<>();
+            QueryUtils.buildFuzzyQuery(exportConfigDTO.getQueryParams(),wrapper);
+            List<ProgrammingCapabilities> programmingCapabilities=programmingCapabilitiesMapper.selectList(wrapper);
             ExcelUtils.exportWithDynamicColumns(
                     response,
                     "编程能力表.xlsx",
-                    list,
-                    ProgrammingCapabilitiesVO.class,
+                    programmingCapabilities,
+                    ProgrammingCapabilities.class,
                     exportConfigDTO.getFields(),
                     exportConfigDTO.getColumnNames()
             );

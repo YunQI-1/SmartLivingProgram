@@ -49,6 +49,6 @@ public class StudentAwardDTO {
     private String ranks;
 
     //photo
-    @ExcelImport(value = "证明照片", required = true)
+    @ExcelImport(value = "证明照片")
     private String photo;
 }
