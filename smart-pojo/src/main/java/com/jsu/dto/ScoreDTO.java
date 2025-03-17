@@ -24,7 +24,7 @@ public class ScoreDTO {
     @ExcelImport(value = "学分", required = true)
     private Double courseCredit;//获得的课程学分
 
-    @ExcelImport(value = "开课日期", required = true)
+    @ExcelImport(value = "开课日期")
     private String courseStartDateTime;//开课日期
 
 }
