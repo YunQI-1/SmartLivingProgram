@@ -1,5 +1,6 @@
-package com.jsu.service.impl;
+package com.jsu.old.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jsu.dto.ExportConfigDTO;
@@ -11,6 +12,7 @@ import com.jsu.old.service.ProfessionalQualificationsService;
 import com.jsu.query.PageQuery;
 
 import com.jsu.utils.ExcelUtils;
+import com.jsu.utils.QueryUtils;
 import com.jsu.vo.ProfessionalQualificationsVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,9 +54,10 @@ public class ProfessionalQualificationsServiceImpl extends ServiceImpl<Professio
     }
 
     @Override
-    public void exportProfessionalQualifications(HttpServletResponse response, ExportConfigDTO exportConfigDTO) {
-        List<ProfessionalQualifications> professionalQualifications = professionalQualificationsMapper.getAllProfessionalQualifications();
-        log.info(professionalQualifications.toString());
+    public void exportProfessionalQualifications(HttpServletResponse response, ExportConfigDTO<ProfessionalQualifications> exportConfigDTO) {
+        QueryWrapper<ProfessionalQualifications> wrapper=new QueryWrapper<>();
+        QueryUtils.buildFuzzyQuery(exportConfigDTO.getQueryParams(),wrapper);
+        List<ProfessionalQualifications> professionalQualifications=professionalQualificationsMapper.selectList(wrapper);
         ExcelUtils.exportWithDynamicColumns(
                 response,
                 "专业资质信息表.xlsx",

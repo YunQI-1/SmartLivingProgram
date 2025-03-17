@@ -19,7 +19,7 @@ public interface ParticipateProjectService extends IService<ParticipateProject> 
 
     void importParticipateProject(MultipartFile file) throws Exception;
 
-    void exportParticipateProject(HttpServletResponse response, ExportConfigDTO exportConfigDTO);
+    void exportParticipateProject(HttpServletResponse response, ExportConfigDTO<ParticipateProject> exportConfigDTO);
 
     List<ParticipateProject> getParticipateProjectDetail(QueryDTO queryDTO);
 }

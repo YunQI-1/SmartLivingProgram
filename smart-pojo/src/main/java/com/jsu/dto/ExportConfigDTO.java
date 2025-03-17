@@ -1,5 +1,6 @@
 package com.jsu.dto;
 
+import com.jsu.entity.JoinQueryParam;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -101,7 +101,7 @@ public class DevelopmentPatentController {
      * 导出专利数据
      */
     @PostMapping("/getAcademicPerformance/exportDevelopmentPatent")
-    public Result exportDevelopmentPatent(HttpServletResponse response, @RequestBody ExportConfigDTO exportConfigDTO){
+    public Result exportDevelopmentPatent(HttpServletResponse response, @RequestBody ExportConfigDTO<DevelopmentPatent> exportConfigDTO){
         developmentPatentService.exportDevelopmentPatent(response,exportConfigDTO);
         return Result.success();
     }

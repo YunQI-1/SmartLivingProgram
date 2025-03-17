@@ -99,7 +99,7 @@ public class StudentAwardController {
      * @return
      */
     @PostMapping("/exportStudentAward")
-    public Result exportStudentAward(HttpServletResponse response,@RequestBody ExportConfigDTO exportConfigDTO){
+    public Result exportStudentAward(HttpServletResponse response,@RequestBody ExportConfigDTO<StudentAwardDTO> exportConfigDTO){
         studentAwardService.exportStudentAward(response,exportConfigDTO);
         return Result.success();
     }

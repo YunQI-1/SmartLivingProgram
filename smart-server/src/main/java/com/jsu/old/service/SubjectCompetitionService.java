@@ -24,7 +24,7 @@ public interface SubjectCompetitionService extends IService<SubjectCompetition> 
 
     void importSubjectCompetition(MultipartFile file) throws Exception;
 
-    void exportSubjectCompetition(HttpServletResponse response, ExportConfigDTO exportConfigDTO);
+    void exportSubjectCompetition(HttpServletResponse response, ExportConfigDTO<SubjectCompetitionDTO> exportConfigDTO);
 
     List<SubjectCompetition> getSubjectCompetitionDetail(QueryDTO queryDTO);
 }

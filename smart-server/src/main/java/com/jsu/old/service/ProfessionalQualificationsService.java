@@ -22,7 +22,7 @@ public interface ProfessionalQualificationsService extends IService<Professional
 
     void importProfessionalQualifications(MultipartFile file) throws Exception;
 
-    void exportProfessionalQualifications(HttpServletResponse response, ExportConfigDTO exportConfigDTO);
+    void exportProfessionalQualifications(HttpServletResponse response, ExportConfigDTO<ProfessionalQualifications> exportConfigDTO);
 
     List<ProfessionalQualifications> getProfessionalQualificationsDetail(QueryDTO queryDTO);
 }

@@ -94,7 +94,7 @@ public class ProgrammingCapabilitiesController {
      * @return
      */
     @PostMapping("/exportProgrammingCapabilities")
-    public Result exportProgrammingCapabilities(HttpServletResponse response, @RequestBody ExportConfigDTO exportConfigDTO){
+    public Result exportProgrammingCapabilities(HttpServletResponse response, @RequestBody ExportConfigDTO<ProgrammingCapabilitiesDTO> exportConfigDTO){
         programmingCapabilitiesService.exportProgrammingCapabilities(response,exportConfigDTO);
         return Result.success();
     }

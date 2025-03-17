@@ -1,5 +1,6 @@
-package com.jsu.service.impl;
+package com.jsu.old.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jsu.dto.ExportConfigDTO;
@@ -11,6 +12,7 @@ import com.jsu.old.mapper.SubjectCompetitionMapper;
 import com.jsu.old.service.SubjectCompetitionService;
 import com.jsu.query.PageQuery;
 import com.jsu.utils.ExcelUtils;
+import com.jsu.utils.QueryUtils;
 import com.jsu.vo.SubjectCompetitionVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,14 +61,15 @@ public class SubjectCompetitionServiceImpl extends ServiceImpl<SubjectCompetitio
     }
 
     @Override
-    public void exportSubjectCompetition(HttpServletResponse response, ExportConfigDTO exportConfigDTO) {
-        List<SubjectCompetitionVO> list=subjectCompetitionMapper.getAllSubjectCompetitionVO();
-        log.info("导出字段为{}的学科竞赛表",exportConfigDTO);
+    public void exportSubjectCompetition(HttpServletResponse response, ExportConfigDTO<SubjectCompetitionDTO> exportConfigDTO) {
+        QueryWrapper<SubjectCompetition> wrapper=new QueryWrapper<>();
+        QueryUtils.buildFuzzyQuery(exportConfigDTO.getQueryParams(),wrapper);
+        List<SubjectCompetition> list=subjectCompetitionMapper.selectList(wrapper);
         ExcelUtils.exportWithDynamicColumns(
                 response,
                 "学科竞赛表.xlsx",
                 list,
-                SubjectCompetitionVO.class,
+                SubjectCompetition.class,
                 exportConfigDTO.getFields(),
                 exportConfigDTO.getColumnNames()
         );

@@ -1,5 +1,6 @@
-package com.jsu.service.impl;
+package com.jsu.old.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jsu.dto.ExportConfigDTO;
@@ -11,6 +12,7 @@ import com.jsu.old.service.ParticipateProjectService;
 import com.jsu.query.PageQuery;
 
 import com.jsu.utils.ExcelUtils;
+import com.jsu.utils.QueryUtils;
 import com.jsu.vo.ParticipateProjectVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,8 +53,10 @@ public class ParticipateProjectServiceImpl extends ServiceImpl<ParticipateProjec
     }
 
     @Override
-    public void exportParticipateProject(HttpServletResponse response, ExportConfigDTO exportConfigDTO) {
-        List<ParticipateProject> participateProjects = participateProjectMapper.getAllParticipateProject();
+    public void exportParticipateProject(HttpServletResponse response, ExportConfigDTO<ParticipateProject> exportConfigDTO) {
+        QueryWrapper<ParticipateProject> wrapper=new QueryWrapper<>();
+        QueryUtils.buildFuzzyQuery(exportConfigDTO.getQueryParams(),wrapper);
+        List<ParticipateProject> participateProjects=participateProjectMapper.selectList(wrapper);
         ExcelUtils.exportWithDynamicColumns(
                 response,
                 "参与项目表.xlsx",

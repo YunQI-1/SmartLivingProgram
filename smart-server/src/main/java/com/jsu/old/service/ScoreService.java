@@ -25,7 +25,7 @@ public interface ScoreService extends IService<Score> {
 
     void importStudentsGrade(MultipartFile file) throws Exception;
 
-    void exportStudentsGrade(HttpServletResponse response, ExportConfigDTO exportConfigDTO);
+    void exportStudentsGrade(HttpServletResponse response, ExportConfigDTO<ScoreDTO> exportConfigDTO);
 
     List<Score> getStudentsGradeDetail(QueryDTO queryDTO);
 }

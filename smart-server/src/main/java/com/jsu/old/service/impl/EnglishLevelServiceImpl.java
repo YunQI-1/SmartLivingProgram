@@ -1,5 +1,6 @@
-package com.jsu.service.impl;
+package com.jsu.old.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jsu.dto.ExportConfigDTO;
@@ -11,6 +12,7 @@ import com.jsu.old.service.EnglishLevelService;
 import com.jsu.query.PageQuery;
 
 import com.jsu.utils.ExcelUtils;
+import com.jsu.utils.QueryUtils;
 import com.jsu.vo.EnglishLevelVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,8 +58,10 @@ public class EnglishLevelServiceImpl extends ServiceImpl<EnglishLevelMapper, Eng
     }
 
     @Override
-    public void exportEnglishLevel(HttpServletResponse response, ExportConfigDTO exportConfigDTO) {
-        List<EnglishLevel> englishLevelList = englishLevelMapper.getAllEnglishLevel();
+    public void exportEnglishLevel(HttpServletResponse response, ExportConfigDTO<EnglishLevel> exportConfigDTO) {
+        QueryWrapper<EnglishLevel> wrapper=new QueryWrapper<>();
+        QueryUtils.buildFuzzyQuery(exportConfigDTO.getQueryParams(),wrapper);
+        List<EnglishLevel> englishLevelList=englishLevelMapper.selectList(wrapper);
         ExcelUtils.exportWithDynamicColumns(
                 response,
                 "英语水平等级.xlsx",

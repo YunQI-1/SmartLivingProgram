@@ -19,7 +19,7 @@ public interface PaperService extends IService<Paper> {
 
     void importPaper(MultipartFile file) throws Exception;
 
-    void exportPaper(HttpServletResponse response, ExportConfigDTO exportConfigDTO);
+    void exportPaper(HttpServletResponse response, ExportConfigDTO<Paper> exportConfigDTO);
 
     boolean removeByDoi(String doi);
 

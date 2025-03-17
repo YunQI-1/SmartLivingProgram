@@ -42,5 +42,4 @@ public class ProgrammingCapabilitiesVO implements Serializable {
 
     @ExcelExport(value = "其他刷题数", sort = 9)
     private Integer otherPracticeNumber;//其他刷题数
-
 }

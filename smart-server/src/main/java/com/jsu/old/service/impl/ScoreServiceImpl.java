@@ -1,17 +1,22 @@
 package com.jsu.old.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jsu.dto.ExportConfigDTO;
 import com.jsu.dto.PageDTO;
 import com.jsu.dto.QueryDTO;
 import com.jsu.dto.ScoreDTO;
+import com.jsu.entity.JoinQueryParam;
+import com.jsu.entity.JoinTable;
 import com.jsu.entity.Score;
+import com.jsu.enums.JoinType;
 import com.jsu.old.mapper.ScoreMapper;
 import com.jsu.old.service.ScoreService;
 import com.jsu.query.PageQuery;
 
 import com.jsu.utils.ExcelUtils;
+import com.jsu.utils.QueryUtils;
 import com.jsu.vo.ScoreVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -65,14 +71,18 @@ public class ScoreServiceImpl extends ServiceImpl<ScoreMapper, Score> implements
     }
 
     @Override
-    public void exportStudentsGrade(HttpServletResponse response, ExportConfigDTO exportConfigDTO) {
-        List<ScoreVO> scoreVOList=scoreMapper.getAllScores();
+    public void exportStudentsGrade(HttpServletResponse response, ExportConfigDTO<ScoreDTO> exportConfigDTO) {
+        QueryWrapper<Score> wrapper=new QueryWrapper<>();
+        QueryUtils.buildFuzzyQuery(exportConfigDTO.getQueryParams(),wrapper);
+        List<Score> scoreList =scoreMapper.getScoreToExport(exportConfigDTO.getQueryParams());
         log.info("导出自选字段为：{}的学生成绩表",exportConfigDTO);
+
+
         ExcelUtils.exportWithDynamicColumns(
                 response,
                 "成绩表.xlsx",
-                scoreVOList,
-                ScoreVO.class,
+                scoreList,
+                Score.class,
                 exportConfigDTO.getFields(),
                 exportConfigDTO.getColumnNames()
         );
