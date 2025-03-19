@@ -59,9 +59,8 @@ public class EnglishLevelServiceImpl extends ServiceImpl<EnglishLevelMapper, Eng
 
     @Override
     public void exportEnglishLevel(HttpServletResponse response, ExportConfigDTO<EnglishLevel> exportConfigDTO) {
-        QueryWrapper<EnglishLevel> wrapper=new QueryWrapper<>();
-        QueryUtils.buildFuzzyQuery(exportConfigDTO.getQueryParams(),wrapper);
-        List<EnglishLevel> englishLevelList=englishLevelMapper.selectList(wrapper);
+        List<EnglishLevel> englishLevelList=englishLevelMapper.exportEnglishLevel(exportConfigDTO.getQueryParams());
+        log.info(englishLevelList.toString());
         ExcelUtils.exportWithDynamicColumns(
                 response,
                 "英语水平等级.xlsx",

@@ -4,7 +4,7 @@ package com.jsu.entrepreneurshipProject.controller;
 import com.jsu.dto.ExportConfigDTO;
 import com.jsu.dto.QueryDTO;
 import com.jsu.entrepreneurshipProject.domain.po.EntrepreneurshipProject;
-import com.jsu.entrepreneurshipProject.service.IEntrepreneurshipProjectService;
+import com.jsu.entrepreneurshipProject.service.EntrepreneurshipProjectService;
 import com.jsu.query.PageQuery;
 import com.jsu.result.Result;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/admin")
 public class EntrepreneurshipProjectController {
     @Autowired
-    private IEntrepreneurshipProjectService entrepreneurshipProjectService;
+    private EntrepreneurshipProjectService entrepreneurshipProjectService;
 
 
     /**
@@ -94,7 +94,7 @@ public class EntrepreneurshipProjectController {
      * 导出创业项目信息
      */
     @GetMapping("/exportEntrepreneurshipProject")
-    public Result exportEntrepreneurshipProject(HttpServletResponse response, @RequestBody ExportConfigDTO exportConfigDTO){
+    public Result exportEntrepreneurshipProject(HttpServletResponse response, @RequestBody ExportConfigDTO<EntrepreneurshipProject> exportConfigDTO){
         log.info("管理端导出创业项目信息");
         entrepreneurshipProjectService.exportEntrepreneurshipProject(response, exportConfigDTO);
         return Result.success();

@@ -19,7 +19,7 @@ import java.util.List;
  * @author authorXuan
  * @since 2025-03-04
  */
-public interface IEntrepreneurshipProjectService extends IService<EntrepreneurshipProject> {
+public interface EntrepreneurshipProjectService extends IService<EntrepreneurshipProject> {
 
     PageDTO<EntrepreneurshipProject> getEntrepreneurshipProject(PageQuery pageQuery);
 
@@ -27,5 +27,5 @@ public interface IEntrepreneurshipProjectService extends IService<Entrepreneursh
 
     void importEntrepreneurshipProject(MultipartFile file) throws Exception;
 
-    void exportEntrepreneurshipProject(HttpServletResponse response, ExportConfigDTO exportConfigDTO);
+    void exportEntrepreneurshipProject(HttpServletResponse response, ExportConfigDTO<EntrepreneurshipProject> exportConfigDTO);
 }

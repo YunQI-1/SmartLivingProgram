@@ -4,10 +4,9 @@ package com.jsu.innovationProject.controller;
 import com.jsu.dto.ExportConfigDTO;
 import com.jsu.dto.QueryDTO;
 import com.jsu.innovationProject.domain.po.InnovationProjects;
-import com.jsu.innovationProject.service.IInnovationProjectsService;
+import com.jsu.innovationProject.service.InnovationProjectsService;
 import com.jsu.query.PageQuery;
 import com.jsu.result.Result;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +30,7 @@ public class InnovationProjectsController {
 
 
     @Autowired
-    private IInnovationProjectsService innovationProjectsService;
+    private InnovationProjectsService innovationProjectsService;
 
     /**
      * 获取所有创新项目
@@ -96,7 +95,7 @@ public class InnovationProjectsController {
      * 导出创新项目
      */
     @GetMapping("/exportInnovationProject")
-    public Result exportInnovationProject(HttpServletResponse response, @RequestBody ExportConfigDTO exportConfigDTO){
+    public Result exportInnovationProject(HttpServletResponse response, @RequestBody ExportConfigDTO<InnovationProjects> exportConfigDTO){
         log.info("管理端导出创新项目");
         innovationProjectsService.exportInnovationProject(response, exportConfigDTO);
         return Result.success();

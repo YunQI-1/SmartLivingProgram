@@ -1,21 +1,20 @@
 package com.jsu.innovationProject.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jsu.dto.ExportConfigDTO;
 import com.jsu.dto.PageDTO;
 import com.jsu.dto.QueryDTO;
-import com.jsu.entity.Course;
 import com.jsu.innovationProject.domain.po.InnovationProjects;
 import com.jsu.innovationProject.mapper.InnovationProjectsMapper;
-import com.jsu.innovationProject.service.IInnovationProjectsService;
+import com.jsu.innovationProject.service.InnovationProjectsService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jsu.query.PageQuery;
 import com.jsu.utils.ExcelUtils;
-import com.jsu.vo.CourseVO;
+import com.jsu.utils.QueryUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -31,7 +30,7 @@ import java.util.List;
  */
 @Slf4j
 @Service
-public class InnovationProjectsServiceImpl extends ServiceImpl<InnovationProjectsMapper, InnovationProjects> implements IInnovationProjectsService {
+public class InnovationProjectsServiceImpl extends ServiceImpl<InnovationProjectsMapper, InnovationProjects> implements InnovationProjectsService {
 
     @Autowired
     private InnovationProjectsMapper innovationProjectsMapper;
@@ -61,8 +60,10 @@ public class InnovationProjectsServiceImpl extends ServiceImpl<InnovationProject
     }
 
     @Override
-    public void exportInnovationProject(HttpServletResponse response, ExportConfigDTO exportConfigDTO) {
-        List<InnovationProjects> list = lambdaQuery().list();
+    public void exportInnovationProject(HttpServletResponse response, ExportConfigDTO<InnovationProjects> exportConfigDTO) {
+        QueryWrapper<InnovationProjects> wrapper=new QueryWrapper<>();
+        QueryUtils.buildFuzzyQuery(exportConfigDTO.getQueryParams(),wrapper);
+        List<InnovationProjects> list=innovationProjectsMapper.selectList(wrapper);
         ExcelUtils.exportWithDynamicColumns(
                 response,
                 "创新项目.xlsx",
