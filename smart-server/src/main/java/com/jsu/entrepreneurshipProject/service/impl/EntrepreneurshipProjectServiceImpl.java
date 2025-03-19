@@ -1,15 +1,17 @@
 package com.jsu.entrepreneurshipProject.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jsu.dto.ExportConfigDTO;
 import com.jsu.dto.PageDTO;
 import com.jsu.dto.QueryDTO;
 import com.jsu.entrepreneurshipProject.domain.po.EntrepreneurshipProject;
 import com.jsu.entrepreneurshipProject.mapper.EntrepreneurshipProjectMapper;
-import com.jsu.entrepreneurshipProject.service.IEntrepreneurshipProjectService;
+import com.jsu.entrepreneurshipProject.service.EntrepreneurshipProjectService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jsu.query.PageQuery;
 import com.jsu.utils.ExcelUtils;
+import com.jsu.utils.QueryUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +30,7 @@ import java.util.List;
  */
 @Slf4j
 @Service
-public class EntrepreneurshipProjectServiceImpl extends ServiceImpl<EntrepreneurshipProjectMapper, EntrepreneurshipProject> implements IEntrepreneurshipProjectService {
+public class EntrepreneurshipProjectServiceImpl extends ServiceImpl<EntrepreneurshipProjectMapper, EntrepreneurshipProject> implements EntrepreneurshipProjectService {
 
     @Autowired
     private EntrepreneurshipProjectMapper entrepreneurshipProjectMapper;
@@ -55,9 +57,10 @@ public class EntrepreneurshipProjectServiceImpl extends ServiceImpl<Entrepreneur
     }
 
     @Override
-    public void exportEntrepreneurshipProject(HttpServletResponse response, ExportConfigDTO exportConfigDTO) {
-        List<EntrepreneurshipProject> list = lambdaQuery().list();
-
+    public void exportEntrepreneurshipProject(HttpServletResponse response, ExportConfigDTO<EntrepreneurshipProject> exportConfigDTO) {
+        QueryWrapper<EntrepreneurshipProject> wrapper=new QueryWrapper<>();
+        QueryUtils.buildFuzzyQuery(exportConfigDTO.getQueryParams(),wrapper);
+        List<EntrepreneurshipProject> list=entrepreneurshipProjectMapper.selectList(wrapper);
         ExcelUtils.exportWithDynamicColumns(
                 response,
                 "创业项目.xlsx",

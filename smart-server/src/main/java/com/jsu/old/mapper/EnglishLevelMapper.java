@@ -20,4 +20,6 @@ public interface EnglishLevelMapper extends BaseMapper<EnglishLevel> {
     boolean removeByCertificateNumber(String certificateNumber);
 
     List<EnglishLevel> getEnglishLevelDetail(QueryDTO queryDTO);
+
+    List<EnglishLevel> exportEnglishLevel(EnglishLevel englishLevel);
 }

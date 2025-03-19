@@ -25,6 +25,8 @@ public class EnglishLevelVO implements Serializable {
     //得分
     private int score;
 
+    private String classes;
+
     //颁发部门
     private String issuingDepartment;
 
