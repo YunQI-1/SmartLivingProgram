@@ -1,6 +1,5 @@
 package com.jsu.entity;
 
-import com.alibaba.druid.sql.ast.statement.SQLJoinTableSource;
 import com.jsu.enums.JoinType;
 import lombok.Data;
 

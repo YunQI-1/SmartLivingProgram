@@ -1,5 +1,6 @@
 package com.jsu.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.jsu.annotation.ExcelExport;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,6 +37,7 @@ public class SubjectCompetition {
     @ExcelExport(value = "参加形式", sort = 7)
     private String participationForm;
     //排名
+    @TableField("`rank`") // 使用反引号括起来
     @ExcelExport(value = "排名", sort = 8)
     private String rank;
     //获取时间

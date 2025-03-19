@@ -63,5 +63,7 @@ public class EnglishLevel implements Serializable {
     @ExcelImport(value = "学院",required = true)
     @ExcelExport(value = "学院", sort = 12)
     private String college;
-
+    @ExcelImport(value = "班级")
+    @ExcelExport(value = "班级", sort = 13)
+    private String classes;
 }
