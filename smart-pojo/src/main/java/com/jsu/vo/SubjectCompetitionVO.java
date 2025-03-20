@@ -1,6 +1,7 @@
 package com.jsu.vo;
 
 import com.jsu.annotation.ExcelExport;
+import com.jsu.annotation.ExcelImport;
 import com.jsu.entity.SubjectCompetition;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,6 +15,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SubjectCompetitionVO implements Serializable {
+    private String id;//id
+
     @ExcelExport(value = "学号", sort = 0)
     private String studentNumber;
     @ExcelExport(value = "学生姓名", sort = 1)
@@ -43,7 +46,7 @@ public class SubjectCompetitionVO implements Serializable {
     private String rank;
     //获取时间
     @ExcelExport(value = "获取时间", sort = 9)
-    private Date getTime;
+    private String getTime;
     //证书照片
     @ExcelExport(value = "证书照片", sort = 10)
     private String certificatePhoto;
@@ -51,4 +54,6 @@ public class SubjectCompetitionVO implements Serializable {
     @ExcelExport(value = "参赛文件", sort = 11)
     private String signUpFile;
 
+    @ExcelExport(value = "照片")
+    private String photo;
 }

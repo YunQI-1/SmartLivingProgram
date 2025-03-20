@@ -37,8 +37,8 @@
         </set>
         WHERE certificate_number = #{certificateNumber}
     </update>
-    <update id="createProfessionalQualifications">
-        INSERT INTO professional_qualifications(
+    <update id="createProfessionalQualifications" parameterType="com.jsu.entity.ProfessionalQualifications">
+        INSERT INTO professional_qualifications (
         certificate_number,
         student_name,
         student_number,
@@ -49,19 +49,21 @@
         obtaining_time,
         issuing_department,
         photo
-        )
-        VALUES (
-        #{certificateNumber},
-        #{studentName},
-        #{studentNumber},
-        #{idCard},
-        #{examinationCertificateNumber},
-        #{credentialsName},
-        #{classification},
-        #{obtainingTime},
-        #{issuingDepartment},
-        #{photo}
-        )
+        ) VALUES
+        <foreach collection="professionalQualificationsList" item="item" separator=",">
+            (
+            #{item.certificateNumber},
+            #{item.studentName},
+            #{item.studentNumber},
+            #{item.idCard},
+            #{item.examinationCertificateNumber},
+            #{item.credentialsName},
+            #{item.classification},
+            #{item.obtainingTime},
+            #{item.issuingDepartment},
+            #{item.photo}
+            )
+        </foreach>
     </update>
     <select id="getAllProfessionalQualifications" resultType="com.jsu.entity.ProfessionalQualifications">
         SELECT * FROM professional_qualifications

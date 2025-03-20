@@ -15,6 +15,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * <课程模块>
+ *  前端控制器
+ * <课程模块>
+ *
+ * @author authorXuan
+ * @since 2025-03-04
+ */
+
+
 @Slf4j
 @RestController
 @CrossOrigin(origins = "*")

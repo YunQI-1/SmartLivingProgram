@@ -1,6 +1,7 @@
 package com.jsu.old.service;
 
 import com.jsu.dto.StudentDTO;
+import com.jsu.dto.StudentInformationDTO;
 import com.jsu.result.PageResult;
 
 public interface AdminService {
@@ -11,7 +12,7 @@ public interface AdminService {
      *
      */
 
-    void createStudentInformation(StudentDTO studentDTO);
+    void createStudentInformation(StudentInformationDTO studentDTO);
 
 
 
@@ -21,7 +22,7 @@ public interface AdminService {
      *
      */
 
-    void updateStudentInformation(StudentDTO studentDTO);
+    void updateStudentInformation(StudentInformationDTO studentDTO);
 
 
     /**

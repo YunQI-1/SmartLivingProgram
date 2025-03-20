@@ -60,11 +60,11 @@ public class StudentInformationDTO {
     @ExcelImport(value = "班级", required = true)
     private String classes;//班级
     @ExcelImport(value = "职务1")
-    private String job1;//职务1
+    private String firstJob;//职务1
     @ExcelImport(value = "职务2")
-    private String job2;//职务2
+    private String secondJob;//职务2
     @ExcelImport(value = "职务3")
-    private String job3;//职务3
+    private String thirdJob;//职务3
     @ExcelImport(value = "寝室号")
     private String dormitoryNumber;//寝室号
     @ExcelImport(value = "个人照片")

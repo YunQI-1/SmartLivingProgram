@@ -64,11 +64,11 @@ public class StudentInformationVO implements Serializable {
     @ExcelExport(value = "学号", sort = 24)
     private String classes;//班级
     @ExcelExport(value = "职务1", sort = 25)
-    private String job1;//职务1
+    private String firstJob;//职务1
     @ExcelExport(value = "职务2", sort = 26)
-    private String job2;//职务2
+    private String secondJob;//职务2
     @ExcelExport(value = "职务3", sort = 27)
-    private String job3;//职务3
+    private String thirdJob;//职务3
     @ExcelExport(value = "寝室号", sort = 28)
     private String dormitoryNumber;//寝室号
     @ExcelExport(value = "个人照片", sort = 29)

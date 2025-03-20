@@ -47,7 +47,7 @@
         </set>
         WHERE student_number = #{studentNumber} AND project_name = #{projectName}
     </update>
-    <update id="createParticipateProject">
+    <update id="createParticipateProject" parameterType="com.jsu.entity.ParticipateProject">
         INSERT IGNORE INTO participate_project (
         student_number,
         student_name,
@@ -64,7 +64,7 @@
         main_innovations,
         main_function
         ) VALUES
-        <foreach collection="participateProjectList" item="item" separator=",">
+        <foreach collection="participateProjects" item="item" separator=",">
            (
                #{item.studentNumber},
                #{item.studentName},
@@ -79,7 +79,7 @@
                #{item.duration},
                #{item.numberOfValidCodes},
                #{item.mainInnovations},
-               #{item.mainFunction},
+               #{item.mainFunction}
             )
         </foreach>
     </update>

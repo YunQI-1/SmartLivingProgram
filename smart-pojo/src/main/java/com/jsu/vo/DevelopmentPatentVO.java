@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DevelopmentPatentVO implements Serializable {
+
     private String studentNumber;
 
     private String studentName;

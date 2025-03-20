@@ -1,6 +1,7 @@
-package com.jsu.service.impl;
+package com.jsu.old.service.impl;
 
 import com.jsu.dto.StudentDTO;
+import com.jsu.dto.StudentInformationDTO;
 import com.jsu.entity.*;
 import com.jsu.exception.BaseException;
 import com.jsu.old.mapper.StudentMapper;
@@ -29,7 +30,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     @Transactional
-    public void createStudentInformation(StudentDTO studentDTO) {
+    public void createStudentInformation(StudentInformationDTO studentDTO) {
         log.info("新增学生信息：{}",studentDTO);
          StudentInformationVO studentVO=studentMapper.getStudentInformationByStudentNumber(studentDTO.getStudentNumber());
          if(studentVO!=null){
@@ -44,7 +45,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     @Transactional
-    public void updateStudentInformation(StudentDTO studentDTO) {
+    public void updateStudentInformation(StudentInformationDTO studentDTO) {
         log.info("修改学生信息:{}",studentDTO);
         StudentInformationVO studentVO=studentMapper.getStudentInformationByStudentNumber(studentDTO.getStudentNumber());
         if(studentVO==null){

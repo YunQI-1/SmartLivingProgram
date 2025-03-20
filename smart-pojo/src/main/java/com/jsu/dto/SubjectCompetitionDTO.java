@@ -11,7 +11,9 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SubjectCompetitionDTO {
-    @ExcelImport(value = "学号", required = true ,maxLength = 20)
+    private String id;//id
+
+    @ExcelImport(value = "学号", required = true)
     private String studentNumber;
     @ExcelImport(value = "学生姓名", required = true)
     private String studentName;
@@ -35,15 +37,18 @@ public class SubjectCompetitionDTO {
     @ExcelImport(value = "参加形式", required = true)
     private String participationForm;
     //排名
+
     @ExcelImport(value = "排名", required = true)
     private String rank;
     //获取时间
     @ExcelImport(value = "获取时间", required = true)
-    private Date getTime;
+    private String getTime;
     //证书照片
     @ExcelImport(value = "证书照片", required = true)
-    private String certificationPhoto;
+    private String certificatePhoto;
     //参赛文件
     @ExcelImport(value = "参赛文件", required = true)
     private String signUpFile;
+    @ExcelImport(value = "照片")
+    private String photo;
 }

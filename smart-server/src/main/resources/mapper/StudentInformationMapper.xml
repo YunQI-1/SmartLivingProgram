@@ -186,9 +186,9 @@
     <insert id="createStudentInformation">
         insert into
             student_information
-            (student_number, student_name, sex, birthday, native_place, height, id_card, family_place, student_phone_number1, student_phone_number2, guardian_ship1, guardian_ship2, guardian_phone_number1, guardian_phone_number2, qq_number, email, wechat_number, health_status, specialty, hobby, political_status, classes, major, grade, college, job1, job2, job3, dormitory_number)
+            (student_number, student_name, sex, birthday, native_place, height, id_card, family_place, student_phone_number1, student_phone_number2, guardian_ship1, guardian_ship2, guardian_phone_number1, guardian_phone_number2, qq_number, email, wechat_number, health_status, specialty, hobby, political_status, classes, major, grade, college, first_job, second_job, third_job, dormitory_number,photo)
         VALUES
-            (#{studentNumber},#{studentName},#{sex},#{birthday},#{nativePlace},#{height},#{idCard},#{familyPlace},#{studentPhoneNumber1},#{studentPhoneNumber2},#{guardianShip1},#{guardianPhoneNumber1},#{guardianShip2},#{guardianPhoneNumber2},#{qqNumber},#{email},#{wechatNumber},#{healthStatus},#{specialty},#{hobby},#{politicalStatus},#{college},#{major},#{grade},#{classes},#{job1},#{job2},#{job3},#{dormitoryNumber})
+            (#{studentNumber},#{studentName},#{sex},#{birthday},#{nativePlace},#{height},#{idCard},#{familyPlace},#{studentPhoneNumber1},#{studentPhoneNumber2},#{guardianShip1},#{guardianPhoneNumber1},#{guardianShip2},#{guardianPhoneNumber2},#{qqNumber},#{email},#{wechatNumber},#{healthStatus},#{specialty},#{hobby},#{politicalStatus},#{college},#{major},#{grade},#{classes},#{firstJob},#{secondJob},#{thirdJob},#{dormitoryNumber},#{photo})
     </insert>
 
 
@@ -221,10 +221,11 @@
             <if test="major != null">major = #{major},</if>
             <if test="grade != null">grade = #{grade},</if>
             <if test="classes != null">classes = #{classes},</if>
-            <if test="job1 != null">job1 = #{job1},</if>
-            <if test="job2 != null">job2 = #{job2},</if>
-            <if test="job3 != null">job3 = #{job3},</if>
+            <if test="firstJob != null">first_job = #{firstJob},</if>
+            <if test="secondJob != null">second_job = #{secondJob},</if>
+            <if test="thirdJob != null">third_job = #{thirdJob},</if>
             <if test="dormitoryNumber != null">dormitory_number = #{dormitoryNumber},</if>
+            <if test="photo != null">photo = #{photo},</if>
         </set>
         WHERE student_number = #{studentNumber}
     </update>

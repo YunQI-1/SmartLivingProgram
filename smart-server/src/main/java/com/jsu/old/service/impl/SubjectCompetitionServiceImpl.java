@@ -46,6 +46,7 @@ public class SubjectCompetitionServiceImpl extends ServiceImpl<SubjectCompetitio
 
     @Override
     public void updateSubjectCompetition(SubjectCompetitionDTO subjectCompetitionDTO) {
+       log.info("修改的数据为：{}",subjectCompetitionDTO);
        subjectCompetitionMapper.updateSubjectCompetition(subjectCompetitionDTO);
     }
 

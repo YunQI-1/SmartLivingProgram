@@ -55,7 +55,7 @@
         patentee,
         authorization_announcement_date,
         issuing_department,
-               photo,
+        photo
         ) VALUES
         <foreach collection="developmentPatents" item="item" separator=",">
             (
@@ -67,7 +67,7 @@
                 #{item.patentee},
                 #{item.authorizationAnnouncementDate},
                 #{item.issuingDepartment},
-                #{photo}
+                #{item.photo}
             )
         </foreach>
     </update>

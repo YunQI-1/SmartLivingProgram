@@ -51,6 +51,8 @@ public class SubjectCompetitionController {
      */
     @PostMapping("/createSubjectCompetition")
     public Result createSubjectCompetition(@RequestBody List<SubjectCompetitionDTO> list){
+        log.info("新增学科竞赛信息");
+        log.info("list:{}",list);
         subjectCompetitionService.createSubjectCompetition(list);
         return Result.success();
     }

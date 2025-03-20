@@ -23,6 +23,7 @@ public class ToolsController {
     @PostMapping("/uploadOSS")
     public Result uploadOSS(@RequestParam("file") MultipartFile file) {
         try {
+            log.info("上传文件{}",file.getOriginalFilename());
             // 获取文件输入流
             InputStream inputStream = file.getInputStream();
             // 获取原始文件名

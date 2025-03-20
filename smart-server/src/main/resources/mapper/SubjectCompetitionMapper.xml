@@ -14,8 +14,9 @@
         get_time,
         certificate_id,
         certificate_number,
-        certification_photo,
-        sign_up_file
+        certificate_photo,
+        sign_up_file,
+        photo
                ) VALUES
         <foreach collection="list" item="item" separator=",">
             (
@@ -29,8 +30,9 @@
             #{item.getTime},
             #{item.certificateId},
             #{item.certificateNumber},
-            #{item.certificationPhoto},
-            #{item.signUpFile}
+            #{item.certificatePhoto},
+            #{item.signUpFile},
+            #{item.photo}
                         )
         </foreach>
     </insert>

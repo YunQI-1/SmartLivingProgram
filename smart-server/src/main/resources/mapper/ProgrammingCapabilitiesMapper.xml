@@ -69,7 +69,7 @@
         </where>
     </select>
     <insert id="creat">
-        INSERT INTO programming_capabilities (
+        INSERT Ignore INTO programming_capabilities (
         student_number, student_name, id_card,
         c_language_code_volume, java_code_volume,
         data_structure_code_volume, java_web_code_volume,
@@ -79,13 +79,13 @@
         <foreach collection="list" item="dto" separator=",">
             (
             #{dto.studentNumber}, #{dto.studentName}, #{dto.idCard},
-            #{dto.cLanguageCodeVolume,jdbcType=BIGINT},
-            #{dto.javaCodeVolume,jdbcType=BIGINT},
-            #{dto.dataStructureCodeVolume,jdbcType=BIGINT},
-            #{dto.javaWebCodeVolume,jdbcType=BIGINT},
-            #{dto.pythonCodeVolume,jdbcType=BIGINT},
-            #{dto.ojPracticeNumber,jdbcType=INTEGER},
-            #{dto.otherPracticeNumber,jdbcType=INTEGER}
+            #{dto.cLanguageCodeVolume},
+            #{dto.javaCodeVolume},
+            #{dto.dataStructureCodeVolume},
+            #{dto.javaWebCodeVolume},
+            #{dto.pythonCodeVolume},
+            #{dto.ojPracticeNumber},
+            #{dto.otherPracticeNumber}
             )
         </foreach>
     </insert>

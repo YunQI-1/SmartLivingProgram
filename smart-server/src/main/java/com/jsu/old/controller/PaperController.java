@@ -17,6 +17,17 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 
+
+/**
+ * <论文模块>
+ *  前端控制器
+ * <论文模块>
+ *
+ * @author authorXuan
+ * @since 2025-03-04
+ */
+
+
 @RestController
 @RequestMapping("/admin")
 @Slf4j

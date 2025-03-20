@@ -5,6 +5,7 @@ import com.jsu.annotation.ExcelImport;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -28,8 +29,9 @@ public class Paper {
     private String journalName;
     @ExcelImport(value = "发表时间")
     @ExcelExport(value = "发表时间", sort = 4)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     //发布时间
-    private Date yearOfPublication;
+    private String yearOfPublication;
     @ExcelImport(value = "卷号")
     @ExcelExport(value = "卷号", sort = 5)
     //卷号
@@ -54,8 +56,8 @@ public class Paper {
     @ExcelExport(value = "指导老师", sort = 10)
     //指导老师
     private String instructor;
-    @ExcelImport(value = "证书图片")
-    @ExcelExport(value = "证书图片", sort = 11)
+    @ExcelImport(value = "论文文档")
+    @ExcelExport(value = "论文文档", sort = 11)
     private String file;
 
 }

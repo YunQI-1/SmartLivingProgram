@@ -53,7 +53,7 @@ public class StudentInformationController {
      * @return
      */
     @PostMapping("/admin/getStudentInformation/createStudentInformation")
-    public Result createStudentInformation(@RequestBody StudentDTO studentDTO){
+    public Result createStudentInformation(@RequestBody StudentInformationDTO studentDTO){
         adminService.createStudentInformation(studentDTO);
         return Result.success();
     }
@@ -71,7 +71,7 @@ public class StudentInformationController {
      */
 
     @PutMapping("/admin/getStudentInformation/updateStudentInformation")
-    public Result updateStudentInformation(@RequestBody StudentDTO studentDTO){
+    public Result updateStudentInformation(@RequestBody StudentInformationDTO studentDTO){
         log.info("修改单个学生信息");
         log.info("修改学生信息:{}",studentDTO);
         adminService.updateStudentInformation(studentDTO);
@@ -100,6 +100,7 @@ public class StudentInformationController {
 
     @PostMapping("/importStudentInformation")
     public Result importStudentInformation(@RequestParam("file") MultipartFile file) throws Exception {
+        log.info("导入学生基本信息表");
         studentInformationService.importStudentInformation(file);
         return Result.success();
     }

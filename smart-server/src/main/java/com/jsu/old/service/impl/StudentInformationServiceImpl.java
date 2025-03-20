@@ -57,6 +57,8 @@ public class StudentInformationServiceImpl extends ServiceImpl<StudentInformatio
     @Override
     public void importStudentInformation(MultipartFile file) throws Exception {
         List<StudentInformationDTO> list= ExcelUtils.readMultipartFile(file, StudentInformationDTO.class);
+        log.info(list.toString());
+        studentInformationMapper.creatStudentInformation(list);
     }
 
     @Override

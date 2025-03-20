@@ -12,7 +12,9 @@
       scope_of_rights,
       registration_number,
       issuing_department,
-      issue_date)
+      issue_date,
+      photo
+            )
      VALUES
      <foreach collection="list" item="item" separator=",">
          (
@@ -24,7 +26,8 @@
          #{item.scopeOfRights},
          #{item.registrationNumber},
          #{item.issuingDepartment},
-         #{item.issueDate}
+         #{item.issueDate},
+         #{item.photo}
          )
      </foreach>
  </insert>

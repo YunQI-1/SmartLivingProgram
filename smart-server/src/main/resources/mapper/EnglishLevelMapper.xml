@@ -46,7 +46,7 @@
         </set>
         WHERE certificate_number = #{certificateNumber}
     </update>
-    <update id="createEnglishLevel">
+    <update id="createEnglishLevel" parameterType="com.jsu.entity.EnglishLevel">
         INSERT IGNORE INTO english_level (
         certificate_number,
         student_number,
@@ -61,22 +61,22 @@
         get_time,
         photo
         ) VALUES
-               <foreach collection="englishLevels" item="item" separator=",">
-                    (
-                    #{item.certificateNumber},
-                    #{item.studentNumber},
-                    #{item.studentName},
-                    #{item.idCard},
-                    #{item.typeName},
-                    #{item.examinationCertificateNumber},
-                    #{item.college},
-                    #{item.major},
-                    #{item.score},
-                    #{item.issuingDepartment},
-                    #{item.getTime},
-                    #{item.photo},
-                    )
-                </foreach>
+        <foreach collection="englishLevelList" item="item" index="index" separator=",">
+            (
+            #{item.certificateNumber},
+            #{item.studentNumber},
+            #{item.studentName},
+            #{item.idCard},
+            #{item.typeName},
+            #{item.examinationCertificateNumber},
+            #{item.college},
+            #{item.major},
+            #{item.score},
+            #{item.issuingDepartment},
+            #{item.getTime},
+            #{item.photo}
+            )
+        </foreach>
     </update>
     <delete id="removeByCertificateNumber">
         DELETE FROM english_level
