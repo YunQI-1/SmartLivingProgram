@@ -36,24 +36,25 @@ public class SubjectCompetitionVO implements Serializable {
     @ExcelExport(value = "举办单位", sort = 5)
     private String organizer;
     //获奖级别student_information
-    @ExcelExport(value = "获奖级别", sort = 6)
+    @ExcelExport(value = "获奖等级", sort = 7)
     private String awardLevel;
+
+    @ExcelExport(value = "获奖级别", sort = 6)
+    private String classification;
     //参加形式
-    @ExcelExport(value = "参加形式", sort = 7)
+    @ExcelExport(value = "参加形式", sort = 8)
     private String participationForm;
     //排名
-    @ExcelExport(value = "排名", sort = 8)
-    private String rank;
+    @ExcelExport(value = "排名", sort = 9)
+    private String ranks;
     //获取时间
-    @ExcelExport(value = "获取时间", sort = 9)
+    @ExcelExport(value = "获取时间", sort = 10)
     private String getTime;
     //证书照片
-    @ExcelExport(value = "证书照片", sort = 10)
+    @ExcelExport(value = "证书照片", sort = 11)
     private String certificatePhoto;
     //参赛文件
-    @ExcelExport(value = "参赛文件", sort = 11)
+    @ExcelExport(value = "参赛文件", sort = 12)
     private String signUpFile;
 
-    @ExcelExport(value = "照片")
-    private String photo;
 }

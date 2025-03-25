@@ -13,6 +13,13 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Paper {
+
+    /**
+     * 主键id
+     */
+
+    private Integer id;
+
     @ExcelImport(value = "学号")
     @ExcelExport(value = "学号", sort = 0)
     private String studentNumber;

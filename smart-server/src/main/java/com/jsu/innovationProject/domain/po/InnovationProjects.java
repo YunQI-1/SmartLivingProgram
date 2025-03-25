@@ -25,8 +25,6 @@ import lombok.experimental.Accessors;
 @TableName("innovation_projects")
 public class InnovationProjects implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
     /**
      * 主键id
      */

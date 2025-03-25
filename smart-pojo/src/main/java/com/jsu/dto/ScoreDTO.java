@@ -10,6 +10,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ScoreDTO {
+
+    /**
+     * 主键id
+     */
+
+    private Integer id;
+
+
     @ExcelImport(value = "学号", required = true ,maxLength = 20)
     private String studentNumber;//学号
 

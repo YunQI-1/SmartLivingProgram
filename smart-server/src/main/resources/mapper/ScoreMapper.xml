@@ -31,6 +31,9 @@
           <if test="courseCredit!=null and  courseCredit != ''">
               course_credit=#{courseCredit},
           </if>
+          <if test="courseStartDateTime != null and courseStartDateTime != ''">
+              course_start_date_time = #{courseStartDateTime}
+          </if>
        </set>
         where student_number=#{studentNumber} and course_number=#{courseNumber}
     </update>

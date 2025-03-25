@@ -36,6 +36,6 @@ public class Course implements Serializable {
 
     @ExcelImport(value = "开课日期",required = true)
     @ExcelExport(value = "开课日期", sort = 6)
-    private Date courseStartDateTime;//开课日期
+    private String courseStartDateTime;//开课日期
 
 }

@@ -1,6 +1,7 @@
 package com.jsu.entity;
 
 import com.jsu.annotation.ExcelExport;
+import com.jsu.annotation.ExcelImport;
 import lombok.Data;
 
 import java.sql.Date;
@@ -8,6 +9,13 @@ import java.sql.Date;
 @Data
 public class SoftwareCopyright {
     //软著
+
+
+    /**
+     * 主键id
+     */
+
+    private Integer id;
 
     @ExcelExport(value = "学号", sort = 0)
     private String studentNumber;
@@ -38,7 +46,7 @@ public class SoftwareCopyright {
 
     //发布日期
     @ExcelExport(value = "发布日期", sort = 8)
-    private Date issueDate;
+    private String issueDate;
 
     @ExcelExport(value = "照片", sort = 9)
     private String photo;

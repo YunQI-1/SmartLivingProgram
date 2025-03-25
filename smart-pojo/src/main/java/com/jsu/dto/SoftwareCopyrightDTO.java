@@ -11,6 +11,14 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SoftwareCopyrightDTO {
+
+    /**
+     * 主键id
+     */
+
+    private Integer id;
+
+
     //软著
     @ExcelImport(value = "学号", required = true,maxLength = 20)
     private String studentNumber;
@@ -23,7 +31,7 @@ public class SoftwareCopyrightDTO {
 
     //完成时间
     @ExcelImport(value = "完成时间", required = true)
-    private Date completionDate;
+    private String completionDate;
 
     //权利获取方式
     @ExcelImport(value = "权利获取方式", required = true)
@@ -43,7 +51,7 @@ public class SoftwareCopyrightDTO {
 
     //发布日期
     @ExcelImport(value = "发布日期", required = true)
-    private Date issueDate;
+    private String issueDate;
 
     @ExcelImport(value = "照片")
     private String photo;

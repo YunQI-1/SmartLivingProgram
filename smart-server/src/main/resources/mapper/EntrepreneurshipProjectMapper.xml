@@ -6,7 +6,7 @@
         student_number,
         student_name,
         project_name,
-        project_introduce,
+        project_introduction,
         project_areas,
         instructor,
         group_member,
@@ -29,7 +29,7 @@
 
     <select id="getEntrepreneurshipProjectDetail"
         parameterType="com.jsu.dto.QueryDTO"    resultType="com.jsu.entrepreneurshipProject.domain.po.EntrepreneurshipProject">
-        Select * from entrepreneurship_project  as ep join student_information as si on ep.student_number = si.student_number\
+        Select * from entrepreneurship_project  as ep join student_information as si on ep.student_number = si.student_number
         <where>
             <if test="studentName != null and studentName != ''">
                 AND ep.student_name LIKE CONCAT('%',#{studentName},'%')

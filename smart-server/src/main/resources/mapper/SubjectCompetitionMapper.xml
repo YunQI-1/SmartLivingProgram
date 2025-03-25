@@ -9,14 +9,14 @@
         certificate_name,
         organizer,
         award_level,
+        classification,
         participation_form,
-        `rank`,
+        ranks,
         get_time,
         certificate_id,
         certificate_number,
         certificate_photo,
-        sign_up_file,
-        photo
+        sign_up_file
                ) VALUES
         <foreach collection="list" item="item" separator=",">
             (
@@ -25,18 +25,18 @@
             #{item.certificateName},
             #{item.organizer},
             #{item.awardLevel},
+            #{item.classification},
             #{item.participationForm},
-            #{item.rank},
+            #{item.ranks},
             #{item.getTime},
             #{item.certificateId},
             #{item.certificateNumber},
             #{item.certificatePhoto},
-            #{item.signUpFile},
-            #{item.photo}
+            #{item.signUpFile}
                         )
         </foreach>
     </insert>
-    <update id="updateSubjectCompetition">
+    <update id="updateSubjectCompetition" parameterType="com.jsu.dto.SubjectCompetitionDTO">
         UPDATE subject_competition
         <set>
             <if test="studentName != null and studentName != ''">
@@ -48,14 +48,17 @@
             <if test="organizer != null and organizer != ''">
                 organizer = #{organizer},
             </if>
+            <if test="classification != null and classification != ''">
+                classification = #{classification},
+            </if>
             <if test="awardLevel != null and awardLevel != ''">
                 award_level = #{awardLevel},
             </if>
             <if test="participationForm != null and participationForm != ''">
                 participation_form = #{participationForm},
             </if>
-            <if test="rank != null and rank != ''">
-                `rank` = #{rank},
+            <if test="ranks != null and rank != ''">
+                ranks = #{ranks},
             </if>
             <if test="getTime != null">
                 get_time = #{getTime},

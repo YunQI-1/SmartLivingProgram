@@ -11,6 +11,14 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class ProfessionalQualificationsVO {
+
+    /**
+     * 主键id
+     */
+
+    private Integer id;
+
+
     //学业情况-职业资格
     private String studentName;
 

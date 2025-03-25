@@ -11,6 +11,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class StudentInformation {
+
+
+
+
     @ExcelExport(value = "学号", sort = 0)
     private String studentNumber;
     @ExcelExport(value = "学生姓名", sort = 1)

@@ -14,6 +14,14 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SoftwareCopyrightVO implements Serializable {
+
+    /**
+     * 主键id
+     */
+
+    private Integer id;
+
+
     //软著
     @ExcelExport(value = "学号", sort = 0)
     private String studentNumber;
@@ -44,7 +52,7 @@ public class SoftwareCopyrightVO implements Serializable {
 
     //发布日期
     @ExcelExport(value = "发布日期", sort = 8)
-    private Date issueDate;
+    private String issueDate;
 
     @ExcelExport(value = "照片", sort = 9)
     private String photo;

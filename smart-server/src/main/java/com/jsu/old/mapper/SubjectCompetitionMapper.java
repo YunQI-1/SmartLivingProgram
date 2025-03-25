@@ -29,4 +29,6 @@ public interface SubjectCompetitionMapper extends BaseMapper<SubjectCompetition>
     void deleteSubjectCompetition(String studentNumber,String certificateNumber);
 
     List<SubjectCompetition> getSubjectCompetitionDetail(QueryDTO queryDTO);
+
+    List<SubjectCompetition> getSubjectCompetitionToExport();
 }

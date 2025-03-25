@@ -15,6 +15,13 @@ import java.sql.Date;
 @AllArgsConstructor
 @Builder
 public class EnglishLevel implements Serializable {
+
+    /**
+     * 主键id
+     */
+
+    private Integer id;
+
     @ExcelImport(value = "学号",required = true)
     @ExcelExport(value = "学号", sort = 0)
     private String studentNumber;
@@ -43,7 +50,7 @@ public class EnglishLevel implements Serializable {
     @ExcelImport(value = "获取时间",required = true)
     @ExcelExport(value = "获取时间", sort = 7)
     //获取时间
-    private Date getTime;
+    private String getTime;
     @ExcelImport(value = "学校")
     @ExcelExport(value = "学校", sort = 8)
     //学校

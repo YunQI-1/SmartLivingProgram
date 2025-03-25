@@ -34,6 +34,7 @@ public class StudentAwardController {
     @GetMapping("/getStudentAward")
     public Result<PageDTO<StudentAwardVO>> getStudentAward(PageQuery pageQuery){
         log.info("管理端查询所有学生的荣誉情况");
+        log.info(String.valueOf(studentAwardService.getStudentAward(pageQuery)));
         return Result.success(studentAwardService.getStudentAward(pageQuery));
     }
 
@@ -65,6 +66,7 @@ public class StudentAwardController {
      */
     @PutMapping("/updateStudentAward")
     public Result updateStudentAward(@RequestBody StudentAwardDTO studentAwardDTO){
+        log.info("修改学生荣誉"+studentAwardDTO.toString());
         studentAwardService.updateStudentAward(studentAwardDTO);
         return Result.success();
     }

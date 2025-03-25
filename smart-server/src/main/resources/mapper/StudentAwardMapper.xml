@@ -13,6 +13,7 @@
      certificate_number,
      issuing_department,
      classification,
+     award_level,
      participate_form,
      ranks,
      photo)
@@ -28,6 +29,7 @@
         #{item.certificateNumber},
         #{item.issuingDepartment},
         #{item.classification},
+        #{item.awardLevel},
         #{item.participateForm},
         #{item.ranks},
         #{item.photo}
@@ -52,6 +54,9 @@
       </if>
       <if test="classification!=null and classification!='' ">
           classification=#{classification},
+      </if>
+      <if test="awardLevel!=null and awardLevel!='' ">
+          award_level=#{awardLevel},
       </if>
       <if test="participateForm!=null and participateForm !='' ">
           participate_form=#{participateForm},

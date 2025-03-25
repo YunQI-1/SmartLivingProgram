@@ -14,6 +14,14 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ParticipateProjectVO implements Serializable {
+
+    /**
+     * 主键id
+     */
+
+    private Integer id;
+
+
     private String studentNumber;
     private String studentName;
     //项目名
@@ -31,7 +39,7 @@ public class ParticipateProjectVO implements Serializable {
 
     private String instructor;
 
-    private Date developTime;
+    private String developTime;
 
     private String duration;
 

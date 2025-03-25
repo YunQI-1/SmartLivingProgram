@@ -13,6 +13,14 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EnglishLevelVO implements Serializable {
+
+    /**
+     * 主键id
+     */
+
+    private Integer id;
+
+
     private String studentNumber;
     private String studentName;
     private String idCard;
@@ -31,7 +39,7 @@ public class EnglishLevelVO implements Serializable {
     private String issuingDepartment;
 
     //获取时间
-    private Date getTime;
+    private String getTime;
 
     //学校
     private String school;

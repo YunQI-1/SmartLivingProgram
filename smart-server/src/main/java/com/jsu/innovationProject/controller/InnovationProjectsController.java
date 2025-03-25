@@ -39,7 +39,7 @@ public class InnovationProjectsController {
      * @return
      */
     @GetMapping("/getInnovationProjects")
-    public Result getInnovationProjects(@RequestBody PageQuery pageQuery) {
+    public Result getInnovationProjects( PageQuery pageQuery) {
         log.info("管理端获取所有创新项目");
         return Result.success(innovationProjectsService.getInnovationProjects(pageQuery));
     }
@@ -48,7 +48,7 @@ public class InnovationProjectsController {
     /**
      * 获取创新项目详情
      */
-    @GetMapping("/getInnovationProjectsDetail")
+    @PostMapping("/getInnovationProjectsDetail")
     public Result getInnovationProjectsDetail(@RequestBody QueryDTO queryDTO){
         log.info("管理端查询创新项目详情");
         return Result.success(innovationProjectsService.getInnovationProjectsDetail(queryDTO));
@@ -95,7 +95,7 @@ public class InnovationProjectsController {
     /**
      * 导出创新项目
      */
-    @GetMapping("/exportInnovationProject")
+    @PostMapping("/exportInnovationProject")
     public Result exportInnovationProject(HttpServletResponse response, @RequestBody ExportConfigDTO<InnovationProjects> exportConfigDTO){
         log.info("管理端导出创新项目");
         innovationProjectsService.exportInnovationProject(response, exportConfigDTO);

@@ -14,6 +14,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class ScoreVO implements Serializable {
+
+    /**
+     * 主键id
+     */
+
+    private Integer id;
+
+
     @ExcelExport(value = "学号", sort = 0)
     private String studentNumber;//学号
 

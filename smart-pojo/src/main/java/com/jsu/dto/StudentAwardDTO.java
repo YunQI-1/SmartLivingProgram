@@ -10,6 +10,14 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StudentAwardDTO {
+    /**
+     * 主键id
+     */
+
+    private Integer id;
+
+
+
     @ExcelImport(value = "学号", required = true ,maxLength = 20)
     private String studentNumber;
     @ExcelImport(value = "学生姓名", required = true)
@@ -30,7 +38,7 @@ public class StudentAwardDTO {
 
     //获取时间
     @ExcelImport(value = "获取时间", required = true)
-    private Date getTime;
+    private String getTime;
 
     //颁发部门
     @ExcelImport(value = "颁发部门", required = true)
@@ -39,6 +47,9 @@ public class StudentAwardDTO {
     //获奖级别
     @ExcelImport(value = "获奖级别", required = true)
     private String classification;
+
+    @ExcelImport(value = "获奖等级", required = true)
+    private String awardLevel;
 
     //参加形式
     @ExcelImport(value = "参加形式", required = true)

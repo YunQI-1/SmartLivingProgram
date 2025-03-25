@@ -13,6 +13,14 @@ import java.sql.Date;
 @AllArgsConstructor
 public class DevelopmentPatent {
 
+    /**
+     * 主键id
+     */
+
+    private Integer id;
+
+
+
     @ExcelImport(value = "学号",required = true)
     @ExcelExport(value = "学号", sort = 0)
     private String studentNumber;
@@ -40,7 +48,7 @@ public class DevelopmentPatent {
     @ExcelImport(value = "专利授权公告日期",required = true)
     @ExcelExport(value = "专利授权公告日期", sort = 6)
     //专利授权公告日期
-    private Date authorizationAnnouncementDate;
+    private String authorizationAnnouncementDate;
     @ExcelImport(value = "颁发部门",required = true)
     @ExcelExport(value = "颁发部门", sort = 7)
     //颁发部门

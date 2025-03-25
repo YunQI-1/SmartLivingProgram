@@ -11,6 +11,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProgrammingCapabilitiesVO implements Serializable {
+
+
+
     //学业情况-编程能力
     @ExcelExport(value = "学号", sort = 0)
     private String studentNumber;

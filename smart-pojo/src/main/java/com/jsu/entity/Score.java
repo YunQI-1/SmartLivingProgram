@@ -1,6 +1,7 @@
 package com.jsu.entity;
 
 import com.jsu.annotation.ExcelExport;
+import com.jsu.annotation.ExcelImport;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -8,6 +9,14 @@ import java.time.LocalDateTime;
 
 @Data
 public class Score implements Serializable {
+
+
+    /**
+     * 主键id
+     */
+
+    private Integer id;
+
     @ExcelExport(value = "学号", sort = 0)
     private String studentNumber;//学号
 

@@ -13,6 +13,13 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ParticipateProject {
+
+    /**
+     * 主键id
+     */
+
+    private Integer id;
+
     @ExcelImport(value = "学号")
     @ExcelExport(value = "学号", sort = 0)
     private String studentNumber;
@@ -44,7 +51,7 @@ public class ParticipateProject {
     private String instructor;
     @ExcelImport(value = "开发时间")
     @ExcelExport(value = "开发时间", sort = 9)
-    private Date developTime;
+    private String developTime;
     @ExcelImport(value = "开发周期")
     @ExcelExport(value = "开发周期", sort = 10)
     private String duration;

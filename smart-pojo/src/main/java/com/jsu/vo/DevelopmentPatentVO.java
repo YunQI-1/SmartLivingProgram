@@ -14,6 +14,14 @@ import java.util.List;
 @AllArgsConstructor
 public class DevelopmentPatentVO implements Serializable {
 
+
+    /**
+     * 主键id
+     */
+
+    private Integer id;
+
+
     private String studentNumber;
 
     private String studentName;
@@ -31,7 +39,7 @@ public class DevelopmentPatentVO implements Serializable {
     private String patentee;
 
     //专利授权公告日期
-    private Date authorizationAnnouncementDate;
+    private String authorizationAnnouncementDate;
 
     //颁发部门
     private String issuingDepartment;

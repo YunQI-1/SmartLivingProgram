@@ -1,6 +1,7 @@
 package com.jsu.entity;
 
 import com.jsu.annotation.ExcelExport;
+import com.jsu.annotation.ExcelImport;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,12 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StudentAward {
+
+    /**
+     * 主键id
+     */
+    private Integer id;
+
 
     @ExcelExport(value = "学号", sort = 0)
     private String studentNumber;
@@ -30,7 +37,7 @@ public class StudentAward {
 
     //获取时间
     @ExcelExport(value = "获取时间", sort = 6)
-    private Date getTime;
+    private String getTime;
 
     //颁发部门
     @ExcelExport(value = "颁发部门", sort = 7)
@@ -40,16 +47,20 @@ public class StudentAward {
     @ExcelExport(value = "获奖级别", sort = 8)
     private String classification;
 
+
+    @ExcelExport(value = "获奖等级", sort = 9)
+    private  String awardLevel;
     //参加形式
-    @ExcelExport(value = "参加形式", sort = 9)
+    @ExcelExport(value = "参加形式", sort = 10)
     private String participateForm;
 
     //排名
-    @ExcelExport(value = "排名", sort = 10)
+    @ExcelExport(value = "排名", sort = 11)
     private String ranks;
 
     //photo
-    @ExcelExport(value = "证明照片", sort = 11)
+    @ExcelExport(value = "证明照片", sort = 12)
     private String photo;
+
 
 }

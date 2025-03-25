@@ -1,5 +1,6 @@
 package com.jsu.dto;
 
+import com.jsu.annotation.ExcelExport;
 import com.jsu.annotation.ExcelImport;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,15 +32,18 @@ public class SubjectCompetitionDTO {
     @ExcelImport(value = "举办单位", required = true)
     private String organizer;
     //获奖级别student_information
-    @ExcelImport(value = "获奖级别", required = true)
+    @ExcelImport(value = "获奖等级", required = true)
     private String awardLevel;
+
+    @ExcelImport(value = "获奖级别", required = true)
+    private String classification;
     //参加形式
     @ExcelImport(value = "参加形式", required = true)
     private String participationForm;
     //排名
 
     @ExcelImport(value = "排名", required = true)
-    private String rank;
+    private String ranks;
     //获取时间
     @ExcelImport(value = "获取时间", required = true)
     private String getTime;
@@ -49,6 +53,4 @@ public class SubjectCompetitionDTO {
     //参赛文件
     @ExcelImport(value = "参赛文件", required = true)
     private String signUpFile;
-    @ExcelImport(value = "照片")
-    private String photo;
 }

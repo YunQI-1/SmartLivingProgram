@@ -26,6 +26,6 @@ public class CourseVO implements Serializable {
 
     private Integer studyTime;//学时
 
-    private Date courseStartDateTime;//开课日期
+    private String courseStartDateTime;//开课日期
 
 }

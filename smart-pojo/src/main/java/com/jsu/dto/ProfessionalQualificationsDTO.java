@@ -11,6 +11,13 @@ import java.sql.Date;
 @NoArgsConstructor
 public class ProfessionalQualificationsDTO {
     //学业情况-职业资格
+    /**
+     * 主键id
+     */
+
+    private Integer id;
+
+
     private String studentName;
 
     private String studentNumber;

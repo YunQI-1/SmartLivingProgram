@@ -36,7 +36,7 @@ public class EntrepreneurshipProjectController {
      * 获取所有创业项目
      */
     @GetMapping("/getEntrepreneurshipProject")
-    public Result getEntrepreneurshipProject(@RequestBody PageQuery pageQuery){
+    public Result getEntrepreneurshipProject(PageQuery pageQuery){
         log.info("管理端获取所有创业项目");
         return Result.success(entrepreneurshipProjectService.getEntrepreneurshipProject(pageQuery));
     }
@@ -44,7 +44,7 @@ public class EntrepreneurshipProjectController {
     /**
      * 获取创业项目详情
      */
-    @GetMapping("/getEntrepreneurshipProjectDetail")
+    @PostMapping("/getEntrepreneurshipProjectDetail")
     public Result getEntrepreneurshipProjectDetail(@RequestBody QueryDTO queryDTO){
         log.info("管理端获取创业项目详情");
         return Result.success(entrepreneurshipProjectService.getEntrepreneurshipProjectDetail(queryDTO));
@@ -95,7 +95,7 @@ public class EntrepreneurshipProjectController {
     /**
      * 导出创业项目信息
      */
-    @GetMapping("/exportEntrepreneurshipProject")
+    @PostMapping("/exportEntrepreneurshipProject")
     public Result exportEntrepreneurshipProject(HttpServletResponse response, @RequestBody ExportConfigDTO<EntrepreneurshipProject> exportConfigDTO){
         log.info("管理端导出创业项目信息");
         entrepreneurshipProjectService.exportEntrepreneurshipProject(response, exportConfigDTO);

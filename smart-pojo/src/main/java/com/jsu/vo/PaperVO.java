@@ -13,6 +13,14 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PaperVO implements Serializable {
+
+    /**
+     * 主键id
+     */
+
+    private Integer id;
+
+
     private String studentNumber;
 
     private String studentName;

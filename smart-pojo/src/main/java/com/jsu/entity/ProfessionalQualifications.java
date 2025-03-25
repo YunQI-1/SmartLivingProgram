@@ -11,6 +11,13 @@ import java.time.LocalDateTime;
 @Data
 public class ProfessionalQualifications implements Serializable {
 
+    /**
+     * 主键id
+     */
+
+    private Integer id;
+
+
     //学业情况-职业资格
     @ExcelImport(value = "学生姓名")
     @ExcelExport(value = "学生姓名", sort = 0)

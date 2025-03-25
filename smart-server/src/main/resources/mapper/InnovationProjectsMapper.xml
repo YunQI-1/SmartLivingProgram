@@ -31,7 +31,7 @@
 
     <select id="getInnovationProjectsDetail"
            parameterType="com.jsu.dto.QueryDTO" resultType="com.jsu.innovationProject.domain.po.InnovationProjects">
-        Select * from innovation_projects as ip join On student_information as si on ip.student_number=si.student_number
+        Select * from innovation_projects as ip join student_information as si on ip.student_number=si.student_number
         <where>
             <if test="studentName != null and studentName != ''">
                 AND ip.student_name LIKE CONCAT('%',#{studentName},'%')
