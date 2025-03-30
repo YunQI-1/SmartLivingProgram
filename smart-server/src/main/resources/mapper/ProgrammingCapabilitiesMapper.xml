@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jsu.old.mapper.ProgrammingCapabilitiesMapper">
+    <!-- Search语句 -->
+    <!-- Create语句 -->
+     <insert id="createProgrammingCapabilities">
+         insert into programming_capabilities
+         (student_number, student_name, id_card, c_language_code_volume, java_code_volume, data_structure_code_volume, java_web_code_volume, python_code_volume, oj_practice_number, other_practice_number)
+         VALUES
+         (#{studentNumber}, #{studentName}, #{idCard},
+          #{cLanguageCodeVolume}, #{javaCodeVolume}, #{dataStructureCodeVolume},
+          #{javaWebCodeVolume}, #{pythonCodeVolume},
+          #{ojPracticeNumber}, #{otherPracticeNumber})
+     </insert>
+    <!-- Update语句 -->
+    <update id="updateProgrammingCapabilities">
+        UPDATE programming_capabilities
+        <set>
+            <if test="cLanguageCodeVolume != null">
+                c_language_code_volume = #{cLanguageCodeVolume},
+            </if>
+            <if test="javaCodeVolume != null">
+                java_code_volume = #{javaCodeVolume},
+            </if>
+            <if test="dataStructureCodeVolume != null">
+                data_structure_code_volume = #{dataStructureCodeVolume},
+            </if>
+            <if test="javaWebCodeVolume != null">
+                java_web_code_volume = #{javaWebCodeVolume},
+            </if>
+            <if test="pythonCodeVolume != null">
+                python_code_volume = #{pythonCodeVolume},
+            </if>
+            <if test="ojPracticeNumber != null">
+                oj_practice_number = #{ojPracticeNumber},
+            </if>
+            <if test="otherPracticeNumber != null">
+                other_practice_number = #{otherPracticeNumber}
+            </if>
+        </set>
+        WHERE student_number = #{studentNumber}
+    </update>
+    <!-- Delete语句 -->
+    <delete id="deleteProgrammingCapabilities">
+      delete from programming_capabilities where student_number=#{studentNumber}
+    </delete>
+    <select id="getProgrammingCapabilitiesDetail"  parameterType="com.jsu.dto.QueryDTO" resultType="com.jsu.entity.ProgrammingCapabilities">
+        SELECT * FROM programming_capabilities pc join student_information si on pc.student_number = si.student_number
+        <where>
+            <if test="studentName != null and studentName != ''">
+                AND pc.student_name LIKE CONCAT('%',#{studentName},'%')
+            </if>
+            <if test="studentNumber != null and studentNumber != ''">
+                AND pc.student_number LIKE CONCAT('%',#{studentNumber},'%')
+            </if>
+            <if test="classes != null and classes != ''">
+                AND si.classes = #{classes}
+            </if>
+            <if test="grade != null and grade != ''">
+                AND si.grade = #{grade}
+            </if>
+            <if test="major != null and major != ''">
+                AND si.major = #{major}
+            </if>
+            <if test="college != null and college != ''">
+                AND si.college = #{college}
+            </if>
+        </where>
+    </select>
+    <insert id="creat">
+        INSERT Ignore INTO programming_capabilities (
+        student_number, student_name, id_card,
+        c_language_code_volume, java_code_volume,
+        data_structure_code_volume, java_web_code_volume,
+        python_code_volume, oj_practice_number, other_practice_number
+        )
+        VALUES
+        <foreach collection="list" item="dto" separator=",">
+            (
+            #{dto.studentNumber}, #{dto.studentName}, #{dto.idCard},
+            #{dto.cLanguageCodeVolume},
+            #{dto.javaCodeVolume},
+            #{dto.dataStructureCodeVolume},
+            #{dto.javaWebCodeVolume},
+            #{dto.pythonCodeVolume},
+            #{dto.ojPracticeNumber},
+            #{dto.otherPracticeNumber}
+            )
+        </foreach>
+    </insert>
+</mapper>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jsu.old.mapper.EnglishLevelMapper">
+
+    <update id="updateByCertificateNumber" parameterType="com.jsu.entity.EnglishLevel">
+        UPDATE english_level
+        <set>
+            <!-- 动态更新字段 -->
+            <if test="studentNumber != null and studentNumber != ''">
+                student_number = #{studentNumber},
+            </if>
+            <if test="studentName != null and studentName != ''">
+                student_name = #{studentName},
+            </if>
+            <if test="idCard != null and idCard != ''">
+                id_card = #{idCard},
+            </if>
+            <if test="typeName != null and typeName != ''">
+                type_name = #{typeName},
+            </if>
+            <if test="examinationCertificateNumber != null and examinationCertificateNumber != ''">
+                examination_certificate_number = #{examinationCertificateNumber},
+            </if>
+            <if test="college != null and college != ''">
+                college = #{college},
+            </if>
+            <if test="major != null and major != ''">
+                major = #{major},
+            </if>
+            <if test="score != null">
+                score = #{score},
+            </if>
+            <if test="issuingDepartment != null and issuingDepartment != ''">
+                issuing_department = #{issuingDepartment},
+            </if>
+            <if test="getTime != null">
+                get_time = #{getTime},
+            </if>
+            <if test="photo != null and photo != ''">
+                photo = #{photo},
+            </if>
+            <if test="school != null and school != ''">
+                school = #{school},
+            </if>
+        </set>
+        WHERE certificate_number = #{certificateNumber}
+    </update>
+    <update id="createEnglishLevel" parameterType="com.jsu.entity.EnglishLevel">
+        INSERT IGNORE INTO english_level (
+        certificate_number,
+        student_number,
+        student_name,
+        id_card,
+        type_name,
+        examination_certificate_number,
+        college,
+        major,
+        score,
+        issuing_department,
+        get_time,
+        photo
+        ) VALUES
+        <foreach collection="englishLevelList" item="item" index="index" separator=",">
+            (
+            #{item.certificateNumber},
+            #{item.studentNumber},
+            #{item.studentName},
+            #{item.idCard},
+            #{item.typeName},
+            #{item.examinationCertificateNumber},
+            #{item.college},
+            #{item.major},
+            #{item.score},
+            #{item.issuingDepartment},
+            #{item.getTime},
+            #{item.photo}
+            )
+        </foreach>
+    </update>
+    <delete id="removeByCertificateNumber">
+        DELETE FROM english_level
+        WHERE certificate_number = #{certificateNumber}
+    </delete>
+    <select id="getAllEnglishLevel" resultType="com.jsu.entity.EnglishLevel">
+        SELECT * FROM english_level
+    </select>
+    <select id="getEnglishLevelDetail"  parameterType="com.jsu.dto.QueryDTO" resultType="com.jsu.entity.EnglishLevel">
+        SELECT *
+        from english_level as el
+        join student_information as si on el.student_number = si.student_number
+        <where>
+            <if test="studentName != null and studentName != ''">
+                AND el.student_name LIKE CONCAT('%',#{studentName},'%')
+            </if>
+            <if test="studentNumber != null and studentNumber != ''">
+                AND el.student_number LIKE CONCAT('%',#{studentNumber},'%')
+            </if>
+            <if test="classes != null and classes != ''">
+                and si.classes = #{classes}
+            </if>
+            <if test="grade != null and grade != ''">
+                and si.grade = #{grade}
+            </if>
+            <if test="major != null and major != ''">
+                and si.major = #{major}
+            </if>
+            <if test="college != null and college != ''">
+                and si.college = #{college}
+            </if>
+        </where>
+    </select>
+    <select id="exportEnglishLevel" resultType="com.jsu.entity.EnglishLevel">
+        SELECT *
+        from english_level as el
+        join student_information as si on el.student_number = si.student_number
+        <where>
+            <if test="studentName != null and studentName != ''">
+                AND  el.student_name LIKE CONCAT('%',#{studentName},'%')
+            </if>
+            <if test="studentNumber != null and studentNumber != ''">
+                AND  el.student_number LIKE CONCAT('%',#{studentNumber},'%')
+            </if>
+            <if test="classes != null and classes != ''">
+                AND   si.classes = LIKE CONCAT('%', #{classes}, '%')
+            </if>
+            <if test="grade != null and grade != ''">
+                AND  si.grade =  LIKE CONCAT('%', #{grade}, '%')
+            </if>
+            <if test="major != null and major != ''">
+                AND  si.major =  LIKE CONCAT('%', #{major} , '%')
+            </if>
+            <if test="college != null and college != ''">
+                AND si.college =  LIKE CONCAT('%', #{college}, '%')
+            </if>
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jsu.old.mapper.SubjectCompetitionMapper">
+    <insert id="createSubjectCompetition">
+        INSERT IGNORE INTO subject_competition (
+        student_number,
+        student_name,
+        certificate_name,
+        organizer,
+        award_level,
+        classification,
+        participation_form,
+        ranks,
+        get_time,
+        certificate_id,
+        certificate_number,
+        certificate_photo,
+        sign_up_file
+               ) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.studentNumber},
+            #{item.studentName},
+            #{item.certificateName},
+            #{item.organizer},
+            #{item.awardLevel},
+            #{item.classification},
+            #{item.participationForm},
+            #{item.ranks},
+            #{item.getTime},
+            #{item.certificateId},
+            #{item.certificateNumber},
+            #{item.certificatePhoto},
+            #{item.signUpFile}
+                        )
+        </foreach>
+    </insert>
+    <update id="updateSubjectCompetition" parameterType="com.jsu.dto.SubjectCompetitionDTO">
+        UPDATE subject_competition
+        <set>
+            <if test="studentName != null and studentName != ''">
+                student_name = #{studentName},
+            </if>
+            <if test="certificateName != null and certificateName != ''">
+                certificate_name = #{certificateName},
+            </if>
+            <if test="organizer != null and organizer != ''">
+                organizer = #{organizer},
+            </if>
+            <if test="classification != null and classification != ''">
+                classification = #{classification},
+            </if>
+            <if test="awardLevel != null and awardLevel != ''">
+                award_level = #{awardLevel},
+            </if>
+            <if test="participationForm != null and participationForm != ''">
+                participation_form = #{participationForm},
+            </if>
+            <if test="ranks != null and rank != ''">
+                ranks = #{ranks},
+            </if>
+            <if test="getTime != null">
+                get_time = #{getTime},
+            </if>
+            <if test="certificateId != null and certificateId != ''">
+                certificate_id = #{certificateId},
+            </if>
+            <if test="certificatePhoto != null and certificatePhoto != ''">
+                certificate_photo = #{certificatePhoto},
+            </if>
+            <if test="signUpFile != null and signUpFile != ''">
+                sign_up_file = #{signUpFile},
+            </if>
+        </set>
+        WHERE student_number = #{studentNumber}
+        AND certificate_number = #{certificateNumber}
+    </update>
+    <select id="getSubjectCompetitionDetail" resultType="com.jsu.entity.SubjectCompetition" parameterType="com.jsu.dto.QueryDTO">
+        select * from subject_competition as sc join student_information as si on sc.student_number = si.student_number
+        <where>
+            <if test="studentName != null and studentName != ''">
+                AND sc.student_name LIKE CONCAT('%',#{studentName},'%')
+            </if>
+            <if test="studentNumber != null and studentNumber != ''">
+                AND sc.student_number LIKE CONCAT('%',#{studentNumber},'%')
+            </if>
+            <if test="classes != null and classes != ''">
+                AND si.classes = #{classes}
+            </if>
+            <if test="grade != null and grade != ''">
+                AND si.grade = #{grade}
+            </if>
+            <if test="major != null and major != ''">
+                AND si.major = #{major}
+            </if>
+            <if test="college != null and college != ''">
+                AND si.college = #{college}
+            </if>
+        </where>
+    </select>
+</mapper>

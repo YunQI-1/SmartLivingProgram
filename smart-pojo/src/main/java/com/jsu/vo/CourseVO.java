@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,6 +26,6 @@ public class CourseVO implements Serializable {
 
     private Integer studyTime;//学时
 
-    private LocalDateTime courseStartDateTime;//开课日期
+    private String courseStartDateTime;//开课日期
 
 }

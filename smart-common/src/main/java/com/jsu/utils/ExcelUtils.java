@@ -31,6 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 
 /**
@@ -639,7 +640,7 @@ public class ExcelUtils {
                     continue;
                 }
                 String val = kvMap.get(data.toString());
-                if (isNumeric(val)) {
+                if (isNumeric(val) && val.length()<8) {
                     rowList.add(Double.valueOf(val));
                 } else {
                     rowList.add(val);
@@ -720,6 +721,7 @@ public class ExcelUtils {
 
     private static void export(HttpServletResponse response, File file, String fileName,
                                Map<String, List<List<Object>>> sheetMap, Map<Integer, List<String>> selectMap) {
+        System.out.println("开始导出");
         // 整个 Excel 表格 book 对象
         SXSSFWorkbook book = new SXSSFWorkbook();
         // 每个 Sheet 页
@@ -751,6 +753,7 @@ public class ExcelUtils {
                 for (int j = 0; j < rowList.size(); j++) {
                     // 每个行数据中的单元格数据
                     Object o = rowList.get(j);
+
                     int v = 0;
                     if (o instanceof URL) {
                         // 如果要导出图片的话, 链接需要传递 URL 对象
@@ -777,11 +780,13 @@ public class ExcelUtils {
         if (response != null) {
             // 前端导出
             try {
+                System.out.println("前端导出");
                 write(response, book, fileName);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
+            System.out.println("本地导出");
             // 本地导出
             FileOutputStream fos;
             try {
@@ -861,7 +866,7 @@ public class ExcelUtils {
     }
 
     private static void write(HttpServletResponse response, SXSSFWorkbook book, String fileName) throws IOException {
-        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setContentType("application/vnd.ms-excel");
         response.setCharacterEncoding("utf-8");
         String name = new String(fileName.getBytes("GBK"), "ISO8859_1") + XLSX;
         response.addHeader("Content-Disposition", "attachment;filename=" + name);
@@ -1009,4 +1014,90 @@ public class ExcelUtils {
         return s.trim();
     }
 
+    public static <T> void exportWithDynamicColumns(
+            HttpServletResponse response,
+            String fileName,
+            List<T> dataList,
+            Class<T> clazz,
+            List<String> fields,
+            Map<String, String> customColumnNames
+    ) {
+        try {
+            // 1. 验证字段合法性
+            validateExportFields(clazz, fields);
+
+            // 2. 动态生成表头
+            List<Object> headers = generateHeaders(clazz, fields, customColumnNames);
+            System.out.println(headers);
+            // 3. 提取数据
+            List<List<Object>> sheetData = new ArrayList<>();
+            sheetData.add(headers); // 添加表头
+
+            for (T item : dataList) {
+                List<Object> rowData = new ArrayList<>();
+                for (String field : fields) {
+                    Object value = getFieldValue(item, field);
+                    rowData.add(value);
+                }
+                sheetData.add(rowData);
+            }
+            System.out.println(sheetData);
+            // 4. 导出
+            export(response, fileName, sheetData);
+        } catch (Exception e) {
+            // 异常处理
+        }
+    }
+
+    // 校验字段是否合法
+    private static void validateExportFields(Class<?> clazz, List<String> fields) {
+        List<String> validFields = Arrays.stream(clazz.getDeclaredFields())
+                .map(Field::getName)
+                .collect(Collectors.toList());
+
+        for (String field : fields) {
+            if (!validFields.contains(field)) {
+                throw new IllegalArgumentException("非法字段: " + field);
+            }
+        }
+    }
+
+    // 生成表头（支持自定义列名）
+    private static List<Object> generateHeaders(
+            Class<?> clazz,
+            List<String> fields,
+            Map<String, String> customNames
+    ) {
+        List<Object> headers = new ArrayList<>();
+        Map<String, String> fieldAnnotationMap = getAnnotationColumnNames(clazz);
+
+        for (String field : fields) {
+            String header = customNames != null && customNames.containsKey(field)
+                    ? customNames.get(field)
+                    : fieldAnnotationMap.getOrDefault(field, field);
+            headers.add(header);
+        }
+        return headers;
+    }
+
+    // 获取注解配置的列名
+    private static Map<String, String> getAnnotationColumnNames(Class<?> clazz) {
+        return Arrays.stream(clazz.getDeclaredFields())
+                .filter(f -> f.isAnnotationPresent(ExcelExport.class))
+                .collect(Collectors.toMap(
+                        Field::getName,
+                        f -> f.getAnnotation(ExcelExport.class).value()
+                ));
+    }
+
+    // 反射获取字段值
+    private static Object getFieldValue(Object obj, String fieldName) {
+        try {
+            Field field = obj.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            return field.get(obj);
+        } catch (Exception e) {
+            return "";
+        }
+    }
 }

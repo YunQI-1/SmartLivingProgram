@@ -1,31 +1,57 @@
 package com.jsu.vo;
 
+import com.jsu.entity.EnglishLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.sql.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class EnglishLevelVO implements Serializable {
-    private String studentName;
+
+    /**
+     * 主键id
+     */
+
+    private Integer id;
+
 
     private String studentNumber;
+    private String studentName;
+    private String idCard;
+    //类型名
+    private String typeName;
 
-    private String cet4;//4级分数
+    //证书编号
+    private String certificateNumber;
 
-    private String cet6;//6级分数
+    //得分
+    private int score;
 
-    private String toefl;            // TOEFL iBT 分数
-    private String ielts;            // IELTS 分数
-    private String toeic;            // TOEIC 分数
-    private String cambridge;        // 剑桥英语考试（如：FCE, CAE等）
-    private String greVerbal;        // GRE Verbal 分数
-    private String gmatVerbal;       // GMAT Verbal 分数
-    private String pteAcademic;      // PTE Academic 分数
-    private String satReadingWriting;// SAT 阅读和写作部分分数
-    private String duolingo;         // Duolingo English Test 分数
-    private String celpip;           // CELPIP 分数
+    private String classes;
+
+    //颁发部门
+    private String issuingDepartment;
+
+    //获取时间
+    private String getTime;
+
+    //学校
+    private String school;
+
+    //专业
+    private String major;
+
+    //准考证号
+    private String examinationCertificateNumber;
+
+    //照片
+    private  String photo;
+
+    private String college;
 }
